@@ -1,0 +1,1156 @@
+Archive member included to satisfy reference by file (symbol)
+
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (exit)
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o) (_global_impure_ptr)
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (__libc_init_array)
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+                              build/i2c.o (memcpy)
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (memset)
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o) (_exit)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .data          0x0000000000000000        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .rodata        0x0000000000000000       0x24 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .text          0x0000000000000000       0x7c /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.extab     0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.exidx     0x0000000000000000       0x10 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.attributes
+                0x0000000000000000       0x1c /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .text          0x0000000000000000        0x0 build/adc.o
+ .data          0x0000000000000000        0x0 build/adc.o
+ .bss           0x0000000000000000        0x0 build/adc.o
+ .text.MX_ADC_Init
+                0x0000000000000000      0x180 build/adc.o
+ .debug_info    0x0000000000000000     0x1036 build/adc.o
+ .debug_abbrev  0x0000000000000000      0x20e build/adc.o
+ .debug_loc     0x0000000000000000      0x47a build/adc.o
+ .debug_aranges
+                0x0000000000000000       0x20 build/adc.o
+ .debug_ranges  0x0000000000000000       0x10 build/adc.o
+ .debug_line    0x0000000000000000      0x458 build/adc.o
+ .debug_str     0x0000000000000000      0x811 build/adc.o
+ .comment       0x0000000000000000       0x4a build/adc.o
+ .debug_frame   0x0000000000000000       0x30 build/adc.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/adc.o
+ .text          0x0000000000000000        0x0 build/dma.o
+ .data          0x0000000000000000        0x0 build/dma.o
+ .bss           0x0000000000000000        0x0 build/dma.o
+ .text.MX_DMA_Init
+                0x0000000000000000       0x60 build/dma.o
+ .debug_info    0x0000000000000000      0xb64 build/dma.o
+ .debug_abbrev  0x0000000000000000      0x1e5 build/dma.o
+ .debug_loc     0x0000000000000000      0x134 build/dma.o
+ .debug_aranges
+                0x0000000000000000       0x20 build/dma.o
+ .debug_ranges  0x0000000000000000       0x10 build/dma.o
+ .debug_line    0x0000000000000000      0x30a build/dma.o
+ .debug_str     0x0000000000000000      0x855 build/dma.o
+ .comment       0x0000000000000000       0x4a build/dma.o
+ .debug_frame   0x0000000000000000       0x28 build/dma.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/dma.o
+ .text          0x0000000000000000        0x0 build/drv_system.o
+ .data          0x0000000000000000        0x0 build/drv_system.o
+ .bss           0x0000000000000000        0x0 build/drv_system.o
+ .text.micros   0x0000000000000000       0x40 build/drv_system.o
+ .text.millis   0x0000000000000000        0xc build/drv_system.o
+ .bss.sysTickCycleCounter
+                0x0000000000000000        0x4 build/drv_system.o
+ .bss.sysTickUptime
+                0x0000000000000000        0x4 build/drv_system.o
+ .text          0x0000000000000000        0x0 build/gpio.o
+ .data          0x0000000000000000        0x0 build/gpio.o
+ .bss           0x0000000000000000        0x0 build/gpio.o
+ .text          0x0000000000000000        0x0 build/i2c.o
+ .data          0x0000000000000000        0x0 build/i2c.o
+ .bss           0x0000000000000000        0x0 build/i2c.o
+ .text.i2c2WriteMemDMA
+                0x0000000000000000       0x90 build/i2c.o
+ .text.i2c2ReadMemoryDMA
+                0x0000000000000000       0xbc build/i2c.o
+ .text          0x0000000000000000        0x0 build/lcd.o
+ .data          0x0000000000000000        0x0 build/lcd.o
+ .bss           0x0000000000000000        0x0 build/lcd.o
+ .text.lcdNoDisplay
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdNoCursor
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdCursor
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdNoBlink
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdBlink
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdScrollDisplayLeft
+                0x0000000000000000        0xc build/lcd.o
+ .text.lcdScrollDisplayRight
+                0x0000000000000000        0xc build/lcd.o
+ .text.lcdLeftToRight
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdRightToLeft
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdAutoscroll
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdNoAutoscroll
+                0x0000000000000000       0x1c build/lcd.o
+ .text.lcdSendChar
+                0x0000000000000000        0xa build/lcd.o
+ .bss._addr     0x0000000000000000        0x1 build/lcd.o
+ .bss._charsize
+                0x0000000000000000        0x1 build/lcd.o
+ .data._cols    0x0000000000000000        0x1 build/lcd.o
+ .data._rows    0x0000000000000000        0x1 build/lcd.o
+ .text          0x0000000000000000        0x0 build/main.o
+ .data          0x0000000000000000        0x0 build/main.o
+ .bss           0x0000000000000000        0x0 build/main.o
+ .text.Error_Handler
+                0x0000000000000000        0x4 build/main.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_it.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_it.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_it.o
+ .text          0x0000000000000000        0x0 build/system_stm32wlxx.o
+ .data          0x0000000000000000        0x0 build/system_stm32wlxx.o
+ .bss           0x0000000000000000        0x0 build/system_stm32wlxx.o
+ .text.SystemCoreClockUpdate
+                0x0000000000000000       0xe0 build/system_stm32wlxx.o
+ .rodata.AHBPrescTable
+                0x0000000000000000       0x40 build/system_stm32wlxx.o
+ .rodata.APBPrescTable
+                0x0000000000000000       0x20 build/system_stm32wlxx.o
+ .rodata.MSIRangeTable
+                0x0000000000000000       0x40 build/system_stm32wlxx.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_adc.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_adc.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_CommonDeInit
+                0x0000000000000000       0x18 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_CommonInit
+                0x0000000000000000       0x24 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_CommonStructInit
+                0x0000000000000000        0x8 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_DeInit
+                0x0000000000000000      0x14c build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_Init
+                0x0000000000000000       0x38 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_StructInit
+                0x0000000000000000       0x10 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_REG_Init
+                0x0000000000000000       0x74 build/stm32wlxx_ll_adc.o
+ .text.LL_ADC_REG_StructInit
+                0x0000000000000000       0x16 build/stm32wlxx_ll_adc.o
+ .debug_info    0x0000000000000000      0xc6f build/stm32wlxx_ll_adc.o
+ .debug_abbrev  0x0000000000000000      0x2a7 build/stm32wlxx_ll_adc.o
+ .debug_loc     0x0000000000000000      0x4c1 build/stm32wlxx_ll_adc.o
+ .debug_aranges
+                0x0000000000000000       0x58 build/stm32wlxx_ll_adc.o
+ .debug_ranges  0x0000000000000000       0x78 build/stm32wlxx_ll_adc.o
+ .debug_line    0x0000000000000000      0x602 build/stm32wlxx_ll_adc.o
+ .debug_str     0x0000000000000000      0x69e build/stm32wlxx_ll_adc.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_adc.o
+ .debug_frame   0x0000000000000000       0xbc build/stm32wlxx_ll_adc.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_adc.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_dma.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_dma.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_dma.o
+ .text.LL_DMA_DeInit
+                0x0000000000000000      0x1dc build/stm32wlxx_ll_dma.o
+ .text.LL_DMA_Init
+                0x0000000000000000       0x80 build/stm32wlxx_ll_dma.o
+ .text.LL_DMA_StructInit
+                0x0000000000000000       0x1a build/stm32wlxx_ll_dma.o
+ .rodata.CHANNEL_OFFSET_TAB
+                0x0000000000000000        0x7 build/stm32wlxx_ll_dma.o
+ .debug_info    0x0000000000000000      0xb32 build/stm32wlxx_ll_dma.o
+ .debug_abbrev  0x0000000000000000      0x27a build/stm32wlxx_ll_dma.o
+ .debug_loc     0x0000000000000000      0x5a7 build/stm32wlxx_ll_dma.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/stm32wlxx_ll_dma.o
+ .debug_ranges  0x0000000000000000      0x150 build/stm32wlxx_ll_dma.o
+ .debug_line    0x0000000000000000      0x5ea build/stm32wlxx_ll_dma.o
+ .debug_str     0x0000000000000000      0x623 build/stm32wlxx_ll_dma.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_dma.o
+ .debug_frame   0x0000000000000000       0x4c build/stm32wlxx_ll_dma.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_dma.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_exti.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_exti.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_exti.o
+ .text.LL_EXTI_DeInit
+                0x0000000000000000       0x30 build/stm32wlxx_ll_exti.o
+ .text.LL_EXTI_Init
+                0x0000000000000000      0x1cc build/stm32wlxx_ll_exti.o
+ .text.LL_EXTI_StructInit
+                0x0000000000000000       0x10 build/stm32wlxx_ll_exti.o
+ .debug_info    0x0000000000000000      0x915 build/stm32wlxx_ll_exti.o
+ .debug_abbrev  0x0000000000000000      0x201 build/stm32wlxx_ll_exti.o
+ .debug_loc     0x0000000000000000      0x4ae build/stm32wlxx_ll_exti.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/stm32wlxx_ll_exti.o
+ .debug_ranges  0x0000000000000000       0x50 build/stm32wlxx_ll_exti.o
+ .debug_line    0x0000000000000000      0x555 build/stm32wlxx_ll_exti.o
+ .debug_str     0x0000000000000000      0x4b3 build/stm32wlxx_ll_exti.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_exti.o
+ .debug_frame   0x0000000000000000       0x54 build/stm32wlxx_ll_exti.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_exti.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_gpio.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_gpio.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_gpio.o
+ .text.LL_GPIO_DeInit
+                0x0000000000000000       0x88 build/stm32wlxx_ll_gpio.o
+ .text.LL_GPIO_Init
+                0x0000000000000000      0x1bc build/stm32wlxx_ll_gpio.o
+ .text.LL_GPIO_StructInit
+                0x0000000000000000       0x16 build/stm32wlxx_ll_gpio.o
+ .debug_info    0x0000000000000000      0xe17 build/stm32wlxx_ll_gpio.o
+ .debug_abbrev  0x0000000000000000      0x2b4 build/stm32wlxx_ll_gpio.o
+ .debug_loc     0x0000000000000000      0x858 build/stm32wlxx_ll_gpio.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/stm32wlxx_ll_gpio.o
+ .debug_ranges  0x0000000000000000      0x218 build/stm32wlxx_ll_gpio.o
+ .debug_line    0x0000000000000000      0x74f build/stm32wlxx_ll_gpio.o
+ .debug_str     0x0000000000000000      0x4c1 build/stm32wlxx_ll_gpio.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_gpio.o
+ .debug_frame   0x0000000000000000       0x54 build/stm32wlxx_ll_gpio.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_gpio.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_i2c.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_i2c.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_i2c.o
+ .text.LL_I2C_DeInit
+                0x0000000000000000       0x6c build/stm32wlxx_ll_i2c.o
+ .text.LL_I2C_Init
+                0x0000000000000000       0x6e build/stm32wlxx_ll_i2c.o
+ .text.LL_I2C_StructInit
+                0x0000000000000000       0x16 build/stm32wlxx_ll_i2c.o
+ .debug_info    0x0000000000000000      0x8f4 build/stm32wlxx_ll_i2c.o
+ .debug_abbrev  0x0000000000000000      0x20a build/stm32wlxx_ll_i2c.o
+ .debug_loc     0x0000000000000000      0x2d4 build/stm32wlxx_ll_i2c.o
+ .debug_aranges
+                0x0000000000000000       0x30 build/stm32wlxx_ll_i2c.o
+ .debug_ranges  0x0000000000000000       0x68 build/stm32wlxx_ll_i2c.o
+ .debug_line    0x0000000000000000      0x3d1 build/stm32wlxx_ll_i2c.o
+ .debug_str     0x0000000000000000      0x4e4 build/stm32wlxx_ll_i2c.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_i2c.o
+ .debug_frame   0x0000000000000000       0x4c build/stm32wlxx_ll_i2c.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_i2c.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_pwr.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_pwr.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_pwr.o
+ .text.LL_PWR_DeInit
+                0x0000000000000000       0x38 build/stm32wlxx_ll_pwr.o
+ .debug_info    0x0000000000000000      0x224 build/stm32wlxx_ll_pwr.o
+ .debug_abbrev  0x0000000000000000       0xca build/stm32wlxx_ll_pwr.o
+ .debug_aranges
+                0x0000000000000000       0x20 build/stm32wlxx_ll_pwr.o
+ .debug_ranges  0x0000000000000000       0x10 build/stm32wlxx_ll_pwr.o
+ .debug_line    0x0000000000000000      0x193 build/stm32wlxx_ll_pwr.o
+ .debug_str     0x0000000000000000      0x232 build/stm32wlxx_ll_pwr.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_pwr.o
+ .debug_frame   0x0000000000000000       0x20 build/stm32wlxx_ll_pwr.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_pwr.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_rcc.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_rcc.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_rcc.o
+ .text.RCC_GetHCLK1ClockFreq
+                0x0000000000000000       0x1c build/stm32wlxx_ll_rcc.o
+ .text.RCC_GetHCLK3ClockFreq
+                0x0000000000000000       0x1c build/stm32wlxx_ll_rcc.o
+ .text.RCC_GetPCLK1ClockFreq
+                0x0000000000000000       0x18 build/stm32wlxx_ll_rcc.o
+ .text.RCC_GetPCLK2ClockFreq
+                0x0000000000000000       0x18 build/stm32wlxx_ll_rcc.o
+ .text.RCC_PLL_GetFreqDomain_SYS
+                0x0000000000000000      0x11c build/stm32wlxx_ll_rcc.o
+ .text.RCC_GetSystemClockFreq
+                0x0000000000000000      0x108 build/stm32wlxx_ll_rcc.o
+ .text.RCC_PLL_GetFreqDomain_ADC
+                0x0000000000000000      0x11c build/stm32wlxx_ll_rcc.o
+ .text.RCC_PLL_GetFreqDomain_RNG
+                0x0000000000000000      0x11c build/stm32wlxx_ll_rcc.o
+ .text.RCC_PLL_GetFreqDomain_I2S
+                0x0000000000000000      0x11c build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_DeInit
+                0x0000000000000000       0x98 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetSystemClocksFreq
+                0x0000000000000000       0x2a build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetUSARTClockFreq
+                0x0000000000000000       0xc4 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetI2CClockFreq
+                0x0000000000000000       0xe4 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetLPUARTClockFreq
+                0x0000000000000000       0x5c build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetLPTIMClockFreq
+                0x0000000000000000      0x180 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetRNGClockFreq
+                0x0000000000000000       0xd8 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetI2SClockFreq
+                0x0000000000000000       0x4c build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetADCClockFreq
+                0x0000000000000000       0x58 build/stm32wlxx_ll_rcc.o
+ .text.LL_RCC_GetRTCClockFreq
+                0x0000000000000000       0x64 build/stm32wlxx_ll_rcc.o
+ .debug_info    0x0000000000000000     0x1b0c build/stm32wlxx_ll_rcc.o
+ .debug_abbrev  0x0000000000000000      0x2a5 build/stm32wlxx_ll_rcc.o
+ .debug_loc     0x0000000000000000      0x875 build/stm32wlxx_ll_rcc.o
+ .debug_aranges
+                0x0000000000000000       0xb0 build/stm32wlxx_ll_rcc.o
+ .debug_ranges  0x0000000000000000       0xa0 build/stm32wlxx_ll_rcc.o
+ .debug_line    0x0000000000000000     0x153e build/stm32wlxx_ll_rcc.o
+ .debug_str     0x0000000000000000      0xa05 build/stm32wlxx_ll_rcc.o
+ .comment       0x0000000000000000       0x4a build/stm32wlxx_ll_rcc.o
+ .debug_frame   0x0000000000000000      0x190 build/stm32wlxx_ll_rcc.o
+ .ARM.attributes
+                0x0000000000000000       0x2e build/stm32wlxx_ll_rcc.o
+ .text          0x0000000000000000        0x0 build/stm32wlxx_ll_utils.o
+ .data          0x0000000000000000        0x0 build/stm32wlxx_ll_utils.o
+ .bss           0x0000000000000000        0x0 build/stm32wlxx_ll_utils.o
+ .text.UTILS_GetPLLOutputFrequency
+                0x0000000000000000       0x20 build/stm32wlxx_ll_utils.o
+ .text.UTILS_PLL_IsBusy
+                0x0000000000000000       0x14 build/stm32wlxx_ll_utils.o
+ .text.LL_mDelay
+                0x0000000000000000       0x2a build/stm32wlxx_ll_utils.o
+ .text.LL_SetFlashLatency
+                0x0000000000000000       0xf8 build/stm32wlxx_ll_utils.o
+ .text.UTILS_EnablePLLAndSwitchSystem
+                0x0000000000000000       0xfc build/stm32wlxx_ll_utils.o
+ .text.LL_PLL_ConfigSystemClock_MSI
+                0x0000000000000000      0x100 build/stm32wlxx_ll_utils.o
+ .text.LL_PLL_ConfigSystemClock_HSI
+                0x0000000000000000       0x6c build/stm32wlxx_ll_utils.o
+ .text.LL_PLL_ConfigSystemClock_HSE
+                0x0000000000000000       0x88 build/stm32wlxx_ll_utils.o
+ .rodata        0x0000000000000000       0x24 build/stm32wlxx_ll_utils.o
+ .text          0x0000000000000000       0x14 build/startup_stm32wle5xx.o
+ .data          0x0000000000000000        0x0 build/startup_stm32wle5xx.o
+ .bss           0x0000000000000000        0x0 build/startup_stm32wle5xx.o
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .text.exit     0x0000000000000000       0x28 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .debug_frame   0x0000000000000000       0x28 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x0000000000000000        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .data.impure_data
+                0x0000000000000000       0x60 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0000000000000000        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .text.memcpy   0x0000000000000000       0x1c /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000000       0x28 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .text.memset   0x0000000000000000       0x10 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000000       0x20 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .text._exit    0x0000000000000000        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .debug_frame   0x0000000000000000       0x20 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .rodata        0x0000000000000000       0x24 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .eh_frame      0x0000000000000000        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .ARM.attributes
+                0x0000000000000000       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .text          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ .data          0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ .bss           0x0000000000000000        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x0000000008000000 0x0000000000040000 xr
+RAM1             0x0000000020000000 0x0000000000008000 xrw
+RAM2             0x0000000020008000 0x0000000000008000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+LOAD build/adc.o
+LOAD build/dma.o
+LOAD build/drv_system.o
+LOAD build/gpio.o
+LOAD build/i2c.o
+LOAD build/lcd.o
+LOAD build/main.o
+LOAD build/stm32wlxx_it.o
+LOAD build/system_stm32wlxx.o
+LOAD build/stm32wlxx_ll_adc.o
+LOAD build/stm32wlxx_ll_dma.o
+LOAD build/stm32wlxx_ll_exti.o
+LOAD build/stm32wlxx_ll_gpio.o
+LOAD build/stm32wlxx_ll_i2c.o
+LOAD build/stm32wlxx_ll_pwr.o
+LOAD build/stm32wlxx_ll_rcc.o
+LOAD build/stm32wlxx_ll_utils.o
+LOAD build/startup_stm32wle5xx.o
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a
+START GROUP
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a
+END GROUP
+START GROUP
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a
+END GROUP
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x0000000020008000                _estack = (ORIGIN (RAM1) + LENGTH (RAM1))
+                0x0000000000000200                _Min_Heap_Size = 0x200
+                0x0000000000000400                _Min_Stack_Size = 0x400
+
+.isr_vector     0x0000000008000000      0x138
+                0x0000000008000000                . = ALIGN (0x8)
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000      0x138 build/startup_stm32wle5xx.o
+                0x0000000008000000                g_pfnVectors
+                0x0000000008000138                . = ALIGN (0x8)
+
+.text           0x0000000008000138      0x7e8
+                0x0000000008000138                . = ALIGN (0x8)
+ *(.text)
+ .text          0x0000000008000138       0x40 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.text*)
+ .text.delayMicroseconds
+                0x0000000008000178       0x38 build/drv_system.o
+                0x0000000008000178                delayMicroseconds
+ .text.delay    0x00000000080001b0       0x16 build/drv_system.o
+                0x00000000080001b0                delay
+ *fill*         0x00000000080001c6        0x2 
+ .text.cycleCounterInit
+                0x00000000080001c8       0x3c build/drv_system.o
+                0x00000000080001c8                cycleCounterInit
+ .text.MX_GPIO_Init
+                0x0000000008000204       0x2e build/gpio.o
+                0x0000000008000204                MX_GPIO_Init
+ *fill*         0x0000000008000232        0x2 
+ .text.i2c2Init
+                0x0000000008000234      0x208 build/i2c.o
+                0x0000000008000234                i2c2Init
+ .text.i2c2CommandDMA
+                0x000000000800043c       0x70 build/i2c.o
+                0x000000000800043c                i2c2CommandDMA
+ .text.DMA1_Channel2_IRQHandler
+                0x00000000080004ac       0x24 build/i2c.o
+                0x00000000080004ac                DMA1_Channel2_IRQHandler
+ .text.DMA1_Channel3_IRQHandler
+                0x00000000080004d0       0x24 build/i2c.o
+                0x00000000080004d0                DMA1_Channel3_IRQHandler
+ .text.expanderWrite
+                0x00000000080004f4        0xc build/lcd.o
+ .text.pulseEnable
+                0x0000000008000500       0x22 build/lcd.o
+ .text.write4bits
+                0x0000000008000522       0x10 build/lcd.o
+ .text.send     0x0000000008000532       0x1e build/lcd.o
+ .text.lcdClear
+                0x0000000008000550       0x14 build/lcd.o
+                0x0000000008000550                lcdClear
+ .text.lcdHome  0x0000000008000564       0x14 build/lcd.o
+                0x0000000008000564                lcdHome
+ .text.lcdSetCursor
+                0x0000000008000578       0x40 build/lcd.o
+                0x0000000008000578                lcdSetCursor
+ .text.lcdDisplay
+                0x00000000080005b8       0x1c build/lcd.o
+                0x00000000080005b8                lcdDisplay
+ .text.lcdNoBacklight
+                0x00000000080005d4       0x14 build/lcd.o
+                0x00000000080005d4                lcdNoBacklight
+ .text.lcdBacklight
+                0x00000000080005e8       0x14 build/lcd.o
+                0x00000000080005e8                lcdBacklight
+ .text.lcdInit  0x00000000080005fc       0xa8 build/lcd.o
+                0x00000000080005fc                lcdInit
+ .text.lcdSendString
+                0x00000000080006a4       0x16 build/lcd.o
+                0x00000000080006a4                lcdSendString
+ *fill*         0x00000000080006ba        0x2 
+ .text.SystemClock_Config
+                0x00000000080006bc       0xbc build/main.o
+                0x00000000080006bc                SystemClock_Config
+ .text.main     0x0000000008000778       0xb4 build/main.o
+                0x0000000008000778                main
+ .text.NMI_Handler
+                0x000000000800082c        0x2 build/stm32wlxx_it.o
+                0x000000000800082c                NMI_Handler
+ .text.HardFault_Handler
+                0x000000000800082e        0x2 build/stm32wlxx_it.o
+                0x000000000800082e                HardFault_Handler
+ .text.MemManage_Handler
+                0x0000000008000830        0x2 build/stm32wlxx_it.o
+                0x0000000008000830                MemManage_Handler
+ .text.BusFault_Handler
+                0x0000000008000832        0x2 build/stm32wlxx_it.o
+                0x0000000008000832                BusFault_Handler
+ .text.UsageFault_Handler
+                0x0000000008000834        0x2 build/stm32wlxx_it.o
+                0x0000000008000834                UsageFault_Handler
+ .text.SVC_Handler
+                0x0000000008000836        0x2 build/stm32wlxx_it.o
+                0x0000000008000836                SVC_Handler
+ .text.DebugMon_Handler
+                0x0000000008000838        0x2 build/stm32wlxx_it.o
+                0x0000000008000838                DebugMon_Handler
+ .text.PendSV_Handler
+                0x000000000800083a        0x2 build/stm32wlxx_it.o
+                0x000000000800083a                PendSV_Handler
+ .text.SysTick_Handler
+                0x000000000800083c        0x2 build/stm32wlxx_it.o
+                0x000000000800083c                SysTick_Handler
+ .text.SystemInit
+                0x000000000800083e        0x2 build/system_stm32wlxx.o
+                0x000000000800083e                SystemInit
+ .text.LL_Init1msTick
+                0x0000000008000840       0x20 build/stm32wlxx_ll_utils.o
+                0x0000000008000840                LL_Init1msTick
+ .text.LL_SetSystemCoreClock
+                0x0000000008000860        0xc build/stm32wlxx_ll_utils.o
+                0x0000000008000860                LL_SetSystemCoreClock
+ .text.Reset_Handler
+                0x000000000800086c       0x50 build/startup_stm32wle5xx.o
+                0x000000000800086c                Reset_Handler
+ .text.Default_Handler
+                0x00000000080008bc        0x2 build/startup_stm32wle5xx.o
+                0x00000000080008bc                DMA2_Channel3_IRQHandler
+                0x00000000080008bc                EXTI2_IRQHandler
+                0x00000000080008bc                TIM1_CC_IRQHandler
+                0x00000000080008bc                EXTI3_IRQHandler
+                0x00000000080008bc                LPTIM2_IRQHandler
+                0x00000000080008bc                I2C3_ER_IRQHandler
+                0x00000000080008bc                LPTIM3_IRQHandler
+                0x00000000080008bc                EXTI0_IRQHandler
+                0x00000000080008bc                I2C2_EV_IRQHandler
+                0x00000000080008bc                TAMP_STAMP_LSECSS_SSRU_IRQHandler
+                0x00000000080008bc                SPI1_IRQHandler
+                0x00000000080008bc                DMA2_Channel2_IRQHandler
+                0x00000000080008bc                DMA1_Channel4_IRQHandler
+                0x00000000080008bc                PKA_IRQHandler
+                0x00000000080008bc                TIM17_IRQHandler
+                0x00000000080008bc                DMA1_Channel7_IRQHandler
+                0x00000000080008bc                SUBGHZSPI_IRQHandler
+                0x00000000080008bc                DMA2_Channel1_IRQHandler
+                0x00000000080008bc                I2C1_EV_IRQHandler
+                0x00000000080008bc                SUBGHZ_Radio_IRQHandler
+                0x00000000080008bc                DMAMUX1_OVR_IRQHandler
+                0x00000000080008bc                DMA1_Channel6_IRQHandler
+                0x00000000080008bc                TIM16_IRQHandler
+                0x00000000080008bc                DMA2_Channel4_IRQHandler
+                0x00000000080008bc                RCC_IRQHandler
+                0x00000000080008bc                TIM1_TRG_COM_IRQHandler
+                0x00000000080008bc                DMA1_Channel1_IRQHandler
+                0x00000000080008bc                Default_Handler
+                0x00000000080008bc                DMA2_Channel7_IRQHandler
+                0x00000000080008bc                EXTI15_10_IRQHandler
+                0x00000000080008bc                ADC_IRQHandler
+                0x00000000080008bc                I2C3_EV_IRQHandler
+                0x00000000080008bc                EXTI9_5_IRQHandler
+                0x00000000080008bc                RTC_WKUP_IRQHandler
+                0x00000000080008bc                PVD_PVM_IRQHandler
+                0x00000000080008bc                SPI2_IRQHandler
+                0x00000000080008bc                DMA2_Channel5_IRQHandler
+                0x00000000080008bc                DMA1_Channel5_IRQHandler
+                0x00000000080008bc                EXTI4_IRQHandler
+                0x00000000080008bc                RNG_IRQHandler
+                0x00000000080008bc                COMP_IRQHandler
+                0x00000000080008bc                HSEM_IRQHandler
+                0x00000000080008bc                TIM1_UP_IRQHandler
+                0x00000000080008bc                WWDG_IRQHandler
+                0x00000000080008bc                LPUART1_IRQHandler
+                0x00000000080008bc                DMA2_Channel6_IRQHandler
+                0x00000000080008bc                TIM2_IRQHandler
+                0x00000000080008bc                TIM1_BRK_IRQHandler
+                0x00000000080008bc                DAC_IRQHandler
+                0x00000000080008bc                EXTI1_IRQHandler
+                0x00000000080008bc                AES_IRQHandler
+                0x00000000080008bc                USART2_IRQHandler
+                0x00000000080008bc                I2C2_ER_IRQHandler
+                0x00000000080008bc                FLASH_IRQHandler
+                0x00000000080008bc                USART1_IRQHandler
+                0x00000000080008bc                I2C1_ER_IRQHandler
+                0x00000000080008bc                LPTIM1_IRQHandler
+                0x00000000080008bc                RTC_Alarm_IRQHandler
+ *fill*         0x00000000080008be        0x2 
+ .text.__libc_init_array
+                0x00000000080008c0       0x48 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+                0x00000000080008c0                __libc_init_array
+ *(.glue_7)
+ .glue_7        0x0000000008000908        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x0000000008000908        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x0000000008000908        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.init)
+ .init          0x0000000008000908        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x0000000008000908                _init
+ .init          0x000000000800090c        0x8 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ *(.fini)
+ .fini          0x0000000008000914        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x0000000008000914                _fini
+ .fini          0x0000000008000918        0x8 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x0000000008000920                . = ALIGN (0x8)
+                0x0000000008000920                _etext = .
+
+.vfp11_veneer   0x0000000008000920        0x0
+ .vfp11_veneer  0x0000000008000920        0x0 linker stubs
+
+.v4_bx          0x0000000008000920        0x0
+ .v4_bx         0x0000000008000920        0x0 linker stubs
+
+.iplt           0x0000000008000920        0x0
+ .iplt          0x0000000008000920        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+
+.rodata         0x0000000008000920       0x60
+                0x0000000008000920                . = ALIGN (0x8)
+ *(.rodata)
+ .rodata        0x0000000008000920       0x10 build/lcd.o
+ *(.rodata*)
+ .rodata.main.str1.4
+                0x0000000008000930       0x50 build/main.o
+                0x0000000008000980                . = ALIGN (0x8)
+
+.rel.dyn        0x0000000008000980        0x0
+ .rel.iplt      0x0000000008000980        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+
+.ARM.extab      0x0000000008000980        0x0
+                0x0000000008000980                . = ALIGN (0x8)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0000000008000980                . = ALIGN (0x8)
+
+.ARM            0x0000000008000980        0x0
+                0x0000000008000980                . = ALIGN (0x8)
+                0x0000000008000980                __exidx_start = .
+ *(.ARM.exidx*)
+                0x0000000008000980                __exidx_end = .
+                0x0000000008000980                . = ALIGN (0x8)
+
+.preinit_array  0x0000000008000980        0x0
+                0x0000000008000980                . = ALIGN (0x8)
+                0x0000000008000980                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                0x0000000008000980                PROVIDE (__preinit_array_end = .)
+                0x0000000008000980                . = ALIGN (0x8)
+
+.init_array     0x0000000008000980        0x8
+                0x0000000008000980                . = ALIGN (0x8)
+                0x0000000008000980                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array*)
+ .init_array    0x0000000008000980        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x0000000008000984                PROVIDE (__init_array_end = .)
+                0x0000000008000988                . = ALIGN (0x8)
+ *fill*         0x0000000008000984        0x4 
+
+.fini_array     0x0000000008000988        0x8
+                0x0000000008000988                . = ALIGN (0x8)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x0000000008000988        0x4 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x0000000008000990                . = ALIGN (0x8)
+ *fill*         0x000000000800098c        0x4 
+                0x0000000008000990                _sidata = LOADADDR (.data)
+
+.data           0x0000000020000000        0x8 load address 0x0000000008000990
+                0x0000000020000000                . = ALIGN (0x8)
+                0x0000000020000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.SystemCoreClock
+                0x0000000020000000        0x4 build/system_stm32wlxx.o
+                0x0000000020000000                SystemCoreClock
+                0x0000000020000008                . = ALIGN (0x8)
+ *fill*         0x0000000020000004        0x4 
+                0x0000000020000008                _edata = .
+
+.igot.plt       0x0000000020000008        0x0 load address 0x0000000008000998
+ .igot.plt      0x0000000020000008        0x0 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x0000000020000008                . = ALIGN (0x8)
+
+.bss            0x0000000020000008       0x28 load address 0x0000000008000998
+                0x0000000020000008                _sbss = .
+                0x0000000020000008                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x0000000020000008       0x1c /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.bss*)
+ .bss.usTicks   0x0000000020000024        0x4 build/drv_system.o
+ .bss.rx_finished
+                0x0000000020000028        0x1 build/i2c.o
+                0x0000000020000028                rx_finished
+ .bss.tx_finished
+                0x0000000020000029        0x1 build/i2c.o
+                0x0000000020000029                tx_finished
+ .bss._backlightval
+                0x000000002000002a        0x1 build/lcd.o
+                0x000000002000002a                _backlightval
+ .bss._displaycontrol
+                0x000000002000002b        0x1 build/lcd.o
+                0x000000002000002b                _displaycontrol
+ .bss._displayfunction
+                0x000000002000002c        0x1 build/lcd.o
+                0x000000002000002c                _displayfunction
+ .bss._displaymode
+                0x000000002000002d        0x1 build/lcd.o
+                0x000000002000002d                _displaymode
+ *(COMMON)
+                0x0000000020000030                . = ALIGN (0x8)
+ *fill*         0x000000002000002e        0x2 
+                0x0000000020000030                _ebss = .
+                0x0000000020000030                __bss_end__ = _ebss
+                0x0000000020000030                . = ALIGN (0x8)
+
+RAM1_region     0x0000000020000030        0x0 load address 0x0000000008000998
+                0x0000000020000030                _sRAM1_region = .
+ *(.RAM1_region)
+                0x0000000020000030                . = ALIGN (0x8)
+                0x0000000020000030                _eRAM1_region = .
+                0x0000000020000030                . = ALIGN (0x8)
+
+RAM2_region     0x0000000020008000        0x0
+                0x0000000020008000                _sRAM2_region = .
+ *(.RAM2_region)
+                0x0000000020008000                . = ALIGN (0x8)
+                0x0000000020008000                _eRAM2_region = .
+
+._user_heap_stack
+                0x0000000020000030      0x600
+                0x0000000020000030                . = ALIGN (0x8)
+                [!provide]                        PROVIDE (end = .)
+                [!provide]                        PROVIDE (_end = .)
+                0x0000000020000230                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020000030      0x200 
+                0x0000000020000630                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020000230      0x400 
+                0x0000000020000630                . = ALIGN (0x8)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x0000000000000000       0x2a
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x1e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .ARM.attributes
+                0x000000000000001e       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .ARM.attributes
+                0x000000000000004c       0x2e build/drv_system.o
+ .ARM.attributes
+                0x000000000000007a       0x2e build/gpio.o
+ .ARM.attributes
+                0x00000000000000a8       0x2e build/i2c.o
+ .ARM.attributes
+                0x00000000000000d6       0x2e build/lcd.o
+ .ARM.attributes
+                0x0000000000000104       0x2e build/main.o
+ .ARM.attributes
+                0x0000000000000132       0x2e build/stm32wlxx_it.o
+ .ARM.attributes
+                0x0000000000000160       0x2e build/system_stm32wlxx.o
+ .ARM.attributes
+                0x000000000000018e       0x2e build/stm32wlxx_ll_utils.o
+ .ARM.attributes
+                0x00000000000001bc       0x21 build/startup_stm32wle5xx.o
+ .ARM.attributes
+                0x00000000000001dd       0x2e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x000000000000020b       0x1e /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+OUTPUT(build/WLE5_Peripherals.elf elf32-littlearm)
+LOAD linker stubs
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a
+LOAD /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+
+.debug_info     0x0000000000000000     0x491f
+ .debug_info    0x0000000000000000      0x4f2 build/drv_system.o
+ .debug_info    0x00000000000004f2      0x3cc build/gpio.o
+ .debug_info    0x00000000000008be      0xd95 build/i2c.o
+ .debug_info    0x0000000000001653      0xade build/lcd.o
+ .debug_info    0x0000000000002131     0x10d8 build/main.o
+ .debug_info    0x0000000000003209      0x162 build/stm32wlxx_it.o
+ .debug_info    0x000000000000336b      0x421 build/system_stm32wlxx.o
+ .debug_info    0x000000000000378c     0x1171 build/stm32wlxx_ll_utils.o
+ .debug_info    0x00000000000048fd       0x22 build/startup_stm32wle5xx.o
+
+.debug_abbrev   0x0000000000000000      0xee0
+ .debug_abbrev  0x0000000000000000      0x208 build/drv_system.o
+ .debug_abbrev  0x0000000000000208      0x149 build/gpio.o
+ .debug_abbrev  0x0000000000000351      0x27c build/i2c.o
+ .debug_abbrev  0x00000000000005cd      0x1ee build/lcd.o
+ .debug_abbrev  0x00000000000007bb      0x27f build/main.o
+ .debug_abbrev  0x0000000000000a3a       0x7d build/stm32wlxx_it.o
+ .debug_abbrev  0x0000000000000ab7      0x12a build/system_stm32wlxx.o
+ .debug_abbrev  0x0000000000000be1      0x2ed build/stm32wlxx_ll_utils.o
+ .debug_abbrev  0x0000000000000ece       0x12 build/startup_stm32wle5xx.o
+
+.debug_loc      0x0000000000000000     0x12c0
+ .debug_loc     0x0000000000000000      0x1b3 build/drv_system.o
+ .debug_loc     0x00000000000001b3       0x2c build/gpio.o
+ .debug_loc     0x00000000000001df      0x19a build/i2c.o
+ .debug_loc     0x0000000000000379      0x37f build/lcd.o
+ .debug_loc     0x00000000000006f8      0x251 build/main.o
+ .debug_loc     0x0000000000000949      0x127 build/system_stm32wlxx.o
+ .debug_loc     0x0000000000000a70      0x850 build/stm32wlxx_ll_utils.o
+
+.debug_aranges  0x0000000000000000      0x2c8
+ .debug_aranges
+                0x0000000000000000       0x40 build/drv_system.o
+ .debug_aranges
+                0x0000000000000040       0x20 build/gpio.o
+ .debug_aranges
+                0x0000000000000060       0x48 build/i2c.o
+ .debug_aranges
+                0x00000000000000a8       0xd8 build/lcd.o
+ .debug_aranges
+                0x0000000000000180       0x30 build/main.o
+ .debug_aranges
+                0x00000000000001b0       0x60 build/stm32wlxx_it.o
+ .debug_aranges
+                0x0000000000000210       0x28 build/system_stm32wlxx.o
+ .debug_aranges
+                0x0000000000000238       0x68 build/stm32wlxx_ll_utils.o
+ .debug_aranges
+                0x00000000000002a0       0x28 build/startup_stm32wle5xx.o
+
+.debug_ranges   0x0000000000000000      0x278
+ .debug_ranges  0x0000000000000000       0x50 build/drv_system.o
+ .debug_ranges  0x0000000000000050       0x10 build/gpio.o
+ .debug_ranges  0x0000000000000060       0x38 build/i2c.o
+ .debug_ranges  0x0000000000000098       0xc8 build/lcd.o
+ .debug_ranges  0x0000000000000160       0x38 build/main.o
+ .debug_ranges  0x0000000000000198       0x50 build/stm32wlxx_it.o
+ .debug_ranges  0x00000000000001e8       0x18 build/system_stm32wlxx.o
+ .debug_ranges  0x0000000000000200       0x58 build/stm32wlxx_ll_utils.o
+ .debug_ranges  0x0000000000000258       0x20 build/startup_stm32wle5xx.o
+
+.debug_line     0x0000000000000000     0x2624
+ .debug_line    0x0000000000000000      0x342 build/drv_system.o
+ .debug_line    0x0000000000000342      0x1d8 build/gpio.o
+ .debug_line    0x000000000000051a      0x6c4 build/i2c.o
+ .debug_line    0x0000000000000bde      0x64c build/lcd.o
+ .debug_line    0x000000000000122a      0x4e6 build/main.o
+ .debug_line    0x0000000000001710      0x23d build/stm32wlxx_it.o
+ .debug_line    0x000000000000194d      0x275 build/system_stm32wlxx.o
+ .debug_line    0x0000000000001bc2      0x9eb build/stm32wlxx_ll_utils.o
+ .debug_line    0x00000000000025ad       0x77 build/startup_stm32wle5xx.o
+
+.debug_str      0x0000000000000000     0x14d9
+ .debug_str     0x0000000000000000      0x303 build/drv_system.o
+                                        0x368 (size before relaxing)
+ .debug_str     0x0000000000000303      0x176 build/gpio.o
+                                        0x338 (size before relaxing)
+ .debug_str     0x0000000000000479      0x67a build/i2c.o
+                                        0x995 (size before relaxing)
+ .debug_str     0x0000000000000af3      0x1cc build/lcd.o
+                                        0x389 (size before relaxing)
+ .debug_str     0x0000000000000cbf      0x281 build/main.o
+                                        0xb0c (size before relaxing)
+ .debug_str     0x0000000000000f40       0xa8 build/stm32wlxx_it.o
+                                        0x233 (size before relaxing)
+ .debug_str     0x0000000000000fe8       0x8b build/system_stm32wlxx.o
+                                        0x358 (size before relaxing)
+ .debug_str     0x0000000000001073      0x442 build/stm32wlxx_ll_utils.o
+                                        0x918 (size before relaxing)
+ .debug_str     0x00000000000014b5       0x24 build/startup_stm32wle5xx.o
+                                         0x61 (size before relaxing)
+
+.comment        0x0000000000000000       0x49
+ .comment       0x0000000000000000       0x49 build/drv_system.o
+                                         0x4a (size before relaxing)
+ .comment       0x0000000000000049       0x4a build/gpio.o
+ .comment       0x0000000000000049       0x4a build/i2c.o
+ .comment       0x0000000000000049       0x4a build/lcd.o
+ .comment       0x0000000000000049       0x4a build/main.o
+ .comment       0x0000000000000049       0x4a build/stm32wlxx_it.o
+ .comment       0x0000000000000049       0x4a build/system_stm32wlxx.o
+ .comment       0x0000000000000049       0x4a build/stm32wlxx_ll_utils.o
+
+.debug_frame    0x0000000000000000      0x5f0
+ .debug_frame   0x0000000000000000       0x74 build/drv_system.o
+ .debug_frame   0x0000000000000074       0x28 build/gpio.o
+ .debug_frame   0x000000000000009c       0xa0 build/i2c.o
+ .debug_frame   0x000000000000013c      0x260 build/lcd.o
+ .debug_frame   0x000000000000039c       0x50 build/main.o
+ .debug_frame   0x00000000000003ec       0xa0 build/stm32wlxx_it.o
+ .debug_frame   0x000000000000048c       0x30 build/system_stm32wlxx.o
+ .debug_frame   0x00000000000004bc      0x108 build/stm32wlxx_ll_utils.o
+ .debug_frame   0x00000000000005c4       0x2c /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+
+Cross Reference Table
+
+Symbol                                            File
+ADC_IRQHandler                                    build/startup_stm32wle5xx.o
+AES_IRQHandler                                    build/startup_stm32wle5xx.o
+AHBPrescTable                                     build/system_stm32wlxx.o
+                                                  build/stm32wlxx_ll_utils.o
+                                                  build/stm32wlxx_ll_rcc.o
+APBPrescTable                                     build/system_stm32wlxx.o
+                                                  build/stm32wlxx_ll_rcc.o
+BusFault_Handler                                  build/stm32wlxx_it.o
+COMP_IRQHandler                                   build/startup_stm32wle5xx.o
+DAC_IRQHandler                                    build/startup_stm32wle5xx.o
+DMA1_Channel1_IRQHandler                          build/startup_stm32wle5xx.o
+DMA1_Channel2_IRQHandler                          build/i2c.o
+DMA1_Channel3_IRQHandler                          build/i2c.o
+DMA1_Channel4_IRQHandler                          build/startup_stm32wle5xx.o
+DMA1_Channel5_IRQHandler                          build/startup_stm32wle5xx.o
+DMA1_Channel6_IRQHandler                          build/startup_stm32wle5xx.o
+DMA1_Channel7_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel1_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel2_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel3_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel4_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel5_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel6_IRQHandler                          build/startup_stm32wle5xx.o
+DMA2_Channel7_IRQHandler                          build/startup_stm32wle5xx.o
+DMAMUX1_OVR_IRQHandler                            build/startup_stm32wle5xx.o
+DebugMon_Handler                                  build/stm32wlxx_it.o
+Default_Handler                                   build/startup_stm32wle5xx.o
+EXTI0_IRQHandler                                  build/startup_stm32wle5xx.o
+EXTI15_10_IRQHandler                              build/startup_stm32wle5xx.o
+EXTI1_IRQHandler                                  build/startup_stm32wle5xx.o
+EXTI2_IRQHandler                                  build/startup_stm32wle5xx.o
+EXTI3_IRQHandler                                  build/startup_stm32wle5xx.o
+EXTI4_IRQHandler                                  build/startup_stm32wle5xx.o
+EXTI9_5_IRQHandler                                build/startup_stm32wle5xx.o
+Error_Handler                                     build/main.o
+FLASH_IRQHandler                                  build/startup_stm32wle5xx.o
+HSEM_IRQHandler                                   build/startup_stm32wle5xx.o
+HardFault_Handler                                 build/stm32wlxx_it.o
+I2C1_ER_IRQHandler                                build/startup_stm32wle5xx.o
+I2C1_EV_IRQHandler                                build/startup_stm32wle5xx.o
+I2C2_ER_IRQHandler                                build/startup_stm32wle5xx.o
+I2C2_EV_IRQHandler                                build/startup_stm32wle5xx.o
+I2C3_ER_IRQHandler                                build/startup_stm32wle5xx.o
+I2C3_EV_IRQHandler                                build/startup_stm32wle5xx.o
+LL_ADC_CommonDeInit                               build/stm32wlxx_ll_adc.o
+LL_ADC_CommonInit                                 build/stm32wlxx_ll_adc.o
+LL_ADC_CommonStructInit                           build/stm32wlxx_ll_adc.o
+LL_ADC_DeInit                                     build/stm32wlxx_ll_adc.o
+LL_ADC_Init                                       build/stm32wlxx_ll_adc.o
+                                                  build/adc.o
+LL_ADC_REG_Init                                   build/stm32wlxx_ll_adc.o
+                                                  build/adc.o
+LL_ADC_REG_StructInit                             build/stm32wlxx_ll_adc.o
+LL_ADC_StructInit                                 build/stm32wlxx_ll_adc.o
+LL_DMA_DeInit                                     build/stm32wlxx_ll_dma.o
+LL_DMA_Init                                       build/stm32wlxx_ll_dma.o
+LL_DMA_StructInit                                 build/stm32wlxx_ll_dma.o
+LL_EXTI_DeInit                                    build/stm32wlxx_ll_exti.o
+LL_EXTI_Init                                      build/stm32wlxx_ll_exti.o
+LL_EXTI_StructInit                                build/stm32wlxx_ll_exti.o
+LL_GPIO_DeInit                                    build/stm32wlxx_ll_gpio.o
+LL_GPIO_Init                                      build/stm32wlxx_ll_gpio.o
+                                                  build/adc.o
+LL_GPIO_StructInit                                build/stm32wlxx_ll_gpio.o
+LL_I2C_DeInit                                     build/stm32wlxx_ll_i2c.o
+LL_I2C_Init                                       build/stm32wlxx_ll_i2c.o
+LL_I2C_StructInit                                 build/stm32wlxx_ll_i2c.o
+LL_Init1msTick                                    build/stm32wlxx_ll_utils.o
+                                                  build/main.o
+LL_PLL_ConfigSystemClock_HSE                      build/stm32wlxx_ll_utils.o
+LL_PLL_ConfigSystemClock_HSI                      build/stm32wlxx_ll_utils.o
+LL_PLL_ConfigSystemClock_MSI                      build/stm32wlxx_ll_utils.o
+LL_PWR_DeInit                                     build/stm32wlxx_ll_pwr.o
+LL_RCC_DeInit                                     build/stm32wlxx_ll_rcc.o
+LL_RCC_GetADCClockFreq                            build/stm32wlxx_ll_rcc.o
+LL_RCC_GetI2CClockFreq                            build/stm32wlxx_ll_rcc.o
+LL_RCC_GetI2SClockFreq                            build/stm32wlxx_ll_rcc.o
+LL_RCC_GetLPTIMClockFreq                          build/stm32wlxx_ll_rcc.o
+LL_RCC_GetLPUARTClockFreq                         build/stm32wlxx_ll_rcc.o
+LL_RCC_GetRNGClockFreq                            build/stm32wlxx_ll_rcc.o
+LL_RCC_GetRTCClockFreq                            build/stm32wlxx_ll_rcc.o
+LL_RCC_GetSystemClocksFreq                        build/stm32wlxx_ll_rcc.o
+LL_RCC_GetUSARTClockFreq                          build/stm32wlxx_ll_rcc.o
+LL_SetFlashLatency                                build/stm32wlxx_ll_utils.o
+LL_SetSystemCoreClock                             build/stm32wlxx_ll_utils.o
+                                                  build/main.o
+LL_mDelay                                         build/stm32wlxx_ll_utils.o
+LPTIM1_IRQHandler                                 build/startup_stm32wle5xx.o
+LPTIM2_IRQHandler                                 build/startup_stm32wle5xx.o
+LPTIM3_IRQHandler                                 build/startup_stm32wle5xx.o
+LPUART1_IRQHandler                                build/startup_stm32wle5xx.o
+MSIRangeTable                                     build/system_stm32wlxx.o
+                                                  build/stm32wlxx_ll_utils.o
+                                                  build/stm32wlxx_ll_rcc.o
+MX_ADC_Init                                       build/adc.o
+MX_DMA_Init                                       build/dma.o
+MX_GPIO_Init                                      build/gpio.o
+                                                  build/main.o
+MemManage_Handler                                 build/stm32wlxx_it.o
+NMI_Handler                                       build/stm32wlxx_it.o
+PKA_IRQHandler                                    build/startup_stm32wle5xx.o
+PVD_PVM_IRQHandler                                build/startup_stm32wle5xx.o
+PendSV_Handler                                    build/stm32wlxx_it.o
+RCC_IRQHandler                                    build/startup_stm32wle5xx.o
+RNG_IRQHandler                                    build/startup_stm32wle5xx.o
+RTC_Alarm_IRQHandler                              build/startup_stm32wle5xx.o
+RTC_WKUP_IRQHandler                               build/startup_stm32wle5xx.o
+Reset_Handler                                     build/startup_stm32wle5xx.o
+SPI1_IRQHandler                                   build/startup_stm32wle5xx.o
+SPI2_IRQHandler                                   build/startup_stm32wle5xx.o
+SUBGHZSPI_IRQHandler                              build/startup_stm32wle5xx.o
+SUBGHZ_Radio_IRQHandler                           build/startup_stm32wle5xx.o
+SVC_Handler                                       build/stm32wlxx_it.o
+SysTick_Handler                                   build/stm32wlxx_it.o
+SystemClock_Config                                build/main.o
+SystemCoreClock                                   build/system_stm32wlxx.o
+                                                  build/stm32wlxx_ll_utils.o
+                                                  build/drv_system.o
+                                                  build/adc.o
+SystemCoreClockUpdate                             build/system_stm32wlxx.o
+SystemInit                                        build/system_stm32wlxx.o
+                                                  build/startup_stm32wle5xx.o
+TAMP_STAMP_LSECSS_SSRU_IRQHandler                 build/startup_stm32wle5xx.o
+TIM16_IRQHandler                                  build/startup_stm32wle5xx.o
+TIM17_IRQHandler                                  build/startup_stm32wle5xx.o
+TIM1_BRK_IRQHandler                               build/startup_stm32wle5xx.o
+TIM1_CC_IRQHandler                                build/startup_stm32wle5xx.o
+TIM1_TRG_COM_IRQHandler                           build/startup_stm32wle5xx.o
+TIM1_UP_IRQHandler                                build/startup_stm32wle5xx.o
+TIM2_IRQHandler                                   build/startup_stm32wle5xx.o
+USART1_IRQHandler                                 build/startup_stm32wle5xx.o
+USART2_IRQHandler                                 build/startup_stm32wle5xx.o
+UsageFault_Handler                                build/stm32wlxx_it.o
+WWDG_IRQHandler                                   build/startup_stm32wle5xx.o
+__bss_end__                                       /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+__bss_start__                                     /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+__call_exitprocs                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+__deregister_frame_info                           /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+__dso_handle                                      /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+__init_array_end                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+__init_array_start                                /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+__libc_fini_array                                 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+__libc_init_array                                 /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+                                                  build/startup_stm32wle5xx.o
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+__preinit_array_end                               /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+__preinit_array_start                             /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+__register_frame_info                             /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+__sf_fake_stderr                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+__sf_fake_stdin                                   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+__sf_fake_stdout                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+__stack                                           /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+_addr                                             build/lcd.o
+_backlightval                                     build/lcd.o
+_charsize                                         build/lcd.o
+_cols                                             build/lcd.o
+_displaycontrol                                   build/lcd.o
+_displayfunction                                  build/lcd.o
+_displaymode                                      build/lcd.o
+_ebss                                             build/startup_stm32wle5xx.o
+_edata                                            build/startup_stm32wle5xx.o
+_estack                                           build/startup_stm32wle5xx.o
+_exit                                             /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libnosys.a(_exit.o)
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+_fini                                             /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+_global_impure_ptr                                /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+_impure_ptr                                       /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-impure.o)
+_init                                             /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-init.o)
+_mainCRTStartup                                   /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+_rows                                             build/lcd.o
+_sbss                                             build/startup_stm32wle5xx.o
+_sdata                                            build/startup_stm32wle5xx.o
+_sidata                                           build/startup_stm32wle5xx.o
+_stack_init                                       /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+_start                                            /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+atexit                                            /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+cycleCounterInit                                  build/drv_system.o
+                                                  build/main.o
+delay                                             build/drv_system.o
+                                                  build/lcd.o
+delayMicroseconds                                 build/drv_system.o
+                                                  build/lcd.o
+exit                                              /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-exit.o)
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+g_pfnVectors                                      build/startup_stm32wle5xx.o
+hardware_init_hook                                /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+i2c2CommandDMA                                    build/i2c.o
+                                                  build/lcd.o
+i2c2Init                                          build/i2c.o
+                                                  build/main.o
+i2c2ReadMemoryDMA                                 build/i2c.o
+i2c2WriteMemDMA                                   build/i2c.o
+lcdAutoscroll                                     build/lcd.o
+lcdBacklight                                      build/lcd.o
+                                                  build/main.o
+lcdBlink                                          build/lcd.o
+lcdClear                                          build/lcd.o
+lcdCursor                                         build/lcd.o
+lcdDisplay                                        build/lcd.o
+lcdHome                                           build/lcd.o
+lcdInit                                           build/lcd.o
+                                                  build/main.o
+lcdLeftToRight                                    build/lcd.o
+lcdNoAutoscroll                                   build/lcd.o
+lcdNoBacklight                                    build/lcd.o
+lcdNoBlink                                        build/lcd.o
+lcdNoCursor                                       build/lcd.o
+lcdNoDisplay                                      build/lcd.o
+lcdRightToLeft                                    build/lcd.o
+lcdScrollDisplayLeft                              build/lcd.o
+lcdScrollDisplayRight                             build/lcd.o
+lcdSendChar                                       build/lcd.o
+lcdSendString                                     build/lcd.o
+                                                  build/main.o
+lcdSetCursor                                      build/lcd.o
+                                                  build/main.o
+main                                              build/main.o
+                                                  build/startup_stm32wle5xx.o
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+memcpy                                            /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memcpy-stub.o)
+                                                  build/i2c.o
+memset                                            /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc_nano.a(lib_a-memset.o)
+                                                  /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+micros                                            build/drv_system.o
+millis                                            build/drv_system.o
+rx_finished                                       build/i2c.o
+software_init_hook                                /opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+tx_finished                                       build/i2c.o

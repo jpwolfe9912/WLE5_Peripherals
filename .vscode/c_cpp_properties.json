@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "name": "STM32",
+      "includePath": [
+        "Core/Inc",
+        "Drivers/CMSIS/Device/ST/STM32WLxx/Include",
+        "Drivers/CMSIS/Include",
+        "Drivers/STM32WLxx_HAL_Driver/Inc"
+      ],
+      "defines": [
+        "CORE_CM4",
+        "DATA_CACHE_ENABLE=1",
+        "EXTERNAL_CLOCK_VALUE=48000",
+        "HSE_STARTUP_TIMEOUT=100",
+        "HSE_VALUE=8000000",
+        "HSI_VALUE=16000000",
+        "INSTRUCTION_CACHE_ENABLE=1",
+        "LSE_STARTUP_TIMEOUT=5000",
+        "LSE_VALUE=32768",
+        "LSI_VALUE=32000",
+        "PREFETCH_ENABLE=0",
+        "STM32WLE5xx",
+        "USE_FULL_LL_DRIVER",
+        "VDD_VALUE=3300"
+      ],
+      "compilerPath": "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/bin/arm-none-eabi-gcc",
+      "configurationProvider": "ms-vscode.makefile-tools"
+    }
+  ],
+  "version": 4
+}
