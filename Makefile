@@ -53,7 +53,8 @@ Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_ll_pwr.c \
 Core/Src/system_stm32wlxx.c \
 Core/Src/lcd.c \
 Core/Src/drv_system.c \
-Core/Src/usart.c
+Core/Src/usart.c \
+Core/Src/syscalls.c
 
 # ASM sources
 ASM_SOURCES =  \

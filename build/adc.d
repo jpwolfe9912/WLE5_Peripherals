@@ -17,7 +17,7 @@ build/adc.o: Core/Src/adc.c Core/Inc/adc.h Core/Inc/main.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_utils.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_pwr.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_gpio.h Core/Inc/i2c.h \
- Core/Inc/drv_system.h Core/Inc/lcd.h
+ Core/Inc/drv_system.h Core/Inc/lcd.h Core/Inc/usart.h
 Core/Inc/adc.h:
 Core/Inc/main.h:
 Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_adc.h:
@@ -43,3 +43,4 @@ Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_gpio.h:
 Core/Inc/i2c.h:
 Core/Inc/drv_system.h:
 Core/Inc/lcd.h:
+Core/Inc/usart.h:

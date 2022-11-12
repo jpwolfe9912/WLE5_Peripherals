@@ -54,6 +54,7 @@ extern "C" {
 #include "i2c.h"
 #include "drv_system.h"
 #include "lcd.h"
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

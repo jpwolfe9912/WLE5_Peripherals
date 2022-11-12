@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -11,87 +11,193 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
    8              		.eabi_attribute 30, 1
    9              		.eabi_attribute 34, 1
   10              		.eabi_attribute 18, 4
-  11              		.file	"i2c.c"
+  11              		.file	"usart.c"
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.i2c2Init,"ax",%progbits
+  15              		.section	.text.usart1ReceiveCb,"ax",%progbits
   16              		.align	1
-  17              		.global	i2c2Init
-  18              		.arch armv7e-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu softvfp
-  24              	i2c2Init:
-  25              	.LFB1042:
-  26              		.file 1 "Core/Src/i2c.c"
-   1:Core/Src/i2c.c **** /* USER CODE BEGIN Header */
-   2:Core/Src/i2c.c **** /**
-   3:Core/Src/i2c.c ****  ******************************************************************************
-   4:Core/Src/i2c.c ****  * @file    i2c.c
-   5:Core/Src/i2c.c ****  * @brief   This file provides code for the configuration
-   6:Core/Src/i2c.c ****  *          of the I2C instances.
-   7:Core/Src/i2c.c ****  ******************************************************************************
-   8:Core/Src/i2c.c ****  * @attention
-   9:Core/Src/i2c.c ****  *
-  10:Core/Src/i2c.c ****  * Copyright (c) 2022 STMicroelectronics.
-  11:Core/Src/i2c.c ****  * All rights reserved.
-  12:Core/Src/i2c.c ****  *
-  13:Core/Src/i2c.c ****  * This software is licensed under terms that can be found in the LICENSE file
-  14:Core/Src/i2c.c ****  * in the root directory of this software component.
-  15:Core/Src/i2c.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
-  16:Core/Src/i2c.c ****  *
-  17:Core/Src/i2c.c ****  ******************************************************************************
-  18:Core/Src/i2c.c ****  */
-  19:Core/Src/i2c.c **** /* USER CODE END Header */
-  20:Core/Src/i2c.c **** /* Includes ------------------------------------------------------------------*/
-  21:Core/Src/i2c.c **** #include "i2c.h"
-  22:Core/Src/i2c.c **** 
-  23:Core/Src/i2c.c **** /* USER CODE BEGIN 0 */
-  24:Core/Src/i2c.c **** #define LCD_ADDRESS 0x27
-  25:Core/Src/i2c.c **** #define I2C2_TX_DMA_REQUEST 0xE
-  26:Core/Src/i2c.c **** #define I2C2_RX_DMA_REQUEST 0xD
-  27:Core/Src/i2c.c **** 
-  28:Core/Src/i2c.c **** volatile uint8_t tx_finished;
-  29:Core/Src/i2c.c **** volatile uint8_t rx_finished;
-  30:Core/Src/i2c.c **** /* USER CODE END 0 */
-  31:Core/Src/i2c.c **** 
-  32:Core/Src/i2c.c **** /* USER CODE BEGIN 1 */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 2
+  17              		.arch armv7e-m
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	usart1ReceiveCb:
+  24              	.LFB1045:
+  25              		.file 1 "Core/Src/usart.c"
+   1:Core/Src/usart.c **** /* Includes */
+   2:Core/Src/usart.c **** #include "usart.h"
+   3:Core/Src/usart.c **** 
+   4:Core/Src/usart.c **** /* Global Variables */
+   5:Core/Src/usart.c **** uint8_t rxBuf;
+   6:Core/Src/usart.c **** 
+   7:Core/Src/usart.c **** /* Function Prototypes */
+   8:Core/Src/usart.c **** static void usart1ReceiveCb(void);
+   9:Core/Src/usart.c **** 
+  10:Core/Src/usart.c **** /* Functions */
+  11:Core/Src/usart.c **** /** @brief Initializes the low level uart registers in order to use printf.
+  12:Core/Src/usart.c **** *
+  13:Core/Src/usart.c **** *  @return Void.
+  14:Core/Src/usart.c **** */
+  15:Core/Src/usart.c **** void usart1Init(void)
+  16:Core/Src/usart.c **** {
+  17:Core/Src/usart.c **** 
+  18:Core/Src/usart.c **** 	RCC->AHB2ENR 	|= RCC_AHB2ENR_GPIOBEN; 						// enable the clock for port B
+  19:Core/Src/usart.c **** 	RCC->APB2ENR 	|= RCC_APB2ENR_USART1EN; 						// enable the clock for USART1
+  20:Core/Src/usart.c **** 
+  21:Core/Src/usart.c **** 	GPIOB->AFR[0] |= (0x7 << (4 * 6U));							// set pin A2 as alternate function
+  22:Core/Src/usart.c **** 	GPIOB->AFR[0] |= (0x7 << (4 * 7U));							// set pin A3 as alternate function
+  23:Core/Src/usart.c **** 
+  24:Core/Src/usart.c **** 	GPIOB->MODER &= ~(GPIO_MODER_MODE6);
+  25:Core/Src/usart.c **** 	GPIOB->MODER &= ~(GPIO_MODER_MODE7);
+  26:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE6_1;						// set PC12 as alternate function
+  27:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE7_1;						// set PD2 as alternate function
+  28:Core/Src/usart.c **** 
+  29:Core/Src/usart.c **** 	NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
+  30:Core/Src/usart.c **** 	NVIC_EnableIRQ(USART1_IRQn);
+  31:Core/Src/usart.c **** 
+  32:Core/Src/usart.c **** 	USART1->BRR = 0x1A1; 										// set baud rate to 115200
+  33:Core/Src/usart.c **** 	USART1->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; 	// enable the receiver, transmitter, a
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 2
 
 
-  33:Core/Src/i2c.c **** void i2c2Init(void)
-  34:Core/Src/i2c.c **** {
-  27              		.loc 1 34 1 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-  32 0000 10B4     		push	{r4}
-  33              		.cfi_def_cfa_offset 4
-  34              		.cfi_offset 4, -4
-  35:Core/Src/i2c.c ****     /* DMA Clock Enable */
-  36:Core/Src/i2c.c ****     RCC->AHB1ENR |= RCC_AHB1ENR_DMAMUX1EN;
-  35              		.loc 1 36 5 view .LVU1
-  36              		.loc 1 36 18 is_stmt 0 view .LVU2
-  37 0002 4FF0B042 		mov	r2, #1476395008
-  38 0006 936C     		ldr	r3, [r2, #72]
-  39 0008 43F00403 		orr	r3, r3, #4
-  40 000c 9364     		str	r3, [r2, #72]
-  37:Core/Src/i2c.c ****     RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
-  41              		.loc 1 37 5 is_stmt 1 view .LVU3
-  42              		.loc 1 37 18 is_stmt 0 view .LVU4
-  43 000e 936C     		ldr	r3, [r2, #72]
-  44 0010 43F00103 		orr	r3, r3, #1
-  45 0014 9364     		str	r3, [r2, #72]
-  38:Core/Src/i2c.c **** 
-  39:Core/Src/i2c.c ****     /* DMA1_Channel2_IRQn interrupt configuration */
-  40:Core/Src/i2c.c ****     NVIC_SetPriority(DMA1_Channel2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
-  46              		.loc 1 40 5 is_stmt 1 view .LVU5
-  47              	.LBB30:
-  48              	.LBI30:
-  49              		.file 2 "Drivers/CMSIS/Include/core_cm4.h"
+  34:Core/Src/usart.c ****     // enable USART1 interrupts on the NVIC (nested vector interrupt controller)
+  35:Core/Src/usart.c **** }
+  36:Core/Src/usart.c **** 
+  37:Core/Src/usart.c **** /** @brief Uses polling to write data to the transmit buffer.
+  38:Core/Src/usart.c ****  *
+  39:Core/Src/usart.c ****  *  @param ch The character to send.
+  40:Core/Src/usart.c ****  *  @return Void.
+  41:Core/Src/usart.c ****  */
+  42:Core/Src/usart.c **** void serialWrite(uint8_t ch)
+  43:Core/Src/usart.c **** {
+  44:Core/Src/usart.c **** 	while (!(USART1->ISR & USART_ISR_TC)){}	// waits for TX buffer to become empty
+  45:Core/Src/usart.c **** 	USART1->TDR = ch;						// transfers the value of the data register into ch
+  46:Core/Src/usart.c **** }
+  47:Core/Src/usart.c **** 
+  48:Core/Src/usart.c **** void serialBeginRead8(void)
+  49:Core/Src/usart.c **** {
+  50:Core/Src/usart.c ****     USART1->ICR |= USART_ICR_ORECF;
+  51:Core/Src/usart.c ****     USART1->CR1 |= USART_CR1_RXNEIE_RXFNEIE;
+  52:Core/Src/usart.c **** }
+  53:Core/Src/usart.c **** 
+  54:Core/Src/usart.c **** static void usart1ReceiveCb(void)
+  55:Core/Src/usart.c **** {
+  26              		.loc 1 55 1 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 08B5     		push	{r3, lr}
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 3, -8
+  33              		.cfi_offset 14, -4
+  56:Core/Src/usart.c ****     rxBuf = USART1->RDR;
+  34              		.loc 1 56 5 view .LVU1
+  35              		.loc 1 56 19 is_stmt 0 view .LVU2
+  36 0002 044B     		ldr	r3, .L3
+  37 0004 586A     		ldr	r0, [r3, #36]
+  38              		.loc 1 56 11 view .LVU3
+  39 0006 C0B2     		uxtb	r0, r0
+  40 0008 034B     		ldr	r3, .L3+4
+  41 000a 1870     		strb	r0, [r3]
+  57:Core/Src/usart.c **** 	lcdSendChar(rxBuf);
+  42              		.loc 1 57 2 is_stmt 1 view .LVU4
+  43 000c FFF7FEFF 		bl	lcdSendChar
+  44              	.LVL0:
+  58:Core/Src/usart.c **** }
+  45              		.loc 1 58 1 is_stmt 0 view .LVU5
+  46 0010 08BD     		pop	{r3, pc}
+  47              	.L4:
+  48 0012 00BF     		.align	2
+  49              	.L3:
+  50 0014 00380140 		.word	1073821696
+  51 0018 00000000 		.word	.LANCHOR0
+  52              		.cfi_endproc
+  53              	.LFE1045:
+  55              		.section	.text.usart1Init,"ax",%progbits
+  56              		.align	1
+  57              		.global	usart1Init
+  58              		.syntax unified
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 3
+
+
+  59              		.thumb
+  60              		.thumb_func
+  61              		.fpu softvfp
+  63              	usart1Init:
+  64              	.LFB1042:
+  16:Core/Src/usart.c **** 
+  65              		.loc 1 16 1 is_stmt 1 view -0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  18:Core/Src/usart.c **** 	RCC->APB2ENR 	|= RCC_APB2ENR_USART1EN; 						// enable the clock for USART1
+  70              		.loc 1 18 2 view .LVU7
+  18:Core/Src/usart.c **** 	RCC->APB2ENR 	|= RCC_APB2ENR_USART1EN; 						// enable the clock for USART1
+  71              		.loc 1 18 16 is_stmt 0 view .LVU8
+  72 0000 4FF0B043 		mov	r3, #1476395008
+  73 0004 DA6C     		ldr	r2, [r3, #76]
+  74 0006 42F00202 		orr	r2, r2, #2
+  75 000a DA64     		str	r2, [r3, #76]
+  19:Core/Src/usart.c **** 
+  76              		.loc 1 19 2 is_stmt 1 view .LVU9
+  19:Core/Src/usart.c **** 
+  77              		.loc 1 19 16 is_stmt 0 view .LVU10
+  78 000c 1A6E     		ldr	r2, [r3, #96]
+  79 000e 42F48042 		orr	r2, r2, #16384
+  80 0012 1A66     		str	r2, [r3, #96]
+  21:Core/Src/usart.c **** 	GPIOB->AFR[0] |= (0x7 << (4 * 7U));							// set pin A3 as alternate function
+  81              		.loc 1 21 2 is_stmt 1 view .LVU11
+  21:Core/Src/usart.c **** 	GPIOB->AFR[0] |= (0x7 << (4 * 7U));							// set pin A3 as alternate function
+  82              		.loc 1 21 16 is_stmt 0 view .LVU12
+  83 0014 144B     		ldr	r3, .L6
+  84 0016 1A6A     		ldr	r2, [r3, #32]
+  85 0018 42F0E062 		orr	r2, r2, #117440512
+  86 001c 1A62     		str	r2, [r3, #32]
+  22:Core/Src/usart.c **** 
+  87              		.loc 1 22 2 is_stmt 1 view .LVU13
+  22:Core/Src/usart.c **** 
+  88              		.loc 1 22 16 is_stmt 0 view .LVU14
+  89 001e 1A6A     		ldr	r2, [r3, #32]
+  90 0020 42F0E042 		orr	r2, r2, #1879048192
+  91 0024 1A62     		str	r2, [r3, #32]
+  24:Core/Src/usart.c **** 	GPIOB->MODER &= ~(GPIO_MODER_MODE7);
+  92              		.loc 1 24 2 is_stmt 1 view .LVU15
+  24:Core/Src/usart.c **** 	GPIOB->MODER &= ~(GPIO_MODER_MODE7);
+  93              		.loc 1 24 15 is_stmt 0 view .LVU16
+  94 0026 1A68     		ldr	r2, [r3]
+  95 0028 22F44052 		bic	r2, r2, #12288
+  96 002c 1A60     		str	r2, [r3]
+  25:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE6_1;						// set PC12 as alternate function
+  97              		.loc 1 25 2 is_stmt 1 view .LVU17
+  25:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE6_1;						// set PC12 as alternate function
+  98              		.loc 1 25 15 is_stmt 0 view .LVU18
+  99 002e 1A68     		ldr	r2, [r3]
+ 100 0030 22F44042 		bic	r2, r2, #49152
+ 101 0034 1A60     		str	r2, [r3]
+  26:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE7_1;						// set PD2 as alternate function
+ 102              		.loc 1 26 2 is_stmt 1 view .LVU19
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 4
+
+
+  26:Core/Src/usart.c **** 	GPIOB->MODER |= GPIO_MODER_MODE7_1;						// set PD2 as alternate function
+ 103              		.loc 1 26 15 is_stmt 0 view .LVU20
+ 104 0036 1A68     		ldr	r2, [r3]
+ 105 0038 42F40052 		orr	r2, r2, #8192
+ 106 003c 1A60     		str	r2, [r3]
+  27:Core/Src/usart.c **** 
+ 107              		.loc 1 27 2 is_stmt 1 view .LVU21
+  27:Core/Src/usart.c **** 
+ 108              		.loc 1 27 15 is_stmt 0 view .LVU22
+ 109 003e 1A68     		ldr	r2, [r3]
+ 110 0040 42F40042 		orr	r2, r2, #32768
+ 111 0044 1A60     		str	r2, [r3]
+  29:Core/Src/usart.c **** 	NVIC_EnableIRQ(USART1_IRQn);
+ 112              		.loc 1 29 2 is_stmt 1 view .LVU23
+ 113              	.LBB16:
+ 114              	.LBI16:
+ 115              		.file 2 "Drivers/CMSIS/Include/core_cm4.h"
    1:Drivers/CMSIS/Include/core_cm4.h **** /**************************************************************************//**
    2:Drivers/CMSIS/Include/core_cm4.h ****  * @file     core_cm4.h
    3:Drivers/CMSIS/Include/core_cm4.h ****  * @brief    CMSIS Cortex-M4 Core Peripheral Access Layer Header File
@@ -118,9 +224,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
   24:Drivers/CMSIS/Include/core_cm4.h **** 
   25:Drivers/CMSIS/Include/core_cm4.h **** #if   defined ( __ICCARM__ )
   26:Drivers/CMSIS/Include/core_cm4.h ****   #pragma system_include         /* treat file as system include file for MISRA check */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 3
-
-
   27:Drivers/CMSIS/Include/core_cm4.h **** #elif defined (__clang__)
   28:Drivers/CMSIS/Include/core_cm4.h ****   #pragma clang system_header   /* treat file as system include file */
   29:Drivers/CMSIS/Include/core_cm4.h **** #endif
@@ -135,6 +238,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
   38:Drivers/CMSIS/Include/core_cm4.h **** #endif
   39:Drivers/CMSIS/Include/core_cm4.h **** 
   40:Drivers/CMSIS/Include/core_cm4.h **** /**
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 5
+
+
   41:Drivers/CMSIS/Include/core_cm4.h ****   \page CMSIS_MISRA_Exceptions  MISRA-C:2004 Compliance Exceptions
   42:Drivers/CMSIS/Include/core_cm4.h ****   CMSIS violates the following MISRA-C:2004 rules:
   43:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -178,9 +284,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
   81:Drivers/CMSIS/Include/core_cm4.h ****       #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
   82:Drivers/CMSIS/Include/core_cm4.h ****       #define __FPU_USED       0U
   83:Drivers/CMSIS/Include/core_cm4.h ****     #endif
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 4
-
-
   84:Drivers/CMSIS/Include/core_cm4.h ****   #else
   85:Drivers/CMSIS/Include/core_cm4.h ****     #define __FPU_USED         0U
   86:Drivers/CMSIS/Include/core_cm4.h ****   #endif
@@ -195,6 +298,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
   95:Drivers/CMSIS/Include/core_cm4.h ****     #endif
   96:Drivers/CMSIS/Include/core_cm4.h ****   #else
   97:Drivers/CMSIS/Include/core_cm4.h ****     #define __FPU_USED         0U
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 6
+
+
   98:Drivers/CMSIS/Include/core_cm4.h ****   #endif
   99:Drivers/CMSIS/Include/core_cm4.h **** 
  100:Drivers/CMSIS/Include/core_cm4.h **** #elif defined ( __GNUC__ )
@@ -238,9 +344,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  138:Drivers/CMSIS/Include/core_cm4.h ****     #if defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)
  139:Drivers/CMSIS/Include/core_cm4.h ****       #define __FPU_USED       1U
  140:Drivers/CMSIS/Include/core_cm4.h ****     #else
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 5
-
-
  141:Drivers/CMSIS/Include/core_cm4.h ****       #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
  142:Drivers/CMSIS/Include/core_cm4.h ****       #define __FPU_USED       0U
  143:Drivers/CMSIS/Include/core_cm4.h ****     #endif
@@ -255,6 +358,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  152:Drivers/CMSIS/Include/core_cm4.h ****     #else
  153:Drivers/CMSIS/Include/core_cm4.h ****       #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
  154:Drivers/CMSIS/Include/core_cm4.h ****       #define __FPU_USED       0U
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 7
+
+
  155:Drivers/CMSIS/Include/core_cm4.h ****     #endif
  156:Drivers/CMSIS/Include/core_cm4.h ****   #else
  157:Drivers/CMSIS/Include/core_cm4.h ****     #define __FPU_USED         0U
@@ -298,9 +404,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  195:Drivers/CMSIS/Include/core_cm4.h ****   #endif
  196:Drivers/CMSIS/Include/core_cm4.h **** 
  197:Drivers/CMSIS/Include/core_cm4.h ****   #ifndef __NVIC_PRIO_BITS
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 6
-
-
  198:Drivers/CMSIS/Include/core_cm4.h ****     #define __NVIC_PRIO_BITS          3U
  199:Drivers/CMSIS/Include/core_cm4.h ****     #warning "__NVIC_PRIO_BITS not defined in device header file; using default!"
  200:Drivers/CMSIS/Include/core_cm4.h ****   #endif
@@ -315,6 +418,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  209:Drivers/CMSIS/Include/core_cm4.h **** /**
  210:Drivers/CMSIS/Include/core_cm4.h ****     \defgroup CMSIS_glob_defs CMSIS Global Defines
  211:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 8
+
+
  212:Drivers/CMSIS/Include/core_cm4.h ****     <strong>IO Type Qualifiers</strong> are used
  213:Drivers/CMSIS/Include/core_cm4.h ****     \li to specify the access to peripheral variables.
  214:Drivers/CMSIS/Include/core_cm4.h ****     \li for automatic generation of peripheral register debug information.
@@ -358,9 +464,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  252:Drivers/CMSIS/Include/core_cm4.h ****   \brief      Core Register type definitions.
  253:Drivers/CMSIS/Include/core_cm4.h ****   @{
  254:Drivers/CMSIS/Include/core_cm4.h ****  */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 7
-
-
  255:Drivers/CMSIS/Include/core_cm4.h **** 
  256:Drivers/CMSIS/Include/core_cm4.h **** /**
  257:Drivers/CMSIS/Include/core_cm4.h ****   \brief  Union type to access the Application Program Status Register (APSR).
@@ -375,6 +478,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  266:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t Q:1;                        /*!< bit:     27  Saturation condition flag */
  267:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag */
  268:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t C:1;                        /*!< bit:     29  Carry condition code flag */
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 9
+
+
  269:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag */
  270:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t N:1;                        /*!< bit:     31  Negative condition code flag */
  271:Drivers/CMSIS/Include/core_cm4.h ****   } b;                                   /*!< Structure used for bit  access */
@@ -418,9 +524,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  309:Drivers/CMSIS/Include/core_cm4.h **** #define IPSR_ISR_Pos                        0U                                            /*!< IPSR
  310:Drivers/CMSIS/Include/core_cm4.h **** #define IPSR_ISR_Msk                       (0x1FFUL /*<< IPSR_ISR_Pos*/)                  /*!< IPSR
  311:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 8
-
-
  312:Drivers/CMSIS/Include/core_cm4.h **** 
  313:Drivers/CMSIS/Include/core_cm4.h **** /**
  314:Drivers/CMSIS/Include/core_cm4.h ****   \brief  Union type to access the Special-Purpose Program Status Registers (xPSR).
@@ -435,6 +538,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  323:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t GE:4;                       /*!< bit: 16..19  Greater than or Equal flags */
  324:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t _reserved1:4;               /*!< bit: 20..23  Reserved */
  325:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t T:1;                        /*!< bit:     24  Thumb bit */
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 10
+
+
  326:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t ICI_IT_2:2;                 /*!< bit: 25..26  ICI/IT part 2 */
  327:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t Q:1;                        /*!< bit:     27  Saturation condition flag */
  328:Drivers/CMSIS/Include/core_cm4.h ****     uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag */
@@ -478,9 +584,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  366:Drivers/CMSIS/Include/core_cm4.h **** 
  367:Drivers/CMSIS/Include/core_cm4.h **** 
  368:Drivers/CMSIS/Include/core_cm4.h **** /**
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 9
-
-
  369:Drivers/CMSIS/Include/core_cm4.h ****   \brief  Union type to access the Control Registers (CONTROL).
  370:Drivers/CMSIS/Include/core_cm4.h ****  */
  371:Drivers/CMSIS/Include/core_cm4.h **** typedef union
@@ -495,6 +598,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  380:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t w;                            /*!< Type      used for word access */
  381:Drivers/CMSIS/Include/core_cm4.h **** } CONTROL_Type;
  382:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 11
+
+
  383:Drivers/CMSIS/Include/core_cm4.h **** /* CONTROL Register Definitions */
  384:Drivers/CMSIS/Include/core_cm4.h **** #define CONTROL_FPCA_Pos                    2U                                            /*!< CONT
  385:Drivers/CMSIS/Include/core_cm4.h **** #define CONTROL_FPCA_Msk                   (1UL << CONTROL_FPCA_Pos)                      /*!< CONT
@@ -538,9 +644,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  423:Drivers/CMSIS/Include/core_cm4.h **** /* Software Triggered Interrupt Register Definitions */
  424:Drivers/CMSIS/Include/core_cm4.h **** #define NVIC_STIR_INTID_Pos                 0U                                         /*!< STIR: I
  425:Drivers/CMSIS/Include/core_cm4.h **** #define NVIC_STIR_INTID_Msk                (0x1FFUL /*<< NVIC_STIR_INTID_Pos*/)        /*!< STIR: I
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 10
-
-
  426:Drivers/CMSIS/Include/core_cm4.h **** 
  427:Drivers/CMSIS/Include/core_cm4.h **** /*@} end of group CMSIS_NVIC */
  428:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -555,6 +658,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  437:Drivers/CMSIS/Include/core_cm4.h **** /**
  438:Drivers/CMSIS/Include/core_cm4.h ****   \brief  Structure type to access the System Control Block (SCB).
  439:Drivers/CMSIS/Include/core_cm4.h ****  */
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 12
+
+
  440:Drivers/CMSIS/Include/core_cm4.h **** typedef struct
  441:Drivers/CMSIS/Include/core_cm4.h **** {
  442:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t CPUID;                  /*!< Offset: 0x000 (R/ )  CPUID Base Register */
@@ -598,9 +704,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  480:Drivers/CMSIS/Include/core_cm4.h **** 
  481:Drivers/CMSIS/Include/core_cm4.h **** /* SCB Interrupt Control State Register Definitions */
  482:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_NMIPENDSET_Pos            31U                                            /*!< SCB 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 11
-
-
  483:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_NMIPENDSET_Msk            (1UL << SCB_ICSR_NMIPENDSET_Pos)               /*!< SCB 
  484:Drivers/CMSIS/Include/core_cm4.h **** 
  485:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_PENDSVSET_Pos             28U                                            /*!< SCB 
@@ -615,6 +718,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  494:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_PENDSTCLR_Pos             25U                                            /*!< SCB 
  495:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_PENDSTCLR_Msk             (1UL << SCB_ICSR_PENDSTCLR_Pos)                /*!< SCB 
  496:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 13
+
+
  497:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_ISRPREEMPT_Pos            23U                                            /*!< SCB 
  498:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_ICSR_ISRPREEMPT_Msk            (1UL << SCB_ICSR_ISRPREEMPT_Pos)               /*!< SCB 
  499:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -658,9 +764,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  537:Drivers/CMSIS/Include/core_cm4.h **** 
  538:Drivers/CMSIS/Include/core_cm4.h **** /* SCB System Control Register Definitions */
  539:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SCR_SEVONPEND_Pos               4U                                            /*!< SCB 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 12
-
-
  540:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SCR_SEVONPEND_Msk              (1UL << SCB_SCR_SEVONPEND_Pos)                 /*!< SCB 
  541:Drivers/CMSIS/Include/core_cm4.h **** 
  542:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SCR_SLEEPDEEP_Pos               2U                                            /*!< SCB 
@@ -675,6 +778,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  551:Drivers/CMSIS/Include/core_cm4.h **** 
  552:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CCR_BFHFNMIGN_Pos               8U                                            /*!< SCB 
  553:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CCR_BFHFNMIGN_Msk              (1UL << SCB_CCR_BFHFNMIGN_Pos)                 /*!< SCB 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 14
+
+
  554:Drivers/CMSIS/Include/core_cm4.h **** 
  555:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CCR_DIV_0_TRP_Pos               4U                                            /*!< SCB 
  556:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CCR_DIV_0_TRP_Msk              (1UL << SCB_CCR_DIV_0_TRP_Pos)                 /*!< SCB 
@@ -718,9 +824,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  594:Drivers/CMSIS/Include/core_cm4.h **** 
  595:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_MONITORACT_Pos            8U                                            /*!< SCB 
  596:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_MONITORACT_Msk           (1UL << SCB_SHCSR_MONITORACT_Pos)              /*!< SCB 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 13
-
-
  597:Drivers/CMSIS/Include/core_cm4.h **** 
  598:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_SVCALLACT_Pos             7U                                            /*!< SCB 
  599:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_SVCALLACT_Msk            (1UL << SCB_SHCSR_SVCALLACT_Pos)               /*!< SCB 
@@ -735,6 +838,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  608:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_SHCSR_MEMFAULTACT_Msk          (1UL /*<< SCB_SHCSR_MEMFAULTACT_Pos*/)         /*!< SCB 
  609:Drivers/CMSIS/Include/core_cm4.h **** 
  610:Drivers/CMSIS/Include/core_cm4.h **** /* SCB Configurable Fault Status Register Definitions */
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 15
+
+
  611:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_USGFAULTSR_Pos            16U                                            /*!< SCB 
  612:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_USGFAULTSR_Msk            (0xFFFFUL << SCB_CFSR_USGFAULTSR_Pos)          /*!< SCB 
  613:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -778,9 +884,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  651:Drivers/CMSIS/Include/core_cm4.h **** 
  652:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_IMPRECISERR_Pos          (SCB_CFSR_BUSFAULTSR_Pos + 2U)                  /*!< SCB 
  653:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_IMPRECISERR_Msk          (1UL << SCB_CFSR_IMPRECISERR_Pos)               /*!< SCB 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 14
-
-
  654:Drivers/CMSIS/Include/core_cm4.h **** 
  655:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_PRECISERR_Pos            (SCB_CFSR_BUSFAULTSR_Pos + 1U)                  /*!< SCB 
  656:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_PRECISERR_Msk            (1UL << SCB_CFSR_PRECISERR_Pos)                 /*!< SCB 
@@ -795,6 +898,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  665:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_UNALIGNED_Pos            (SCB_CFSR_USGFAULTSR_Pos + 8U)                  /*!< SCB 
  666:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_UNALIGNED_Msk            (1UL << SCB_CFSR_UNALIGNED_Pos)                 /*!< SCB 
  667:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 16
+
+
  668:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_NOCP_Pos                 (SCB_CFSR_USGFAULTSR_Pos + 3U)                  /*!< SCB 
  669:Drivers/CMSIS/Include/core_cm4.h **** #define SCB_CFSR_NOCP_Msk                 (1UL << SCB_CFSR_NOCP_Pos)                      /*!< SCB 
  670:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -838,9 +944,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  708:Drivers/CMSIS/Include/core_cm4.h **** 
  709:Drivers/CMSIS/Include/core_cm4.h **** /**
  710:Drivers/CMSIS/Include/core_cm4.h ****   \ingroup  CMSIS_core_register
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 15
-
-
  711:Drivers/CMSIS/Include/core_cm4.h ****   \defgroup CMSIS_SCnSCB System Controls not in SCB (SCnSCB)
  712:Drivers/CMSIS/Include/core_cm4.h ****   \brief    Type definitions for the System Control and ID Register not in the SCB
  713:Drivers/CMSIS/Include/core_cm4.h ****   @{
@@ -855,6 +958,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  722:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t ICTR;                   /*!< Offset: 0x004 (R/ )  Interrupt Controller Type Regist
  723:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t ACTLR;                  /*!< Offset: 0x008 (R/W)  Auxiliary Control Register */
  724:Drivers/CMSIS/Include/core_cm4.h **** } SCnSCB_Type;
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 17
+
+
  725:Drivers/CMSIS/Include/core_cm4.h **** 
  726:Drivers/CMSIS/Include/core_cm4.h **** /* Interrupt Controller Type Register Definitions */
  727:Drivers/CMSIS/Include/core_cm4.h **** #define SCnSCB_ICTR_INTLINESNUM_Pos         0U                                         /*!< ICTR: I
@@ -898,9 +1004,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  765:Drivers/CMSIS/Include/core_cm4.h **** } SysTick_Type;
  766:Drivers/CMSIS/Include/core_cm4.h **** 
  767:Drivers/CMSIS/Include/core_cm4.h **** /* SysTick Control / Status Register Definitions */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 16
-
-
  768:Drivers/CMSIS/Include/core_cm4.h **** #define SysTick_CTRL_COUNTFLAG_Pos         16U                                            /*!< SysT
  769:Drivers/CMSIS/Include/core_cm4.h **** #define SysTick_CTRL_COUNTFLAG_Msk         (1UL << SysTick_CTRL_COUNTFLAG_Pos)            /*!< SysT
  770:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -915,6 +1018,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  779:Drivers/CMSIS/Include/core_cm4.h **** 
  780:Drivers/CMSIS/Include/core_cm4.h **** /* SysTick Reload Register Definitions */
  781:Drivers/CMSIS/Include/core_cm4.h **** #define SysTick_LOAD_RELOAD_Pos             0U                                            /*!< SysT
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 18
+
+
  782:Drivers/CMSIS/Include/core_cm4.h **** #define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFUL /*<< SysTick_LOAD_RELOAD_Pos*/)    /*!< SysT
  783:Drivers/CMSIS/Include/core_cm4.h **** 
  784:Drivers/CMSIS/Include/core_cm4.h **** /* SysTick Current Register Definitions */
@@ -958,9 +1064,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  822:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t TPR;                    /*!< Offset: 0xE40 (R/W)  ITM Trace Privilege Register */
  823:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED2[15U];
  824:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t TCR;                    /*!< Offset: 0xE80 (R/W)  ITM Trace Control Register */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 17
-
-
  825:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED3[32U];
  826:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED4[43U];
  827:Drivers/CMSIS/Include/core_cm4.h ****   __OM  uint32_t LAR;                    /*!< Offset: 0xFB0 ( /W)  ITM Lock Access Register */
@@ -975,6 +1078,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  836:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t PID2;                   /*!< Offset: 0xFE8 (R/ )  ITM Peripheral Identification Re
  837:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t PID3;                   /*!< Offset: 0xFEC (R/ )  ITM Peripheral Identification Re
  838:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t CID0;                   /*!< Offset: 0xFF0 (R/ )  ITM Component  Identification Re
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 19
+
+
  839:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t CID1;                   /*!< Offset: 0xFF4 (R/ )  ITM Component  Identification Re
  840:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t CID2;                   /*!< Offset: 0xFF8 (R/ )  ITM Component  Identification Re
  841:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t CID3;                   /*!< Offset: 0xFFC (R/ )  ITM Component  Identification Re
@@ -1018,9 +1124,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  879:Drivers/CMSIS/Include/core_cm4.h **** 
  880:Drivers/CMSIS/Include/core_cm4.h **** #define ITM_LSR_Access_Pos                  1U                                            /*!< ITM 
  881:Drivers/CMSIS/Include/core_cm4.h **** #define ITM_LSR_Access_Msk                 (1UL << ITM_LSR_Access_Pos)                    /*!< ITM 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 18
-
-
  882:Drivers/CMSIS/Include/core_cm4.h **** 
  883:Drivers/CMSIS/Include/core_cm4.h **** #define ITM_LSR_Present_Pos                 0U                                            /*!< ITM 
  884:Drivers/CMSIS/Include/core_cm4.h **** #define ITM_LSR_Present_Msk                (1UL /*<< ITM_LSR_Present_Pos*/)               /*!< ITM 
@@ -1035,6 +1138,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  893:Drivers/CMSIS/Include/core_cm4.h ****   @{
  894:Drivers/CMSIS/Include/core_cm4.h ****  */
  895:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 20
+
+
  896:Drivers/CMSIS/Include/core_cm4.h **** /**
  897:Drivers/CMSIS/Include/core_cm4.h ****   \brief  Structure type to access the Data Watchpoint and Trace Register (DWT).
  898:Drivers/CMSIS/Include/core_cm4.h ****  */
@@ -1078,9 +1184,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  936:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_NOCYCCNT_Pos              25U                                         /*!< DWT CTR
  937:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_NOCYCCNT_Msk              (0x1UL << DWT_CTRL_NOCYCCNT_Pos)            /*!< DWT CTR
  938:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 19
-
-
  939:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_NOPRFCNT_Pos              24U                                         /*!< DWT CTR
  940:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_NOPRFCNT_Msk              (0x1UL << DWT_CTRL_NOPRFCNT_Pos)            /*!< DWT CTR
  941:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1095,6 +1198,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  950:Drivers/CMSIS/Include/core_cm4.h **** 
  951:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_SLEEPEVTENA_Pos           19U                                         /*!< DWT CTR
  952:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_SLEEPEVTENA_Msk           (0x1UL << DWT_CTRL_SLEEPEVTENA_Pos)         /*!< DWT CTR
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 21
+
+
  953:Drivers/CMSIS/Include/core_cm4.h **** 
  954:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_EXCEVTENA_Pos             18U                                         /*!< DWT CTR
  955:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_CTRL_EXCEVTENA_Msk             (0x1UL << DWT_CTRL_EXCEVTENA_Pos)           /*!< DWT CTR
@@ -1138,9 +1244,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
  993:Drivers/CMSIS/Include/core_cm4.h **** /* DWT LSU Count Register Definitions */
  994:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_LSUCNT_LSUCNT_Pos               0U                                         /*!< DWT LSU
  995:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_LSUCNT_LSUCNT_Msk              (0xFFUL /*<< DWT_LSUCNT_LSUCNT_Pos*/)       /*!< DWT LSU
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 20
-
-
  996:Drivers/CMSIS/Include/core_cm4.h **** 
  997:Drivers/CMSIS/Include/core_cm4.h **** /* DWT Folded-instruction Count Register Definitions */
  998:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_FOLDCNT_FOLDCNT_Pos             0U                                         /*!< DWT FOL
@@ -1155,6 +1258,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1007:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_FUNCTION_MATCHED_Msk           (0x1UL << DWT_FUNCTION_MATCHED_Pos)         /*!< DWT FUN
 1008:Drivers/CMSIS/Include/core_cm4.h **** 
 1009:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR1_Pos        16U                                         /*!< DWT FUN
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 22
+
+
 1010:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR1_Msk        (0xFUL << DWT_FUNCTION_DATAVADDR1_Pos)      /*!< DWT FUN
 1011:Drivers/CMSIS/Include/core_cm4.h **** 
 1012:Drivers/CMSIS/Include/core_cm4.h **** #define DWT_FUNCTION_DATAVADDR0_Pos        12U                                         /*!< DWT FUN
@@ -1198,9 +1304,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1050:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED0[2U];
 1051:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t ACPR;                   /*!< Offset: 0x010 (R/W)  Asynchronous Clock Prescaler Reg
 1052:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED1[55U];
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 21
-
-
 1053:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t SPPR;                   /*!< Offset: 0x0F0 (R/W)  Selected Pin Protocol Register *
 1054:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED2[131U];
 1055:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t FFSR;                   /*!< Offset: 0x300 (R/ )  Formatter and Flush Status Regis
@@ -1215,6 +1318,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1064:Drivers/CMSIS/Include/core_cm4.h ****   __IM  uint32_t FIFO1;                  /*!< Offset: 0xEFC (R/ )  Integration ITM Data */
 1065:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t ITCTRL;                 /*!< Offset: 0xF00 (R/W)  Integration Mode Control */
 1066:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED5[39U];
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 23
+
+
 1067:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t CLAIMSET;               /*!< Offset: 0xFA0 (R/W)  Claim tag set */
 1068:Drivers/CMSIS/Include/core_cm4.h ****   __IOM uint32_t CLAIMCLR;               /*!< Offset: 0xFA4 (R/W)  Claim tag clear */
 1069:Drivers/CMSIS/Include/core_cm4.h ****         uint32_t RESERVED7[8U];
@@ -1258,9 +1364,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1107:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ITM_ATVALID_Pos          29U                                         /*!< TPI FIF
 1108:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ITM_ATVALID_Msk          (0x1UL << TPI_FIFO0_ITM_ATVALID_Pos)        /*!< TPI FIF
 1109:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 22
-
-
 1110:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ITM_bytecount_Pos        27U                                         /*!< TPI FIF
 1111:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ITM_bytecount_Msk        (0x3UL << TPI_FIFO0_ITM_bytecount_Pos)      /*!< TPI FIF
 1112:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1275,6 +1378,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1121:Drivers/CMSIS/Include/core_cm4.h **** 
 1122:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ETM1_Pos                  8U                                         /*!< TPI FIF
 1123:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ETM1_Msk                 (0xFFUL << TPI_FIFO0_ETM1_Pos)              /*!< TPI FIF
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 24
+
+
 1124:Drivers/CMSIS/Include/core_cm4.h **** 
 1125:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ETM0_Pos                  0U                                         /*!< TPI FIF
 1126:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_FIFO0_ETM0_Msk                 (0xFFUL /*<< TPI_FIFO0_ETM0_Pos*/)          /*!< TPI FIF
@@ -1318,9 +1424,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1164:Drivers/CMSIS/Include/core_cm4.h **** /* TPI Integration Mode Control Register Definitions */
 1165:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_ITCTRL_Mode_Pos                 0U                                         /*!< TPI ITC
 1166:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_ITCTRL_Mode_Msk                (0x3UL /*<< TPI_ITCTRL_Mode_Pos*/)          /*!< TPI ITC
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 23
-
-
 1167:Drivers/CMSIS/Include/core_cm4.h **** 
 1168:Drivers/CMSIS/Include/core_cm4.h **** /* TPI DEVID Register Definitions */
 1169:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_DEVID_NRZVALID_Pos             11U                                         /*!< TPI DEV
@@ -1335,6 +1438,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1178:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_DEVID_MinBufSz_Pos              6U                                         /*!< TPI DEV
 1179:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_DEVID_MinBufSz_Msk             (0x7UL << TPI_DEVID_MinBufSz_Pos)           /*!< TPI DEV
 1180:Drivers/CMSIS/Include/core_cm4.h **** 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 25
+
+
 1181:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_DEVID_AsynClkIn_Pos             5U                                         /*!< TPI DEV
 1182:Drivers/CMSIS/Include/core_cm4.h **** #define TPI_DEVID_AsynClkIn_Msk            (0x1UL << TPI_DEVID_AsynClkIn_Pos)          /*!< TPI DEV
 1183:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1378,9 +1484,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1221:Drivers/CMSIS/Include/core_cm4.h **** } MPU_Type;
 1222:Drivers/CMSIS/Include/core_cm4.h **** 
 1223:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_TYPE_RALIASES                  4U
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 24
-
-
 1224:Drivers/CMSIS/Include/core_cm4.h **** 
 1225:Drivers/CMSIS/Include/core_cm4.h **** /* MPU Type Register Definitions */
 1226:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_TYPE_IREGION_Pos               16U                                            /*!< MPU 
@@ -1395,6 +1498,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1235:Drivers/CMSIS/Include/core_cm4.h **** /* MPU Control Register Definitions */
 1236:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_CTRL_PRIVDEFENA_Pos             2U                                            /*!< MPU 
 1237:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_CTRL_PRIVDEFENA_Msk            (1UL << MPU_CTRL_PRIVDEFENA_Pos)               /*!< MPU 
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 26
+
+
 1238:Drivers/CMSIS/Include/core_cm4.h **** 
 1239:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_CTRL_HFNMIENA_Pos               1U                                            /*!< MPU 
 1240:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_CTRL_HFNMIENA_Msk              (1UL << MPU_CTRL_HFNMIENA_Pos)                 /*!< MPU 
@@ -1438,9 +1544,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1278:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_B_Pos                     16U                                            /*!< MPU 
 1279:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_B_Msk                     (1UL << MPU_RASR_B_Pos)                        /*!< MPU 
 1280:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 25
-
-
 1281:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_SRD_Pos                    8U                                            /*!< MPU 
 1282:Drivers/CMSIS/Include/core_cm4.h **** #define MPU_RASR_SRD_Msk                   (0xFFUL << MPU_RASR_SRD_Pos)                   /*!< MPU 
 1283:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1455,6 +1558,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1292:Drivers/CMSIS/Include/core_cm4.h **** 
 1293:Drivers/CMSIS/Include/core_cm4.h **** 
 1294:Drivers/CMSIS/Include/core_cm4.h **** /**
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 27
+
+
 1295:Drivers/CMSIS/Include/core_cm4.h ****   \ingroup  CMSIS_core_register
 1296:Drivers/CMSIS/Include/core_cm4.h ****   \defgroup CMSIS_FPU     Floating Point Unit (FPU)
 1297:Drivers/CMSIS/Include/core_cm4.h ****   \brief    Type definitions for the Floating Point Unit (FPU)
@@ -1498,9 +1604,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1335:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_THREAD_Msk               (1UL << FPU_FPCCR_THREAD_Pos)                  /*!< FPCC
 1336:Drivers/CMSIS/Include/core_cm4.h **** 
 1337:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_USER_Pos                  1U                                            /*!< FPCC
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 26
-
-
 1338:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_USER_Msk                 (1UL << FPU_FPCCR_USER_Pos)                    /*!< FPCC
 1339:Drivers/CMSIS/Include/core_cm4.h **** 
 1340:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPCCR_LSPACT_Pos                0U                                            /*!< FPCC
@@ -1515,6 +1618,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1349:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPDSCR_AHP_Msk                 (1UL << FPU_FPDSCR_AHP_Pos)                    /*!< FPDS
 1350:Drivers/CMSIS/Include/core_cm4.h **** 
 1351:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPDSCR_DN_Pos                  25U                                            /*!< FPDS
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 28
+
+
 1352:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPDSCR_DN_Msk                  (1UL << FPU_FPDSCR_DN_Pos)                     /*!< FPDS
 1353:Drivers/CMSIS/Include/core_cm4.h **** 
 1354:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_FPDSCR_FZ_Pos                  24U                                            /*!< FPDS
@@ -1558,9 +1664,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1392:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_D_NaN_mode_Pos            4U                                            /*!< MVFR
 1393:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_D_NaN_mode_Msk           (0xFUL << FPU_MVFR1_D_NaN_mode_Pos)            /*!< MVFR
 1394:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 27
-
-
 1395:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_FtZ_mode_Pos              0U                                            /*!< MVFR
 1396:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_MVFR1_FtZ_mode_Msk             (0xFUL /*<< FPU_MVFR1_FtZ_mode_Pos*/)          /*!< MVFR
 1397:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1575,6 +1678,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1406:Drivers/CMSIS/Include/core_cm4.h **** /**
 1407:Drivers/CMSIS/Include/core_cm4.h ****   \ingroup  CMSIS_core_register
 1408:Drivers/CMSIS/Include/core_cm4.h ****   \defgroup CMSIS_CoreDebug       Core Debug Registers (CoreDebug)
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 29
+
+
 1409:Drivers/CMSIS/Include/core_cm4.h ****   \brief    Type definitions for the Core Debug Registers
 1410:Drivers/CMSIS/Include/core_cm4.h ****   @{
 1411:Drivers/CMSIS/Include/core_cm4.h ****  */
@@ -1618,9 +1724,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1449:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_MASKINTS_Pos      3U                                            /*!< Core
 1450:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_MASKINTS_Msk     (1UL << CoreDebug_DHCSR_C_MASKINTS_Pos)        /*!< Core
 1451:Drivers/CMSIS/Include/core_cm4.h **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 28
-
-
 1452:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_STEP_Pos          2U                                            /*!< Core
 1453:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DHCSR_C_STEP_Msk         (1UL << CoreDebug_DHCSR_C_STEP_Pos)            /*!< Core
 1454:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1635,6 +1738,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1463:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DCRSR_REGWnR_Msk         (1UL << CoreDebug_DCRSR_REGWnR_Pos)            /*!< Core
 1464:Drivers/CMSIS/Include/core_cm4.h **** 
 1465:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DCRSR_REGSEL_Pos          0U                                            /*!< Core
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 30
+
+
 1466:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DCRSR_REGSEL_Msk         (0x1FUL /*<< CoreDebug_DCRSR_REGSEL_Pos*/)     /*!< Core
 1467:Drivers/CMSIS/Include/core_cm4.h **** 
 1468:Drivers/CMSIS/Include/core_cm4.h **** /* Debug Exception and Monitor Control Register Definitions */
@@ -1678,9 +1784,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1506:Drivers/CMSIS/Include/core_cm4.h **** #define CoreDebug_DEMCR_VC_CORERESET_Msk   (1UL /*<< CoreDebug_DEMCR_VC_CORERESET_Pos*/)  /*!< Core
 1507:Drivers/CMSIS/Include/core_cm4.h **** 
 1508:Drivers/CMSIS/Include/core_cm4.h **** /*@} end of group CMSIS_CoreDebug */
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 29
-
-
 1509:Drivers/CMSIS/Include/core_cm4.h **** 
 1510:Drivers/CMSIS/Include/core_cm4.h **** 
 1511:Drivers/CMSIS/Include/core_cm4.h **** /**
@@ -1695,6 +1798,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1520:Drivers/CMSIS/Include/core_cm4.h ****   \param[in] field  Name of the register bit field.
 1521:Drivers/CMSIS/Include/core_cm4.h ****   \param[in] value  Value of the bit field. This parameter is interpreted as an uint32_t type.
 1522:Drivers/CMSIS/Include/core_cm4.h ****   \return           Masked and shifted value.
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 31
+
+
 1523:Drivers/CMSIS/Include/core_cm4.h **** */
 1524:Drivers/CMSIS/Include/core_cm4.h **** #define _VAL2FLD(field, value)    (((uint32_t)(value) << field ## _Pos) & field ## _Msk)
 1525:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1738,9 +1844,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1563:Drivers/CMSIS/Include/core_cm4.h **** #if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1U)
 1564:Drivers/CMSIS/Include/core_cm4.h ****   #define MPU_BASE          (SCS_BASE +  0x0D90UL)                    /*!< Memory Protection Unit *
 1565:Drivers/CMSIS/Include/core_cm4.h ****   #define MPU               ((MPU_Type       *)     MPU_BASE      )   /*!< Memory Protection Unit *
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 30
-
-
 1566:Drivers/CMSIS/Include/core_cm4.h **** #endif
 1567:Drivers/CMSIS/Include/core_cm4.h **** 
 1568:Drivers/CMSIS/Include/core_cm4.h **** #define FPU_BASE            (SCS_BASE +  0x0F30UL)                    /*!< Floating Point Unit */
@@ -1755,6 +1858,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1577:Drivers/CMSIS/Include/core_cm4.h ****   Core Function Interface contains:
 1578:Drivers/CMSIS/Include/core_cm4.h ****   - Core NVIC Functions
 1579:Drivers/CMSIS/Include/core_cm4.h ****   - Core SysTick Functions
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 32
+
+
 1580:Drivers/CMSIS/Include/core_cm4.h ****   - Core Debug Functions
 1581:Drivers/CMSIS/Include/core_cm4.h ****   - Core Register Access Functions
 1582:Drivers/CMSIS/Include/core_cm4.h ****  ******************************************************************************/
@@ -1798,9 +1904,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1620:Drivers/CMSIS/Include/core_cm4.h ****   #endif
 1621:Drivers/CMSIS/Include/core_cm4.h ****   #include CMSIS_VECTAB_VIRTUAL_HEADER_FILE
 1622:Drivers/CMSIS/Include/core_cm4.h **** #else
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 31
-
-
 1623:Drivers/CMSIS/Include/core_cm4.h ****   #define NVIC_SetVector              __NVIC_SetVector
 1624:Drivers/CMSIS/Include/core_cm4.h ****   #define NVIC_GetVector              __NVIC_GetVector
 1625:Drivers/CMSIS/Include/core_cm4.h **** #endif  /* (CMSIS_VECTAB_VIRTUAL) */
@@ -1815,6 +1918,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1634:Drivers/CMSIS/Include/core_cm4.h **** #define EXC_RETURN_HANDLER_FPU     (0xFFFFFFE1UL)     /* return to Handler mode, uses MSP after ret
 1635:Drivers/CMSIS/Include/core_cm4.h **** #define EXC_RETURN_THREAD_MSP_FPU  (0xFFFFFFE9UL)     /* return to Thread mode, uses MSP after retu
 1636:Drivers/CMSIS/Include/core_cm4.h **** #define EXC_RETURN_THREAD_PSP_FPU  (0xFFFFFFEDUL)     /* return to Thread mode, uses PSP after retu
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 33
+
+
 1637:Drivers/CMSIS/Include/core_cm4.h **** 
 1638:Drivers/CMSIS/Include/core_cm4.h **** 
 1639:Drivers/CMSIS/Include/core_cm4.h **** /**
@@ -1846,23 +1952,20 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1665:Drivers/CMSIS/Include/core_cm4.h ****   \return                Priority grouping field (SCB->AIRCR [10:8] PRIGROUP field).
 1666:Drivers/CMSIS/Include/core_cm4.h ****  */
 1667:Drivers/CMSIS/Include/core_cm4.h **** __STATIC_INLINE uint32_t __NVIC_GetPriorityGrouping(void)
-  50              		.loc 2 1667 26 view .LVU6
-  51              	.LBB31:
+ 116              		.loc 2 1667 26 view .LVU24
+ 117              	.LBB17:
 1668:Drivers/CMSIS/Include/core_cm4.h **** {
 1669:Drivers/CMSIS/Include/core_cm4.h ****   return ((uint32_t)((SCB->AIRCR & SCB_AIRCR_PRIGROUP_Msk) >> SCB_AIRCR_PRIGROUP_Pos));
-  52              		.loc 2 1669 3 view .LVU7
-  53              		.loc 2 1669 26 is_stmt 0 view .LVU8
-  54 0016 7648     		ldr	r0, .L3
-  55 0018 C368     		ldr	r3, [r0, #12]
-  56              	.LVL0:
-  57              		.loc 2 1669 26 view .LVU9
-  58              	.LBE31:
-  59              	.LBE30:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 32
-
-
-  60              	.LBB32:
-  61              	.LBI32:
+ 118              		.loc 2 1669 3 view .LVU25
+ 119              		.loc 2 1669 26 is_stmt 0 view .LVU26
+ 120 0046 094B     		ldr	r3, .L6+4
+ 121 0048 DB68     		ldr	r3, [r3, #12]
+ 122              	.LVL1:
+ 123              		.loc 2 1669 26 view .LVU27
+ 124              	.LBE17:
+ 125              	.LBE16:
+ 126              	.LBB18:
+ 127              	.LBI18:
 1670:Drivers/CMSIS/Include/core_cm4.h **** }
 1671:Drivers/CMSIS/Include/core_cm4.h **** 
 1672:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1875,6 +1978,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1679:Drivers/CMSIS/Include/core_cm4.h **** __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
 1680:Drivers/CMSIS/Include/core_cm4.h **** {
 1681:Drivers/CMSIS/Include/core_cm4.h ****   if ((int32_t)(IRQn) >= 0)
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 34
+
+
 1682:Drivers/CMSIS/Include/core_cm4.h ****   {
 1683:Drivers/CMSIS/Include/core_cm4.h ****     __COMPILER_BARRIER();
 1684:Drivers/CMSIS/Include/core_cm4.h ****     NVIC->ISER[(((uint32_t)IRQn) >> 5UL)] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
@@ -1918,9 +2024,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1722:Drivers/CMSIS/Include/core_cm4.h ****     __DSB();
 1723:Drivers/CMSIS/Include/core_cm4.h ****     __ISB();
 1724:Drivers/CMSIS/Include/core_cm4.h ****   }
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 33
-
-
 1725:Drivers/CMSIS/Include/core_cm4.h **** }
 1726:Drivers/CMSIS/Include/core_cm4.h **** 
 1727:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -1935,6 +2038,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1736:Drivers/CMSIS/Include/core_cm4.h **** __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
 1737:Drivers/CMSIS/Include/core_cm4.h **** {
 1738:Drivers/CMSIS/Include/core_cm4.h ****   if ((int32_t)(IRQn) >= 0)
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 35
+
+
 1739:Drivers/CMSIS/Include/core_cm4.h ****   {
 1740:Drivers/CMSIS/Include/core_cm4.h ****     return((uint32_t)(((NVIC->ISPR[(((uint32_t)IRQn) >> 5UL)] & (1UL << (((uint32_t)IRQn) & 0x1FUL)
 1741:Drivers/CMSIS/Include/core_cm4.h ****   }
@@ -1978,9 +2084,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1779:Drivers/CMSIS/Include/core_cm4.h **** /**
 1780:Drivers/CMSIS/Include/core_cm4.h ****   \brief   Get Active Interrupt
 1781:Drivers/CMSIS/Include/core_cm4.h ****   \details Reads the active register in the NVIC and returns the active bit for the device specific
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 34
-
-
 1782:Drivers/CMSIS/Include/core_cm4.h ****   \param [in]      IRQn  Device specific interrupt number.
 1783:Drivers/CMSIS/Include/core_cm4.h ****   \return             0  Interrupt status is not active.
 1784:Drivers/CMSIS/Include/core_cm4.h ****   \return             1  Interrupt status is active.
@@ -1995,6 +2098,9 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1793:Drivers/CMSIS/Include/core_cm4.h ****   else
 1794:Drivers/CMSIS/Include/core_cm4.h ****   {
 1795:Drivers/CMSIS/Include/core_cm4.h ****     return(0U);
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 36
+
+
 1796:Drivers/CMSIS/Include/core_cm4.h ****   }
 1797:Drivers/CMSIS/Include/core_cm4.h **** }
 1798:Drivers/CMSIS/Include/core_cm4.h **** 
@@ -2038,9 +2144,6 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1836:Drivers/CMSIS/Include/core_cm4.h ****     return(((uint32_t)NVIC->IP[((uint32_t)IRQn)]               >> (8U - __NVIC_PRIO_BITS)));
 1837:Drivers/CMSIS/Include/core_cm4.h ****   }
 1838:Drivers/CMSIS/Include/core_cm4.h ****   else
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 35
-
-
 1839:Drivers/CMSIS/Include/core_cm4.h ****   {
 1840:Drivers/CMSIS/Include/core_cm4.h ****     return(((uint32_t)SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] >> (8U - __NVIC_PRIO_BITS)));
 1841:Drivers/CMSIS/Include/core_cm4.h ****   }
@@ -2055,1175 +2158,359 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 1
 1850:Drivers/CMSIS/Include/core_cm4.h ****            priority bits (__NVIC_PRIO_BITS), the smallest possible priority group is set.
 1851:Drivers/CMSIS/Include/core_cm4.h ****   \param [in]     PriorityGroup  Used priority group.
 1852:Drivers/CMSIS/Include/core_cm4.h ****   \param [in]   PreemptPriority  Preemptive priority value (starting from 0).
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 37
+
+
 1853:Drivers/CMSIS/Include/core_cm4.h ****   \param [in]       SubPriority  Subpriority value (starting from 0).
 1854:Drivers/CMSIS/Include/core_cm4.h ****   \return                        Encoded priority. Value can be used in the function \ref NVIC_SetP
 1855:Drivers/CMSIS/Include/core_cm4.h ****  */
 1856:Drivers/CMSIS/Include/core_cm4.h **** __STATIC_INLINE uint32_t NVIC_EncodePriority (uint32_t PriorityGroup, uint32_t PreemptPriority, uin
-  62              		.loc 2 1856 26 is_stmt 1 view .LVU10
-  63              	.LBB33:
+ 128              		.loc 2 1856 26 is_stmt 1 view .LVU28
+ 129              	.LBB19:
 1857:Drivers/CMSIS/Include/core_cm4.h **** {
 1858:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t)0x07UL);   /* only values 0..7 are used   
-  64              		.loc 2 1858 3 view .LVU11
+ 130              		.loc 2 1858 3 view .LVU29
 1859:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t PreemptPriorityBits;
-  65              		.loc 2 1859 3 view .LVU12
+ 131              		.loc 2 1859 3 view .LVU30
 1860:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t SubPriorityBits;
-  66              		.loc 2 1860 3 view .LVU13
+ 132              		.loc 2 1860 3 view .LVU31
 1861:Drivers/CMSIS/Include/core_cm4.h **** 
 1862:Drivers/CMSIS/Include/core_cm4.h ****   PreemptPriorityBits = ((7UL - PriorityGroupTmp) > (uint32_t)(__NVIC_PRIO_BITS)) ? (uint32_t)(__NV
-  67              		.loc 2 1862 3 view .LVU14
+ 133              		.loc 2 1862 3 view .LVU32
 1863:Drivers/CMSIS/Include/core_cm4.h ****   SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint
-  68              		.loc 2 1863 3 view .LVU15
+ 134              		.loc 2 1863 3 view .LVU33
 1864:Drivers/CMSIS/Include/core_cm4.h **** 
 1865:Drivers/CMSIS/Include/core_cm4.h ****   return (
-  69              		.loc 2 1865 3 view .LVU16
-  70              		.loc 2 1865 3 is_stmt 0 view .LVU17
-  71              	.LBE33:
-  72              	.LBE32:
-  73              	.LBB34:
-  74              	.LBI34:
+ 135              		.loc 2 1865 3 view .LVU34
+ 136              		.loc 2 1865 3 is_stmt 0 view .LVU35
+ 137              	.LBE19:
+ 138              	.LBE18:
+ 139              	.LBB20:
+ 140              	.LBI20:
 1809:Drivers/CMSIS/Include/core_cm4.h **** {
-  75              		.loc 2 1809 22 is_stmt 1 view .LVU18
-  76              	.LBB35:
+ 141              		.loc 2 1809 22 is_stmt 1 view .LVU36
+ 142              	.LBB21:
 1811:Drivers/CMSIS/Include/core_cm4.h ****   {
-  77              		.loc 2 1811 3 view .LVU19
+ 143              		.loc 2 1811 3 view .LVU37
 1813:Drivers/CMSIS/Include/core_cm4.h ****   }
-  78              		.loc 2 1813 5 view .LVU20
+ 144              		.loc 2 1813 5 view .LVU38
 1813:Drivers/CMSIS/Include/core_cm4.h ****   }
-  79              		.loc 2 1813 46 is_stmt 0 view .LVU21
-  80 001a 764B     		ldr	r3, .L3+4
-  81 001c 0021     		movs	r1, #0
-  82 001e 83F80C13 		strb	r1, [r3, #780]
-  83              	.LVL1:
+ 145              		.loc 2 1813 46 is_stmt 0 view .LVU39
+ 146 004a 094B     		ldr	r3, .L6+8
+ 147 004c 0022     		movs	r2, #0
+ 148 004e 83F82423 		strb	r2, [r3, #804]
+ 149              	.LVL2:
 1813:Drivers/CMSIS/Include/core_cm4.h ****   }
-  84              		.loc 2 1813 46 view .LVU22
-  85              	.LBE35:
-  86              	.LBE34:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 36
-
-
-  41:Core/Src/i2c.c ****     NVIC_EnableIRQ(DMA1_Channel2_IRQn);
-  87              		.loc 1 41 5 is_stmt 1 view .LVU23
-  88              	.LBB36:
-  89              	.LBI36:
+ 150              		.loc 2 1813 46 view .LVU40
+ 151              	.LBE21:
+ 152              	.LBE20:
+  30:Core/Src/usart.c **** 
+ 153              		.loc 1 30 2 is_stmt 1 view .LVU41
+ 154              	.LBB22:
+ 155              	.LBI22:
 1679:Drivers/CMSIS/Include/core_cm4.h **** {
-  90              		.loc 2 1679 22 view .LVU24
-  91              	.LBB37:
+ 156              		.loc 2 1679 22 view .LVU42
+ 157              	.LBB23:
 1681:Drivers/CMSIS/Include/core_cm4.h ****   {
-  92              		.loc 2 1681 3 view .LVU25
+ 158              		.loc 2 1681 3 view .LVU43
 1683:Drivers/CMSIS/Include/core_cm4.h ****     NVIC->ISER[(((uint32_t)IRQn) >> 5UL)] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-  93              		.loc 2 1683 5 view .LVU26
+ 159              		.loc 2 1683 5 view .LVU44
 1684:Drivers/CMSIS/Include/core_cm4.h ****     __COMPILER_BARRIER();
-  94              		.loc 2 1684 5 view .LVU27
+ 160              		.loc 2 1684 5 view .LVU45
 1684:Drivers/CMSIS/Include/core_cm4.h ****     __COMPILER_BARRIER();
-  95              		.loc 2 1684 43 is_stmt 0 view .LVU28
-  96 0022 4FF48054 		mov	r4, #4096
-  97 0026 1C60     		str	r4, [r3]
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 38
+
+
+ 161              		.loc 2 1684 43 is_stmt 0 view .LVU46
+ 162 0052 1022     		movs	r2, #16
+ 163 0054 5A60     		str	r2, [r3, #4]
 1685:Drivers/CMSIS/Include/core_cm4.h ****   }
-  98              		.loc 2 1685 5 is_stmt 1 view .LVU29
-  99              	.LVL2:
+ 164              		.loc 2 1685 5 is_stmt 1 view .LVU47
+ 165              	.LVL3:
 1685:Drivers/CMSIS/Include/core_cm4.h ****   }
- 100              		.loc 2 1685 5 is_stmt 0 view .LVU30
- 101              	.LBE37:
- 102              	.LBE36:
-  42:Core/Src/i2c.c ****     /* DMA1_Channel3_IRQn interrupt configuration */
-  43:Core/Src/i2c.c ****     NVIC_SetPriority(DMA1_Channel3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
- 103              		.loc 1 43 5 is_stmt 1 view .LVU31
- 104              	.LBB38:
- 105              	.LBI38:
-1667:Drivers/CMSIS/Include/core_cm4.h **** {
- 106              		.loc 2 1667 26 view .LVU32
- 107              	.LBB39:
-1669:Drivers/CMSIS/Include/core_cm4.h **** }
- 108              		.loc 2 1669 3 view .LVU33
-1669:Drivers/CMSIS/Include/core_cm4.h **** }
- 109              		.loc 2 1669 26 is_stmt 0 view .LVU34
- 110 0028 C068     		ldr	r0, [r0, #12]
- 111              	.LVL3:
-1669:Drivers/CMSIS/Include/core_cm4.h **** }
- 112              		.loc 2 1669 26 view .LVU35
- 113              	.LBE39:
- 114              	.LBE38:
- 115              	.LBB40:
- 116              	.LBI40:
-1856:Drivers/CMSIS/Include/core_cm4.h **** {
- 117              		.loc 2 1856 26 is_stmt 1 view .LVU36
- 118              	.LBB41:
-1858:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t PreemptPriorityBits;
- 119              		.loc 2 1858 3 view .LVU37
-1859:Drivers/CMSIS/Include/core_cm4.h ****   uint32_t SubPriorityBits;
- 120              		.loc 2 1859 3 view .LVU38
-1860:Drivers/CMSIS/Include/core_cm4.h **** 
- 121              		.loc 2 1860 3 view .LVU39
-1862:Drivers/CMSIS/Include/core_cm4.h ****   SubPriorityBits     = ((PriorityGroupTmp + (uint32_t)(__NVIC_PRIO_BITS)) < (uint32_t)7UL) ? (uint
- 122              		.loc 2 1862 3 view .LVU40
-1863:Drivers/CMSIS/Include/core_cm4.h **** 
- 123              		.loc 2 1863 3 view .LVU41
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 37
+ 166              		.loc 2 1685 5 is_stmt 0 view .LVU48
+ 167              	.LBE23:
+ 168              	.LBE22:
+  32:Core/Src/usart.c **** 	USART1->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; 	// enable the receiver, transmitter, a
+ 169              		.loc 1 32 2 is_stmt 1 view .LVU49
+  32:Core/Src/usart.c **** 	USART1->CR1 |= USART_CR1_RE | USART_CR1_TE | USART_CR1_UE; 	// enable the receiver, transmitter, a
+ 170              		.loc 1 32 14 is_stmt 0 view .LVU50
+ 171 0056 074B     		ldr	r3, .L6+12
+ 172 0058 40F2A112 		movw	r2, #417
+ 173 005c DA60     		str	r2, [r3, #12]
+  33:Core/Src/usart.c ****     // enable USART1 interrupts on the NVIC (nested vector interrupt controller)
+ 174              		.loc 1 33 2 is_stmt 1 view .LVU51
+  33:Core/Src/usart.c ****     // enable USART1 interrupts on the NVIC (nested vector interrupt controller)
+ 175              		.loc 1 33 14 is_stmt 0 view .LVU52
+ 176 005e 1A68     		ldr	r2, [r3]
+ 177 0060 42F00D02 		orr	r2, r2, #13
+ 178 0064 1A60     		str	r2, [r3]
+  35:Core/Src/usart.c **** 
+ 179              		.loc 1 35 1 view .LVU53
+ 180 0066 7047     		bx	lr
+ 181              	.L7:
+ 182              		.align	2
+ 183              	.L6:
+ 184 0068 00040048 		.word	1207960576
+ 185 006c 00ED00E0 		.word	-536810240
+ 186 0070 00E100E0 		.word	-536813312
+ 187 0074 00380140 		.word	1073821696
+ 188              		.cfi_endproc
+ 189              	.LFE1042:
+ 191              		.section	.text.serialWrite,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	serialWrite
+ 194              		.syntax unified
+ 195              		.thumb
+ 196              		.thumb_func
+ 197              		.fpu softvfp
+ 199              	serialWrite:
+ 200              	.LFB1043:
+  43:Core/Src/usart.c **** 	while (!(USART1->ISR & USART_ISR_TC)){}	// waits for TX buffer to become empty
+ 201              		.loc 1 43 1 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+ 206              	.LVL4:
+ 207              	.L9:
+  44:Core/Src/usart.c **** 	USART1->TDR = ch;						// transfers the value of the data register into ch
+ 208              		.loc 1 44 40 discriminator 1 view .LVU55
+  44:Core/Src/usart.c **** 	USART1->TDR = ch;						// transfers the value of the data register into ch
+ 209              		.loc 1 44 8 discriminator 1 view .LVU56
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 39
 
 
- 124              		.loc 2 1865 3 view .LVU42
- 125              		.loc 2 1865 3 is_stmt 0 view .LVU43
- 126              	.LBE41:
- 127              	.LBE40:
- 128              	.LBB42:
- 129              	.LBI42:
-1809:Drivers/CMSIS/Include/core_cm4.h **** {
- 130              		.loc 2 1809 22 is_stmt 1 view .LVU44
- 131              	.LBB43:
-1811:Drivers/CMSIS/Include/core_cm4.h ****   {
- 132              		.loc 2 1811 3 view .LVU45
-1813:Drivers/CMSIS/Include/core_cm4.h ****   }
- 133              		.loc 2 1813 5 view .LVU46
-1813:Drivers/CMSIS/Include/core_cm4.h ****   }
- 134              		.loc 2 1813 46 is_stmt 0 view .LVU47
- 135 002a 83F80D13 		strb	r1, [r3, #781]
- 136              	.LVL4:
-1813:Drivers/CMSIS/Include/core_cm4.h ****   }
- 137              		.loc 2 1813 46 view .LVU48
- 138              	.LBE43:
- 139              	.LBE42:
-  44:Core/Src/i2c.c ****     NVIC_EnableIRQ(DMA1_Channel3_IRQn);
- 140              		.loc 1 44 5 is_stmt 1 view .LVU49
- 141              	.LBB44:
- 142              	.LBI44:
-1679:Drivers/CMSIS/Include/core_cm4.h **** {
- 143              		.loc 2 1679 22 view .LVU50
- 144              	.LBB45:
-1681:Drivers/CMSIS/Include/core_cm4.h ****   {
- 145              		.loc 2 1681 3 view .LVU51
-1683:Drivers/CMSIS/Include/core_cm4.h ****     NVIC->ISER[(((uint32_t)IRQn) >> 5UL)] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
- 146              		.loc 2 1683 5 view .LVU52
-1684:Drivers/CMSIS/Include/core_cm4.h ****     __COMPILER_BARRIER();
- 147              		.loc 2 1684 5 view .LVU53
-1684:Drivers/CMSIS/Include/core_cm4.h ****     __COMPILER_BARRIER();
- 148              		.loc 2 1684 43 is_stmt 0 view .LVU54
- 149 002e 4FF40051 		mov	r1, #8192
- 150 0032 1960     		str	r1, [r3]
-1685:Drivers/CMSIS/Include/core_cm4.h ****   }
- 151              		.loc 2 1685 5 is_stmt 1 view .LVU55
- 152              	.LVL5:
-1685:Drivers/CMSIS/Include/core_cm4.h ****   }
- 153              		.loc 2 1685 5 is_stmt 0 view .LVU56
- 154              	.LBE45:
- 155              	.LBE44:
-  45:Core/Src/i2c.c **** 
-  46:Core/Src/i2c.c ****     RCC->CCIPR &= ~RCC_CCIPR_I2C2SEL;       // PCLK source for I2C2
- 156              		.loc 1 46 5 is_stmt 1 view .LVU57
- 157              		.loc 1 46 16 is_stmt 0 view .LVU58
- 158 0034 D2F88830 		ldr	r3, [r2, #136]
- 159 0038 23F44043 		bic	r3, r3, #49152
- 160 003c C2F88830 		str	r3, [r2, #136]
-  47:Core/Src/i2c.c ****     
-  48:Core/Src/i2c.c ****     /* Enable GPIO Clock */
-  49:Core/Src/i2c.c ****     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
- 161              		.loc 1 49 5 is_stmt 1 view .LVU59
- 162              		.loc 1 49 18 is_stmt 0 view .LVU60
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 38
+  44:Core/Src/usart.c **** 	USART1->TDR = ch;						// transfers the value of the data register into ch
+ 210              		.loc 1 44 17 is_stmt 0 discriminator 1 view .LVU57
+ 211 0000 034B     		ldr	r3, .L10
+ 212 0002 DB69     		ldr	r3, [r3, #28]
+  44:Core/Src/usart.c **** 	USART1->TDR = ch;						// transfers the value of the data register into ch
+ 213              		.loc 1 44 8 discriminator 1 view .LVU58
+ 214 0004 13F0400F 		tst	r3, #64
+ 215 0008 FAD0     		beq	.L9
+  45:Core/Src/usart.c **** }
+ 216              		.loc 1 45 2 is_stmt 1 view .LVU59
+  45:Core/Src/usart.c **** }
+ 217              		.loc 1 45 14 is_stmt 0 view .LVU60
+ 218 000a 014B     		ldr	r3, .L10
+ 219 000c 9862     		str	r0, [r3, #40]
+  46:Core/Src/usart.c **** 
+ 220              		.loc 1 46 1 view .LVU61
+ 221 000e 7047     		bx	lr
+ 222              	.L11:
+ 223              		.align	2
+ 224              	.L10:
+ 225 0010 00380140 		.word	1073821696
+ 226              		.cfi_endproc
+ 227              	.LFE1043:
+ 229              		.section	.text.serialBeginRead8,"ax",%progbits
+ 230              		.align	1
+ 231              		.global	serialBeginRead8
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.fpu softvfp
+ 237              	serialBeginRead8:
+ 238              	.LFB1044:
+  49:Core/Src/usart.c ****     USART1->ICR |= USART_ICR_ORECF;
+ 239              		.loc 1 49 1 is_stmt 1 view -0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              		@ link register save eliminated.
+  50:Core/Src/usart.c ****     USART1->CR1 |= USART_CR1_RXNEIE_RXFNEIE;
+ 244              		.loc 1 50 5 view .LVU63
+  50:Core/Src/usart.c ****     USART1->CR1 |= USART_CR1_RXNEIE_RXFNEIE;
+ 245              		.loc 1 50 17 is_stmt 0 view .LVU64
+ 246 0000 044B     		ldr	r3, .L13
+ 247 0002 1A6A     		ldr	r2, [r3, #32]
+ 248 0004 42F00802 		orr	r2, r2, #8
+ 249 0008 1A62     		str	r2, [r3, #32]
+  51:Core/Src/usart.c **** }
+ 250              		.loc 1 51 5 is_stmt 1 view .LVU65
+  51:Core/Src/usart.c **** }
+ 251              		.loc 1 51 17 is_stmt 0 view .LVU66
+ 252 000a 1A68     		ldr	r2, [r3]
+ 253 000c 42F02002 		orr	r2, r2, #32
+ 254 0010 1A60     		str	r2, [r3]
+  52:Core/Src/usart.c **** 
+ 255              		.loc 1 52 1 view .LVU67
+ 256 0012 7047     		bx	lr
+ 257              	.L14:
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 40
 
 
- 163 0040 D36C     		ldr	r3, [r2, #76]
- 164 0042 43F00103 		orr	r3, r3, #1
- 165 0046 D364     		str	r3, [r2, #76]
-  50:Core/Src/i2c.c ****     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
- 166              		.loc 1 50 5 is_stmt 1 view .LVU61
- 167              		.loc 1 50 18 is_stmt 0 view .LVU62
- 168 0048 D36C     		ldr	r3, [r2, #76]
- 169 004a 43F00203 		orr	r3, r3, #2
- 170 004e D364     		str	r3, [r2, #76]
-  51:Core/Src/i2c.c **** 
-  52:Core/Src/i2c.c ****     GPIOA->MODER &= ~GPIO_MODER_MODE15;
- 171              		.loc 1 52 5 is_stmt 1 view .LVU63
- 172              		.loc 1 52 18 is_stmt 0 view .LVU64
- 173 0050 4FF09043 		mov	r3, #1207959552
- 174 0054 1968     		ldr	r1, [r3]
- 175 0056 21F04041 		bic	r1, r1, #-1073741824
- 176 005a 1960     		str	r1, [r3]
-  53:Core/Src/i2c.c ****     GPIOA->MODER |= GPIO_MODER_MODE15_1;     // AF mode
- 177              		.loc 1 53 5 is_stmt 1 view .LVU65
- 178              		.loc 1 53 18 is_stmt 0 view .LVU66
- 179 005c 1968     		ldr	r1, [r3]
- 180 005e 41F00041 		orr	r1, r1, #-2147483648
- 181 0062 1960     		str	r1, [r3]
-  54:Core/Src/i2c.c ****     GPIOA->OSPEEDR |= GPIO_OSPEEDR_OSPEED15; // very high speed
- 182              		.loc 1 54 5 is_stmt 1 view .LVU67
- 183              		.loc 1 54 20 is_stmt 0 view .LVU68
- 184 0064 9968     		ldr	r1, [r3, #8]
- 185 0066 41F04041 		orr	r1, r1, #-1073741824
- 186 006a 9960     		str	r1, [r3, #8]
-  55:Core/Src/i2c.c ****     GPIOA->OTYPER |= GPIO_OTYPER_OT15;       // open drain
- 187              		.loc 1 55 5 is_stmt 1 view .LVU69
- 188              		.loc 1 55 19 is_stmt 0 view .LVU70
- 189 006c 5968     		ldr	r1, [r3, #4]
- 190 006e 41F40041 		orr	r1, r1, #32768
- 191 0072 5960     		str	r1, [r3, #4]
-  56:Core/Src/i2c.c ****     GPIOA->PUPDR |= GPIO_PUPDR_PUPD15_0;     // no pull
- 192              		.loc 1 56 5 is_stmt 1 view .LVU71
- 193              		.loc 1 56 18 is_stmt 0 view .LVU72
- 194 0074 D968     		ldr	r1, [r3, #12]
- 195 0076 41F08041 		orr	r1, r1, #1073741824
- 196 007a D960     		str	r1, [r3, #12]
-  57:Core/Src/i2c.c ****     GPIOA->AFR[1] &= GPIO_AFRH_AFSEL15;
- 197              		.loc 1 57 5 is_stmt 1 view .LVU73
- 198              		.loc 1 57 19 is_stmt 0 view .LVU74
- 199 007c 596A     		ldr	r1, [r3, #36]
- 200 007e 01F07041 		and	r1, r1, #-268435456
- 201 0082 5962     		str	r1, [r3, #36]
-  58:Core/Src/i2c.c ****     GPIOA->AFR[1] |= (4U << GPIO_AFRH_AFSEL15_Pos); // AF4
- 202              		.loc 1 58 5 is_stmt 1 view .LVU75
- 203              		.loc 1 58 19 is_stmt 0 view .LVU76
- 204 0084 596A     		ldr	r1, [r3, #36]
- 205 0086 41F08041 		orr	r1, r1, #1073741824
- 206 008a 5962     		str	r1, [r3, #36]
-  59:Core/Src/i2c.c **** 
-  60:Core/Src/i2c.c ****     GPIOB->MODER &= ~GPIO_MODER_MODE15;
- 207              		.loc 1 60 5 is_stmt 1 view .LVU77
- 208              		.loc 1 60 18 is_stmt 0 view .LVU78
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 39
+ 258              		.align	2
+ 259              	.L13:
+ 260 0014 00380140 		.word	1073821696
+ 261              		.cfi_endproc
+ 262              	.LFE1044:
+ 264              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 265              		.align	1
+ 266              		.global	USART1_IRQHandler
+ 267              		.syntax unified
+ 268              		.thumb
+ 269              		.thumb_func
+ 270              		.fpu softvfp
+ 272              	USART1_IRQHandler:
+ 273              	.LFB1046:
+  59:Core/Src/usart.c **** 
+  60:Core/Src/usart.c **** /* Interrupt Handlers */
+  61:Core/Src/usart.c **** 
+  62:Core/Src/usart.c **** /**
+  63:Core/Src/usart.c **** * @brief This function handles USART1 global interrupt.
+  64:Core/Src/usart.c **** */
+  65:Core/Src/usart.c **** void USART1_IRQHandler(void)
+  66:Core/Src/usart.c **** {
+ 274              		.loc 1 66 1 is_stmt 1 view -0
+ 275              		.cfi_startproc
+ 276              		@ args = 0, pretend = 0, frame = 0
+ 277              		@ frame_needed = 0, uses_anonymous_args = 0
+ 278 0000 08B5     		push	{r3, lr}
+ 279              		.cfi_def_cfa_offset 8
+ 280              		.cfi_offset 3, -8
+ 281              		.cfi_offset 14, -4
+  67:Core/Src/usart.c **** 	if((USART1->ISR & USART_ISR_RXNE_RXFNE) &&(USART1->CR1 & USART_CR1_RXNEIE_RXFNEIE))    // check fo
+ 282              		.loc 1 67 2 view .LVU69
+ 283              		.loc 1 67 12 is_stmt 0 view .LVU70
+ 284 0002 0C4B     		ldr	r3, .L20
+ 285 0004 DB69     		ldr	r3, [r3, #28]
+ 286              		.loc 1 67 4 view .LVU71
+ 287 0006 13F0200F 		tst	r3, #32
+ 288 000a 04D0     		beq	.L16
+ 289              		.loc 1 67 51 discriminator 1 view .LVU72
+ 290 000c 094B     		ldr	r3, .L20
+ 291 000e 1B68     		ldr	r3, [r3]
+ 292              		.loc 1 67 42 discriminator 1 view .LVU73
+ 293 0010 13F0200F 		tst	r3, #32
+ 294 0014 0AD1     		bne	.L19
+ 295              	.L16:
+  68:Core/Src/usart.c **** 		usart1ReceiveCb();
+  69:Core/Src/usart.c **** 	if(USART1->ISR & USART_ISR_ORE)
+ 296              		.loc 1 69 2 is_stmt 1 view .LVU74
+ 297              		.loc 1 69 11 is_stmt 0 view .LVU75
+ 298 0016 074B     		ldr	r3, .L20
+ 299 0018 DB69     		ldr	r3, [r3, #28]
+ 300              		.loc 1 69 4 view .LVU76
+ 301 001a 13F0080F 		tst	r3, #8
+ 302 001e 04D0     		beq	.L15
+  70:Core/Src/usart.c **** 		USART1->ICR |= USART_ICR_ORECF;
+ 303              		.loc 1 70 3 is_stmt 1 view .LVU77
+ 304              		.loc 1 70 15 is_stmt 0 view .LVU78
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 41
 
 
- 209 008c 03F58063 		add	r3, r3, #1024
- 210 0090 1968     		ldr	r1, [r3]
- 211 0092 21F04041 		bic	r1, r1, #-1073741824
- 212 0096 1960     		str	r1, [r3]
-  61:Core/Src/i2c.c ****     GPIOB->MODER |= GPIO_MODER_MODE15_1;     // AF mode
- 213              		.loc 1 61 5 is_stmt 1 view .LVU79
- 214              		.loc 1 61 18 is_stmt 0 view .LVU80
- 215 0098 1968     		ldr	r1, [r3]
- 216 009a 41F00041 		orr	r1, r1, #-2147483648
- 217 009e 1960     		str	r1, [r3]
-  62:Core/Src/i2c.c ****     GPIOB->OSPEEDR |= GPIO_OSPEEDR_OSPEED15; // very high speed
- 218              		.loc 1 62 5 is_stmt 1 view .LVU81
- 219              		.loc 1 62 20 is_stmt 0 view .LVU82
- 220 00a0 9968     		ldr	r1, [r3, #8]
- 221 00a2 41F04041 		orr	r1, r1, #-1073741824
- 222 00a6 9960     		str	r1, [r3, #8]
-  63:Core/Src/i2c.c ****     GPIOB->OTYPER |= GPIO_OTYPER_OT15;       // open drain
- 223              		.loc 1 63 5 is_stmt 1 view .LVU83
- 224              		.loc 1 63 19 is_stmt 0 view .LVU84
- 225 00a8 5968     		ldr	r1, [r3, #4]
- 226 00aa 41F40041 		orr	r1, r1, #32768
- 227 00ae 5960     		str	r1, [r3, #4]
-  64:Core/Src/i2c.c ****     GPIOB->PUPDR |= GPIO_PUPDR_PUPD15_0;     // no pull
- 228              		.loc 1 64 5 is_stmt 1 view .LVU85
- 229              		.loc 1 64 18 is_stmt 0 view .LVU86
- 230 00b0 D968     		ldr	r1, [r3, #12]
- 231 00b2 41F08041 		orr	r1, r1, #1073741824
- 232 00b6 D960     		str	r1, [r3, #12]
-  65:Core/Src/i2c.c ****     GPIOB->AFR[1] &= GPIO_AFRH_AFSEL15;
- 233              		.loc 1 65 5 is_stmt 1 view .LVU87
- 234              		.loc 1 65 19 is_stmt 0 view .LVU88
- 235 00b8 596A     		ldr	r1, [r3, #36]
- 236 00ba 01F07041 		and	r1, r1, #-268435456
- 237 00be 5962     		str	r1, [r3, #36]
-  66:Core/Src/i2c.c ****     GPIOB->AFR[1] |= (4U << GPIO_AFRH_AFSEL15_Pos); // AF4
- 238              		.loc 1 66 5 is_stmt 1 view .LVU89
- 239              		.loc 1 66 19 is_stmt 0 view .LVU90
- 240 00c0 596A     		ldr	r1, [r3, #36]
- 241 00c2 41F08041 		orr	r1, r1, #1073741824
- 242 00c6 5962     		str	r1, [r3, #36]
-  67:Core/Src/i2c.c **** 
-  68:Core/Src/i2c.c ****     RCC->APB1ENR1 |= RCC_APB1ENR1_I2C2EN;
- 243              		.loc 1 68 5 is_stmt 1 view .LVU91
- 244              		.loc 1 68 19 is_stmt 0 view .LVU92
- 245 00c8 936D     		ldr	r3, [r2, #88]
- 246 00ca 43F48003 		orr	r3, r3, #4194304
- 247 00ce 9365     		str	r3, [r2, #88]
-  69:Core/Src/i2c.c **** 
-  70:Core/Src/i2c.c ****     /* TX DMA Configuration */
-  71:Core/Src/i2c.c ****     // Set I2C2_RX as Channel 2 Request
-  72:Core/Src/i2c.c ****     DMAMUX1_Channel1->CCR &= ~DMAMUX_CxCR_DMAREQ_ID;
- 248              		.loc 1 72 5 is_stmt 1 view .LVU93
- 249              		.loc 1 72 27 is_stmt 0 view .LVU94
- 250 00d0 494B     		ldr	r3, .L3+8
- 251 00d2 D3F80428 		ldr	r2, [r3, #2052]
- 252 00d6 22F07F02 		bic	r2, r2, #127
- 253 00da C3F80428 		str	r2, [r3, #2052]
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 40
+ 305 0020 044A     		ldr	r2, .L20
+ 306 0022 136A     		ldr	r3, [r2, #32]
+ 307 0024 43F00803 		orr	r3, r3, #8
+ 308 0028 1362     		str	r3, [r2, #32]
+ 309              	.L15:
+  71:Core/Src/usart.c **** }
+ 310              		.loc 1 71 1 view .LVU79
+ 311 002a 08BD     		pop	{r3, pc}
+ 312              	.L19:
+  68:Core/Src/usart.c **** 		usart1ReceiveCb();
+ 313              		.loc 1 68 3 is_stmt 1 view .LVU80
+ 314 002c FFF7FEFF 		bl	usart1ReceiveCb
+ 315              	.LVL5:
+ 316 0030 F1E7     		b	.L16
+ 317              	.L21:
+ 318 0032 00BF     		.align	2
+ 319              	.L20:
+ 320 0034 00380140 		.word	1073821696
+ 321              		.cfi_endproc
+ 322              	.LFE1046:
+ 324              		.section	.text.__io_putchar,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	__io_putchar
+ 327              		.syntax unified
+ 328              		.thumb
+ 329              		.thumb_func
+ 330              		.fpu softvfp
+ 332              	__io_putchar:
+ 333              	.LVL6:
+ 334              	.LFB1047:
+  72:Core/Src/usart.c **** 
+  73:Core/Src/usart.c **** /*	This is required to use printf											*/
+  74:Core/Src/usart.c **** /*	This basically tells the compiler what to do when it encounters printf	*/
+  75:Core/Src/usart.c **** /*	I honestly can't fully explain what is going on but it works			*/
+  76:Core/Src/usart.c **** 
+  77:Core/Src/usart.c **** #ifdef __GNUC__
+  78:Core/Src/usart.c **** #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+  79:Core/Src/usart.c **** //	#define GETCHAR_PROTOTYPE int __io_getchar (void)
+  80:Core/Src/usart.c **** #else
+  81:Core/Src/usart.c **** #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+  82:Core/Src/usart.c **** //	#define GETCHAR_PROTOTYPE int fgetc(FILE * f)
+  83:Core/Src/usart.c **** #endif
+  84:Core/Src/usart.c **** 
+  85:Core/Src/usart.c **** PUTCHAR_PROTOTYPE{
+ 335              		.loc 1 85 18 view -0
+ 336              		.cfi_startproc
+ 337              		@ args = 0, pretend = 0, frame = 0
+ 338              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339              		.loc 1 85 18 is_stmt 0 view .LVU82
+ 340 0000 10B5     		push	{r4, lr}
+ 341              		.cfi_def_cfa_offset 8
+ 342              		.cfi_offset 4, -8
+ 343              		.cfi_offset 14, -4
+ 344 0002 0446     		mov	r4, r0
+  86:Core/Src/usart.c **** 	serialWrite(ch);
+ 345              		.loc 1 86 2 is_stmt 1 view .LVU83
+ 346 0004 C0B2     		uxtb	r0, r0
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 42
 
 
-  73:Core/Src/i2c.c ****     DMAMUX1_Channel1->CCR |= (I2C2_TX_DMA_REQUEST << DMAMUX_CxCR_DMAREQ_ID_Pos);
- 254              		.loc 1 73 5 is_stmt 1 view .LVU95
- 255              		.loc 1 73 27 is_stmt 0 view .LVU96
- 256 00de D3F80428 		ldr	r2, [r3, #2052]
- 257 00e2 42F00E02 		orr	r2, r2, #14
- 258 00e6 C3F80428 		str	r2, [r3, #2052]
-  74:Core/Src/i2c.c ****     DMA1_Channel2->CCR |= DMA_CCR_DIR;    // mem to per
- 259              		.loc 1 74 5 is_stmt 1 view .LVU97
- 260              		.loc 1 74 24 is_stmt 0 view .LVU98
- 261 00ea DA69     		ldr	r2, [r3, #28]
- 262 00ec 42F01002 		orr	r2, r2, #16
- 263 00f0 DA61     		str	r2, [r3, #28]
-  75:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_PL;    // low priority
- 264              		.loc 1 75 5 is_stmt 1 view .LVU99
- 265              		.loc 1 75 24 is_stmt 0 view .LVU100
- 266 00f2 DA69     		ldr	r2, [r3, #28]
- 267 00f4 22F44052 		bic	r2, r2, #12288
- 268 00f8 DA61     		str	r2, [r3, #28]
-  76:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_CIRC;  // normal mode
- 269              		.loc 1 76 5 is_stmt 1 view .LVU101
- 270              		.loc 1 76 24 is_stmt 0 view .LVU102
- 271 00fa DA69     		ldr	r2, [r3, #28]
- 272 00fc 22F02002 		bic	r2, r2, #32
- 273 0100 DA61     		str	r2, [r3, #28]
-  77:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_PINC;  // no per inc
- 274              		.loc 1 77 5 is_stmt 1 view .LVU103
- 275              		.loc 1 77 24 is_stmt 0 view .LVU104
- 276 0102 DA69     		ldr	r2, [r3, #28]
- 277 0104 22F04002 		bic	r2, r2, #64
- 278 0108 DA61     		str	r2, [r3, #28]
-  78:Core/Src/i2c.c ****     DMA1_Channel2->CCR |= DMA_CCR_MINC;   // mem inc
- 279              		.loc 1 78 5 is_stmt 1 view .LVU105
- 280              		.loc 1 78 24 is_stmt 0 view .LVU106
- 281 010a DA69     		ldr	r2, [r3, #28]
- 282 010c 42F08002 		orr	r2, r2, #128
- 283 0110 DA61     		str	r2, [r3, #28]
-  79:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_PSIZE; // per size byte
- 284              		.loc 1 79 5 is_stmt 1 view .LVU107
- 285              		.loc 1 79 24 is_stmt 0 view .LVU108
- 286 0112 DA69     		ldr	r2, [r3, #28]
- 287 0114 22F44072 		bic	r2, r2, #768
- 288 0118 DA61     		str	r2, [r3, #28]
-  80:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_MSIZE; // mem size byte
- 289              		.loc 1 80 5 is_stmt 1 view .LVU109
- 290              		.loc 1 80 24 is_stmt 0 view .LVU110
- 291 011a DA69     		ldr	r2, [r3, #28]
- 292 011c 22F44062 		bic	r2, r2, #3072
- 293 0120 DA61     		str	r2, [r3, #28]
-  81:Core/Src/i2c.c ****     DMA1_Channel2->CPAR = (uint32_t)(&(I2C2->TXDR));
- 294              		.loc 1 81 5 is_stmt 1 view .LVU111
- 295              		.loc 1 81 25 is_stmt 0 view .LVU112
- 296 0122 364A     		ldr	r2, .L3+12
- 297 0124 5A62     		str	r2, [r3, #36]
-  82:Core/Src/i2c.c ****     DMA1_Channel2->CCR |= DMA_CCR_TCIE;
- 298              		.loc 1 82 5 is_stmt 1 view .LVU113
- 299              		.loc 1 82 24 is_stmt 0 view .LVU114
- 300 0126 DA69     		ldr	r2, [r3, #28]
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 41
-
-
- 301 0128 42F00202 		orr	r2, r2, #2
- 302 012c DA61     		str	r2, [r3, #28]
-  83:Core/Src/i2c.c ****     /* RX DMA Configuration */
-  84:Core/Src/i2c.c ****     // Set I2C2_TX as Channel 3 Request
-  85:Core/Src/i2c.c ****     DMAMUX1_Channel2->CCR &= ~DMAMUX_CxCR_DMAREQ_ID;
- 303              		.loc 1 85 5 is_stmt 1 view .LVU115
- 304              		.loc 1 85 27 is_stmt 0 view .LVU116
- 305 012e D3F80828 		ldr	r2, [r3, #2056]
- 306 0132 22F07F02 		bic	r2, r2, #127
- 307 0136 C3F80828 		str	r2, [r3, #2056]
-  86:Core/Src/i2c.c ****     DMAMUX1_Channel2->CCR |= (I2C2_RX_DMA_REQUEST << DMAMUX_CxCR_DMAREQ_ID_Pos);
- 308              		.loc 1 86 5 is_stmt 1 view .LVU117
- 309              		.loc 1 86 27 is_stmt 0 view .LVU118
- 310 013a D3F80828 		ldr	r2, [r3, #2056]
- 311 013e 42F00D02 		orr	r2, r2, #13
- 312 0142 C3F80828 		str	r2, [r3, #2056]
-  87:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_DIR;   // per to mem
- 313              		.loc 1 87 5 is_stmt 1 view .LVU119
- 314              		.loc 1 87 24 is_stmt 0 view .LVU120
- 315 0146 1A6B     		ldr	r2, [r3, #48]
- 316 0148 22F01002 		bic	r2, r2, #16
- 317 014c 1A63     		str	r2, [r3, #48]
-  88:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_PL;    // low priority
- 318              		.loc 1 88 5 is_stmt 1 view .LVU121
- 319              		.loc 1 88 24 is_stmt 0 view .LVU122
- 320 014e 1A6B     		ldr	r2, [r3, #48]
- 321 0150 22F44052 		bic	r2, r2, #12288
- 322 0154 1A63     		str	r2, [r3, #48]
-  89:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_CIRC;  // normal mode
- 323              		.loc 1 89 5 is_stmt 1 view .LVU123
- 324              		.loc 1 89 24 is_stmt 0 view .LVU124
- 325 0156 1A6B     		ldr	r2, [r3, #48]
- 326 0158 22F02002 		bic	r2, r2, #32
- 327 015c 1A63     		str	r2, [r3, #48]
-  90:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_PINC;  // no per inc
- 328              		.loc 1 90 5 is_stmt 1 view .LVU125
- 329              		.loc 1 90 24 is_stmt 0 view .LVU126
- 330 015e 1A6B     		ldr	r2, [r3, #48]
- 331 0160 22F04002 		bic	r2, r2, #64
- 332 0164 1A63     		str	r2, [r3, #48]
-  91:Core/Src/i2c.c ****     DMA1_Channel3->CCR |= DMA_CCR_MINC;   // mem inc
- 333              		.loc 1 91 5 is_stmt 1 view .LVU127
- 334              		.loc 1 91 24 is_stmt 0 view .LVU128
- 335 0166 1A6B     		ldr	r2, [r3, #48]
- 336 0168 42F08002 		orr	r2, r2, #128
- 337 016c 1A63     		str	r2, [r3, #48]
-  92:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_PSIZE; // per size byte
- 338              		.loc 1 92 5 is_stmt 1 view .LVU129
- 339              		.loc 1 92 24 is_stmt 0 view .LVU130
- 340 016e 1A6B     		ldr	r2, [r3, #48]
- 341 0170 22F44072 		bic	r2, r2, #768
- 342 0174 1A63     		str	r2, [r3, #48]
-  93:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_MSIZE; // mem size byte
- 343              		.loc 1 93 5 is_stmt 1 view .LVU131
- 344              		.loc 1 93 24 is_stmt 0 view .LVU132
- 345 0176 1A6B     		ldr	r2, [r3, #48]
- 346 0178 22F44062 		bic	r2, r2, #3072
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 42
-
-
- 347 017c 1A63     		str	r2, [r3, #48]
-  94:Core/Src/i2c.c ****     DMA1_Channel3->CPAR = (uint32_t)(&(I2C2->RXDR));
- 348              		.loc 1 94 5 is_stmt 1 view .LVU133
- 349              		.loc 1 94 25 is_stmt 0 view .LVU134
- 350 017e 204A     		ldr	r2, .L3+16
- 351 0180 9A63     		str	r2, [r3, #56]
-  95:Core/Src/i2c.c ****     DMA1_Channel3->CCR |= DMA_CCR_TCIE;
- 352              		.loc 1 95 5 is_stmt 1 view .LVU135
- 353              		.loc 1 95 24 is_stmt 0 view .LVU136
- 354 0182 1A6B     		ldr	r2, [r3, #48]
- 355 0184 42F00202 		orr	r2, r2, #2
- 356 0188 1A63     		str	r2, [r3, #48]
-  96:Core/Src/i2c.c **** 
-  97:Core/Src/i2c.c ****     /* I2C2 Initialization */
-  98:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_AUTOEND;
- 357              		.loc 1 98 5 is_stmt 1 view .LVU137
- 358              		.loc 1 98 15 is_stmt 0 view .LVU138
- 359 018a A3F5D433 		sub	r3, r3, #108544
- 360 018e 5A68     		ldr	r2, [r3, #4]
- 361 0190 42F00072 		orr	r2, r2, #33554432
- 362 0194 5A60     		str	r2, [r3, #4]
-  99:Core/Src/i2c.c ****     I2C2->OAR2 &= ~I2C_OAR2_OA2EN;
- 363              		.loc 1 99 5 is_stmt 1 view .LVU139
- 364              		.loc 1 99 16 is_stmt 0 view .LVU140
- 365 0196 DA68     		ldr	r2, [r3, #12]
- 366 0198 22F40042 		bic	r2, r2, #32768
- 367 019c DA60     		str	r2, [r3, #12]
- 100:Core/Src/i2c.c ****     I2C2->CR1 &= ~I2C_CR1_GCEN;
- 368              		.loc 1 100 5 is_stmt 1 view .LVU141
- 369              		.loc 1 100 15 is_stmt 0 view .LVU142
- 370 019e 1A68     		ldr	r2, [r3]
- 371 01a0 22F40022 		bic	r2, r2, #524288
- 372 01a4 1A60     		str	r2, [r3]
- 101:Core/Src/i2c.c ****     I2C2->CR1 &= ~I2C_CR1_NOSTRETCH;
- 373              		.loc 1 101 5 is_stmt 1 view .LVU143
- 374              		.loc 1 101 15 is_stmt 0 view .LVU144
- 375 01a6 1A68     		ldr	r2, [r3]
- 376 01a8 22F40032 		bic	r2, r2, #131072
- 377 01ac 1A60     		str	r2, [r3]
- 102:Core/Src/i2c.c ****     I2C2->CR1 &= ~I2C_CR1_PE;
- 378              		.loc 1 102 5 is_stmt 1 view .LVU145
- 379              		.loc 1 102 15 is_stmt 0 view .LVU146
- 380 01ae 1A68     		ldr	r2, [r3]
- 381 01b0 22F00102 		bic	r2, r2, #1
- 382 01b4 1A60     		str	r2, [r3]
- 103:Core/Src/i2c.c ****     I2C2->CR1 &= ~I2C_CR1_ANFOFF;
- 383              		.loc 1 103 5 is_stmt 1 view .LVU147
- 384              		.loc 1 103 15 is_stmt 0 view .LVU148
- 385 01b6 1A68     		ldr	r2, [r3]
- 386 01b8 22F48052 		bic	r2, r2, #4096
- 387 01bc 1A60     		str	r2, [r3]
- 104:Core/Src/i2c.c ****     I2C2->CR1 &= ~I2C_CR1_DNF;
- 388              		.loc 1 104 5 is_stmt 1 view .LVU149
- 389              		.loc 1 104 15 is_stmt 0 view .LVU150
- 390 01be 1A68     		ldr	r2, [r3]
- 391 01c0 22F47062 		bic	r2, r2, #3840
- 392 01c4 1A60     		str	r2, [r3]
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 43
-
-
- 105:Core/Src/i2c.c ****     I2C2->TIMINGR = 0x20303E5D;
- 393              		.loc 1 105 5 is_stmt 1 view .LVU151
- 394              		.loc 1 105 19 is_stmt 0 view .LVU152
- 395 01c6 0F4A     		ldr	r2, .L3+20
- 396 01c8 1A61     		str	r2, [r3, #16]
- 106:Core/Src/i2c.c ****     I2C2->CR1 |= I2C_CR1_PE;
- 397              		.loc 1 106 5 is_stmt 1 view .LVU153
- 398              		.loc 1 106 15 is_stmt 0 view .LVU154
- 399 01ca 1A68     		ldr	r2, [r3]
- 400 01cc 42F00102 		orr	r2, r2, #1
- 401 01d0 1A60     		str	r2, [r3]
- 107:Core/Src/i2c.c ****     I2C2->OAR1 &= ~I2C_OAR1_OA1EN;
- 402              		.loc 1 107 5 is_stmt 1 view .LVU155
- 403              		.loc 1 107 16 is_stmt 0 view .LVU156
- 404 01d2 9A68     		ldr	r2, [r3, #8]
- 405 01d4 22F40042 		bic	r2, r2, #32768
- 406 01d8 9A60     		str	r2, [r3, #8]
- 108:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_NACK;
- 407              		.loc 1 108 5 is_stmt 1 view .LVU157
- 408              		.loc 1 108 15 is_stmt 0 view .LVU158
- 409 01da 5A68     		ldr	r2, [r3, #4]
- 410 01dc 22F40042 		bic	r2, r2, #32768
- 411 01e0 5A60     		str	r2, [r3, #4]
- 109:Core/Src/i2c.c ****     I2C2->CR1 |= I2C_CR1_TXDMAEN;
- 412              		.loc 1 109 5 is_stmt 1 view .LVU159
- 413              		.loc 1 109 15 is_stmt 0 view .LVU160
- 414 01e2 1A68     		ldr	r2, [r3]
- 415 01e4 42F48042 		orr	r2, r2, #16384
- 416 01e8 1A60     		str	r2, [r3]
- 110:Core/Src/i2c.c **** }
- 417              		.loc 1 110 1 view .LVU161
- 418 01ea 10BC     		pop	{r4}
- 419              		.cfi_restore 4
- 420              		.cfi_def_cfa_offset 0
- 421 01ec 7047     		bx	lr
- 422              	.L4:
- 423 01ee 00BF     		.align	2
- 424              	.L3:
- 425 01f0 00ED00E0 		.word	-536810240
- 426 01f4 00E100E0 		.word	-536813312
- 427 01f8 00000240 		.word	1073872896
- 428 01fc 28580040 		.word	1073764392
- 429 0200 24580040 		.word	1073764388
- 430 0204 5D3E3020 		.word	540032605
- 431              		.cfi_endproc
- 432              	.LFE1042:
- 434              		.section	.text.i2c2CommandDMA,"ax",%progbits
- 435              		.align	1
- 436              		.global	i2c2CommandDMA
- 437              		.syntax unified
- 438              		.thumb
- 439              		.thumb_func
- 440              		.fpu softvfp
- 442              	i2c2CommandDMA:
- 443              	.LVL6:
- 444              	.LFB1043:
- 111:Core/Src/i2c.c **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 44
-
-
- 112:Core/Src/i2c.c **** /**
- 113:Core/Src/i2c.c ****  * @brief Sends data over I2C2 using DMA
- 114:Core/Src/i2c.c ****  * @param data
- 115:Core/Src/i2c.c ****  */
- 116:Core/Src/i2c.c **** void i2c2CommandDMA(uint8_t data)
- 117:Core/Src/i2c.c **** {
- 445              		.loc 1 117 1 is_stmt 1 view -0
- 446              		.cfi_startproc
- 447              		@ args = 0, pretend = 0, frame = 8
- 448              		@ frame_needed = 0, uses_anonymous_args = 0
- 449              		@ link register save eliminated.
- 450              		.loc 1 117 1 is_stmt 0 view .LVU163
- 451 0000 82B0     		sub	sp, sp, #8
- 452              		.cfi_def_cfa_offset 8
- 453 0002 8DF80700 		strb	r0, [sp, #7]
- 118:Core/Src/i2c.c **** 
- 119:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_EN; // disable channel
- 454              		.loc 1 119 5 is_stmt 1 view .LVU164
- 455              		.loc 1 119 24 is_stmt 0 view .LVU165
- 456 0006 184B     		ldr	r3, .L8
- 457 0008 DA69     		ldr	r2, [r3, #28]
- 458 000a 22F00102 		bic	r2, r2, #1
- 459 000e DA61     		str	r2, [r3, #28]
- 120:Core/Src/i2c.c ****     DMA1_Channel2->CNDTR = 1;
- 460              		.loc 1 120 5 is_stmt 1 view .LVU166
- 461              		.loc 1 120 26 is_stmt 0 view .LVU167
- 462 0010 0122     		movs	r2, #1
- 463 0012 1A62     		str	r2, [r3, #32]
- 121:Core/Src/i2c.c ****     DMA1_Channel2->CMAR = (uint32_t)&data;
- 464              		.loc 1 121 5 is_stmt 1 view .LVU168
- 465              		.loc 1 121 27 is_stmt 0 view .LVU169
- 466 0014 0DF10702 		add	r2, sp, #7
- 467              		.loc 1 121 25 view .LVU170
- 468 0018 9A62     		str	r2, [r3, #40]
- 122:Core/Src/i2c.c ****     DMA1_Channel2->CCR |= DMA_CCR_EN;
- 469              		.loc 1 122 5 is_stmt 1 view .LVU171
- 470              		.loc 1 122 24 is_stmt 0 view .LVU172
- 471 001a DA69     		ldr	r2, [r3, #28]
- 472 001c 42F00102 		orr	r2, r2, #1
- 473 0020 DA61     		str	r2, [r3, #28]
- 123:Core/Src/i2c.c **** 
- 124:Core/Src/i2c.c ****     I2C2->CR2 |= (LCD_ADDRESS << 1U);
- 474              		.loc 1 124 5 is_stmt 1 view .LVU173
- 475              		.loc 1 124 15 is_stmt 0 view .LVU174
- 476 0022 A3F5D433 		sub	r3, r3, #108544
- 477 0026 5A68     		ldr	r2, [r3, #4]
- 478 0028 42F04E02 		orr	r2, r2, #78
- 479 002c 5A60     		str	r2, [r3, #4]
- 125:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_RD_WRN; // write operation
- 480              		.loc 1 125 5 is_stmt 1 view .LVU175
- 481              		.loc 1 125 15 is_stmt 0 view .LVU176
- 482 002e 5A68     		ldr	r2, [r3, #4]
- 483 0030 22F48062 		bic	r2, r2, #1024
- 484 0034 5A60     		str	r2, [r3, #4]
- 126:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_NBYTES;
- 485              		.loc 1 126 5 is_stmt 1 view .LVU177
- 486              		.loc 1 126 15 is_stmt 0 view .LVU178
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 45
-
-
- 487 0036 5A68     		ldr	r2, [r3, #4]
- 488 0038 22F47F02 		bic	r2, r2, #16711680
- 489 003c 5A60     		str	r2, [r3, #4]
- 127:Core/Src/i2c.c ****     I2C2->CR2 |= (1 << 16U);
- 490              		.loc 1 127 5 is_stmt 1 view .LVU179
- 491              		.loc 1 127 15 is_stmt 0 view .LVU180
- 492 003e 5A68     		ldr	r2, [r3, #4]
- 493 0040 42F48032 		orr	r2, r2, #65536
- 494 0044 5A60     		str	r2, [r3, #4]
- 128:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_AUTOEND;
- 495              		.loc 1 128 5 is_stmt 1 view .LVU181
- 496              		.loc 1 128 15 is_stmt 0 view .LVU182
- 497 0046 5A68     		ldr	r2, [r3, #4]
- 498 0048 42F00072 		orr	r2, r2, #33554432
- 499 004c 5A60     		str	r2, [r3, #4]
- 129:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_START;
- 500              		.loc 1 129 5 is_stmt 1 view .LVU183
- 501              		.loc 1 129 15 is_stmt 0 view .LVU184
- 502 004e 5A68     		ldr	r2, [r3, #4]
- 503 0050 42F40052 		orr	r2, r2, #8192
- 504 0054 5A60     		str	r2, [r3, #4]
- 130:Core/Src/i2c.c **** 
- 131:Core/Src/i2c.c ****     while (!tx_finished)
- 505              		.loc 1 131 5 is_stmt 1 view .LVU185
- 506              	.L6:
- 132:Core/Src/i2c.c ****         ;
- 507              		.loc 1 132 9 discriminator 1 view .LVU186
- 131:Core/Src/i2c.c ****         ;
- 508              		.loc 1 131 11 discriminator 1 view .LVU187
- 131:Core/Src/i2c.c ****         ;
- 509              		.loc 1 131 12 is_stmt 0 discriminator 1 view .LVU188
- 510 0056 054B     		ldr	r3, .L8+4
- 511 0058 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 131:Core/Src/i2c.c ****         ;
- 512              		.loc 1 131 11 discriminator 1 view .LVU189
- 513 005a 002B     		cmp	r3, #0
- 514 005c FBD0     		beq	.L6
- 133:Core/Src/i2c.c ****     tx_finished = 0;
- 515              		.loc 1 133 5 is_stmt 1 view .LVU190
- 516              		.loc 1 133 17 is_stmt 0 view .LVU191
- 517 005e 034B     		ldr	r3, .L8+4
- 518 0060 0022     		movs	r2, #0
- 519 0062 1A70     		strb	r2, [r3]
- 134:Core/Src/i2c.c **** }
- 520              		.loc 1 134 1 view .LVU192
- 521 0064 02B0     		add	sp, sp, #8
- 522              		.cfi_def_cfa_offset 0
- 523              		@ sp needed
- 524 0066 7047     		bx	lr
- 525              	.L9:
- 526              		.align	2
- 527              	.L8:
- 528 0068 00000240 		.word	1073872896
- 529 006c 00000000 		.word	.LANCHOR0
- 530              		.cfi_endproc
- 531              	.LFE1043:
- 533              		.section	.text.i2c2WriteMemDMA,"ax",%progbits
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 46
-
-
- 534              		.align	1
- 535              		.global	i2c2WriteMemDMA
- 536              		.syntax unified
- 537              		.thumb
- 538              		.thumb_func
- 539              		.fpu softvfp
- 541              	i2c2WriteMemDMA:
- 542              	.LVL7:
- 543              	.LFB1044:
- 135:Core/Src/i2c.c **** 
- 136:Core/Src/i2c.c **** void i2c2WriteMemDMA(uint8_t *pData, uint8_t memadd, uint8_t size)
- 137:Core/Src/i2c.c **** {
- 544              		.loc 1 137 1 is_stmt 1 view -0
- 545              		.cfi_startproc
- 546              		@ args = 0, pretend = 0, frame = 0
- 547              		@ frame_needed = 1, uses_anonymous_args = 0
- 548              		.loc 1 137 1 is_stmt 0 view .LVU194
- 549 0000 80B5     		push	{r7, lr}
- 550              		.cfi_def_cfa_offset 8
- 551              		.cfi_offset 7, -8
- 552              		.cfi_offset 14, -4
- 553 0002 00AF     		add	r7, sp, #0
- 554              		.cfi_def_cfa_register 7
- 138:Core/Src/i2c.c ****     uint8_t combinedData[size + 1];
- 555              		.loc 1 138 5 is_stmt 1 view .LVU195
- 556              	.LVL8:
- 557              		.loc 1 138 13 is_stmt 0 view .LVU196
- 558 0004 02F10803 		add	r3, r2, #8
- 559 0008 03F4FC73 		and	r3, r3, #504
- 560 000c ADEB030D 		sub	sp, sp, r3
- 561              	.LVL9:
- 139:Core/Src/i2c.c **** 
- 140:Core/Src/i2c.c ****     combinedData[0] = memadd;
- 562              		.loc 1 140 5 is_stmt 1 view .LVU197
- 563              		.loc 1 140 21 is_stmt 0 view .LVU198
- 564 0010 6B46     		mov	r3, sp
- 565 0012 03F8011B 		strb	r1, [r3], #1
- 141:Core/Src/i2c.c ****     memcpy((combinedData + 0x1), pData, size);
- 566              		.loc 1 141 5 is_stmt 1 view .LVU199
- 567 0016 0146     		mov	r1, r0
- 568              	.LVL10:
- 569              		.loc 1 141 5 is_stmt 0 view .LVU200
- 570 0018 1846     		mov	r0, r3
- 571              	.LVL11:
- 572              		.loc 1 141 5 view .LVU201
- 573 001a FFF7FEFF 		bl	memcpy
- 574              	.LVL12:
- 142:Core/Src/i2c.c **** 
- 143:Core/Src/i2c.c ****     DMA1_Channel2->CCR &= ~DMA_CCR_EN; // disable channel
- 575              		.loc 1 143 5 is_stmt 1 view .LVU202
- 576              		.loc 1 143 24 is_stmt 0 view .LVU203
- 577 001e 1A4B     		ldr	r3, .L13
- 578 0020 DA69     		ldr	r2, [r3, #28]
- 579 0022 22F00102 		bic	r2, r2, #1
- 580 0026 DA61     		str	r2, [r3, #28]
- 144:Core/Src/i2c.c ****     DMA1_Channel2->CNDTR = 1;
- 581              		.loc 1 144 5 is_stmt 1 view .LVU204
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 47
-
-
- 582              		.loc 1 144 26 is_stmt 0 view .LVU205
- 583 0028 0122     		movs	r2, #1
- 584 002a 1A62     		str	r2, [r3, #32]
- 145:Core/Src/i2c.c ****     DMA1_Channel2->CMAR = (uint32_t)&combinedData;
- 585              		.loc 1 145 5 is_stmt 1 view .LVU206
- 586              		.loc 1 145 25 is_stmt 0 view .LVU207
- 587 002c C3F828D0 		str	sp, [r3, #40]
- 146:Core/Src/i2c.c ****     DMA1_Channel2->CCR |= DMA_CCR_EN;
- 588              		.loc 1 146 5 is_stmt 1 view .LVU208
- 589              		.loc 1 146 24 is_stmt 0 view .LVU209
- 590 0030 DA69     		ldr	r2, [r3, #28]
- 591 0032 42F00102 		orr	r2, r2, #1
- 592 0036 DA61     		str	r2, [r3, #28]
- 147:Core/Src/i2c.c **** 
- 148:Core/Src/i2c.c ****     I2C2->CR1 |= I2C_CR1_TXDMAEN;
- 593              		.loc 1 148 5 is_stmt 1 view .LVU210
- 594              		.loc 1 148 15 is_stmt 0 view .LVU211
- 595 0038 A3F5D433 		sub	r3, r3, #108544
- 596 003c 1A68     		ldr	r2, [r3]
- 597 003e 42F48042 		orr	r2, r2, #16384
- 598 0042 1A60     		str	r2, [r3]
- 149:Core/Src/i2c.c ****     I2C2->CR2 |= (LCD_ADDRESS << 1U);
- 599              		.loc 1 149 5 is_stmt 1 view .LVU212
- 600              		.loc 1 149 15 is_stmt 0 view .LVU213
- 601 0044 5A68     		ldr	r2, [r3, #4]
- 602 0046 42F04E02 		orr	r2, r2, #78
- 603 004a 5A60     		str	r2, [r3, #4]
- 150:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_RD_WRN; // write operation
- 604              		.loc 1 150 5 is_stmt 1 view .LVU214
- 605              		.loc 1 150 15 is_stmt 0 view .LVU215
- 606 004c 5A68     		ldr	r2, [r3, #4]
- 607 004e 22F48062 		bic	r2, r2, #1024
- 608 0052 5A60     		str	r2, [r3, #4]
- 151:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_NBYTES;
- 609              		.loc 1 151 5 is_stmt 1 view .LVU216
- 610              		.loc 1 151 15 is_stmt 0 view .LVU217
- 611 0054 5A68     		ldr	r2, [r3, #4]
- 612 0056 22F47F02 		bic	r2, r2, #16711680
- 613 005a 5A60     		str	r2, [r3, #4]
- 152:Core/Src/i2c.c ****     I2C2->CR2 |= (1 << 16U);
- 614              		.loc 1 152 5 is_stmt 1 view .LVU218
- 615              		.loc 1 152 15 is_stmt 0 view .LVU219
- 616 005c 5A68     		ldr	r2, [r3, #4]
- 617 005e 42F48032 		orr	r2, r2, #65536
- 618 0062 5A60     		str	r2, [r3, #4]
- 153:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_AUTOEND;
- 619              		.loc 1 153 5 is_stmt 1 view .LVU220
- 620              		.loc 1 153 15 is_stmt 0 view .LVU221
- 621 0064 5A68     		ldr	r2, [r3, #4]
- 622 0066 42F00072 		orr	r2, r2, #33554432
- 623 006a 5A60     		str	r2, [r3, #4]
- 154:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_START;
- 624              		.loc 1 154 5 is_stmt 1 view .LVU222
- 625              		.loc 1 154 15 is_stmt 0 view .LVU223
- 626 006c 5A68     		ldr	r2, [r3, #4]
- 627 006e 42F40052 		orr	r2, r2, #8192
- 628 0072 5A60     		str	r2, [r3, #4]
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 48
-
-
- 155:Core/Src/i2c.c **** 
- 156:Core/Src/i2c.c ****     while (!tx_finished)
- 629              		.loc 1 156 5 is_stmt 1 view .LVU224
- 630              	.L11:
- 157:Core/Src/i2c.c ****         ;
- 631              		.loc 1 157 9 discriminator 1 view .LVU225
- 156:Core/Src/i2c.c ****         ;
- 632              		.loc 1 156 11 discriminator 1 view .LVU226
- 156:Core/Src/i2c.c ****         ;
- 633              		.loc 1 156 12 is_stmt 0 discriminator 1 view .LVU227
- 634 0074 054B     		ldr	r3, .L13+4
- 635 0076 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 156:Core/Src/i2c.c ****         ;
- 636              		.loc 1 156 11 discriminator 1 view .LVU228
- 637 0078 002B     		cmp	r3, #0
- 638 007a FBD0     		beq	.L11
- 158:Core/Src/i2c.c ****     tx_finished = 0;
- 639              		.loc 1 158 5 is_stmt 1 view .LVU229
- 640              		.loc 1 158 17 is_stmt 0 view .LVU230
- 641 007c 034B     		ldr	r3, .L13+4
- 642 007e 0022     		movs	r2, #0
- 643 0080 1A70     		strb	r2, [r3]
- 159:Core/Src/i2c.c **** }
- 644              		.loc 1 159 1 view .LVU231
- 645 0082 BD46     		mov	sp, r7
- 646              		.cfi_def_cfa_register 13
- 647              	.LVL13:
- 648              		.loc 1 159 1 view .LVU232
- 649              		@ sp needed
- 650 0084 80BD     		pop	{r7, pc}
- 651              	.L14:
- 652 0086 00BF     		.align	2
- 653              	.L13:
- 654 0088 00000240 		.word	1073872896
- 655 008c 00000000 		.word	.LANCHOR0
- 656              		.cfi_endproc
- 657              	.LFE1044:
- 659              		.section	.text.i2c2ReadMemoryDMA,"ax",%progbits
- 660              		.align	1
- 661              		.global	i2c2ReadMemoryDMA
- 662              		.syntax unified
- 663              		.thumb
- 664              		.thumb_func
- 665              		.fpu softvfp
- 667              	i2c2ReadMemoryDMA:
- 668              	.LVL14:
- 669              	.LFB1045:
- 160:Core/Src/i2c.c **** 
- 161:Core/Src/i2c.c **** void i2c2ReadMemoryDMA(uint8_t *pData, uint8_t memadd, uint8_t size)
- 162:Core/Src/i2c.c **** {
- 670              		.loc 1 162 1 is_stmt 1 view -0
- 671              		.cfi_startproc
- 672              		@ args = 0, pretend = 0, frame = 0
- 673              		@ frame_needed = 0, uses_anonymous_args = 0
- 674              		@ link register save eliminated.
- 675              		.loc 1 162 1 is_stmt 0 view .LVU234
- 676 0000 10B4     		push	{r4}
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 49
-
-
- 677              		.cfi_def_cfa_offset 4
- 678              		.cfi_offset 4, -4
- 163:Core/Src/i2c.c ****     I2C2->CR2 |= (LCD_ADDRESS << 1U);
- 679              		.loc 1 163 5 is_stmt 1 view .LVU235
- 680              		.loc 1 163 15 is_stmt 0 view .LVU236
- 681 0002 2B4B     		ldr	r3, .L20
- 682 0004 5C68     		ldr	r4, [r3, #4]
- 683 0006 44F04E04 		orr	r4, r4, #78
- 684 000a 5C60     		str	r4, [r3, #4]
- 164:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_RD_WRN; // write operation
- 685              		.loc 1 164 5 is_stmt 1 view .LVU237
- 686              		.loc 1 164 15 is_stmt 0 view .LVU238
- 687 000c 5C68     		ldr	r4, [r3, #4]
- 688 000e 24F48064 		bic	r4, r4, #1024
- 689 0012 5C60     		str	r4, [r3, #4]
- 165:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_NBYTES;
- 690              		.loc 1 165 5 is_stmt 1 view .LVU239
- 691              		.loc 1 165 15 is_stmt 0 view .LVU240
- 692 0014 5C68     		ldr	r4, [r3, #4]
- 693 0016 24F47F04 		bic	r4, r4, #16711680
- 694 001a 5C60     		str	r4, [r3, #4]
- 166:Core/Src/i2c.c ****     I2C2->CR2 |= (1 << I2C_CR2_NBYTES_Pos);
- 695              		.loc 1 166 5 is_stmt 1 view .LVU241
- 696              		.loc 1 166 15 is_stmt 0 view .LVU242
- 697 001c 5C68     		ldr	r4, [r3, #4]
- 698 001e 44F48034 		orr	r4, r4, #65536
- 699 0022 5C60     		str	r4, [r3, #4]
- 167:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_AUTOEND;
- 700              		.loc 1 167 5 is_stmt 1 view .LVU243
- 701              		.loc 1 167 15 is_stmt 0 view .LVU244
- 702 0024 5C68     		ldr	r4, [r3, #4]
- 703 0026 44F00074 		orr	r4, r4, #33554432
- 704 002a 5C60     		str	r4, [r3, #4]
- 168:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_START;
- 705              		.loc 1 168 5 is_stmt 1 view .LVU245
- 706              		.loc 1 168 15 is_stmt 0 view .LVU246
- 707 002c 5C68     		ldr	r4, [r3, #4]
- 708 002e 44F40054 		orr	r4, r4, #8192
- 709 0032 5C60     		str	r4, [r3, #4]
- 169:Core/Src/i2c.c **** 
- 170:Core/Src/i2c.c ****     while (!(I2C2->ISR & I2C_ISR_TXIS))
- 710              		.loc 1 170 5 is_stmt 1 view .LVU247
- 711              	.L16:
- 171:Core/Src/i2c.c ****         ;
- 712              		.loc 1 171 9 discriminator 1 view .LVU248
- 170:Core/Src/i2c.c ****         ;
- 713              		.loc 1 170 11 discriminator 1 view .LVU249
- 170:Core/Src/i2c.c ****         ;
- 714              		.loc 1 170 18 is_stmt 0 discriminator 1 view .LVU250
- 715 0034 1E4B     		ldr	r3, .L20
- 716 0036 9B69     		ldr	r3, [r3, #24]
- 170:Core/Src/i2c.c ****         ;
- 717              		.loc 1 170 11 discriminator 1 view .LVU251
- 718 0038 13F0020F 		tst	r3, #2
- 719 003c FAD0     		beq	.L16
- 172:Core/Src/i2c.c ****     I2C2->TXDR = (uint32_t)memadd;
- 720              		.loc 1 172 5 is_stmt 1 view .LVU252
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 50
-
-
- 721              		.loc 1 172 16 is_stmt 0 view .LVU253
- 722 003e 1C4B     		ldr	r3, .L20
- 723 0040 9962     		str	r1, [r3, #40]
- 173:Core/Src/i2c.c ****     while (!(I2C2->ISR & I2C_ISR_TXE))
- 724              		.loc 1 173 5 is_stmt 1 view .LVU254
- 725              	.L17:
- 174:Core/Src/i2c.c ****         ;
- 726              		.loc 1 174 9 discriminator 1 view .LVU255
- 173:Core/Src/i2c.c ****     while (!(I2C2->ISR & I2C_ISR_TXE))
- 727              		.loc 1 173 11 discriminator 1 view .LVU256
- 173:Core/Src/i2c.c ****     while (!(I2C2->ISR & I2C_ISR_TXE))
- 728              		.loc 1 173 18 is_stmt 0 discriminator 1 view .LVU257
- 729 0042 1B4B     		ldr	r3, .L20
- 730 0044 9B69     		ldr	r3, [r3, #24]
- 173:Core/Src/i2c.c ****     while (!(I2C2->ISR & I2C_ISR_TXE))
- 731              		.loc 1 173 11 discriminator 1 view .LVU258
- 732 0046 13F0010F 		tst	r3, #1
- 733 004a FAD0     		beq	.L17
- 175:Core/Src/i2c.c **** 
- 176:Core/Src/i2c.c ****     /* Set up DMA Receiver*/
- 177:Core/Src/i2c.c ****     DMA1_Channel3->CCR &= ~DMA_CCR_EN;
- 734              		.loc 1 177 5 is_stmt 1 view .LVU259
- 735              		.loc 1 177 24 is_stmt 0 view .LVU260
- 736 004c 194B     		ldr	r3, .L20+4
- 737 004e 196B     		ldr	r1, [r3, #48]
- 738              	.LVL15:
- 739              		.loc 1 177 24 view .LVU261
- 740 0050 21F00101 		bic	r1, r1, #1
- 741 0054 1963     		str	r1, [r3, #48]
- 178:Core/Src/i2c.c ****     DMA1_Channel3->CNDTR = size;
- 742              		.loc 1 178 5 is_stmt 1 view .LVU262
- 743              		.loc 1 178 26 is_stmt 0 view .LVU263
- 744 0056 5A63     		str	r2, [r3, #52]
- 179:Core/Src/i2c.c ****     DMA1_Channel3->CMAR = (uint32_t)pData;
- 745              		.loc 1 179 5 is_stmt 1 view .LVU264
- 746              		.loc 1 179 25 is_stmt 0 view .LVU265
- 747 0058 D863     		str	r0, [r3, #60]
- 180:Core/Src/i2c.c ****     DMA1_Channel3->CCR |= DMA_CCR_EN;
- 748              		.loc 1 180 5 is_stmt 1 view .LVU266
- 749              		.loc 1 180 24 is_stmt 0 view .LVU267
- 750 005a 196B     		ldr	r1, [r3, #48]
- 751 005c 41F00101 		orr	r1, r1, #1
- 752 0060 1963     		str	r1, [r3, #48]
- 181:Core/Src/i2c.c **** 
- 182:Core/Src/i2c.c ****     I2C2->CR1 |= I2C_CR1_RXDMAEN;
- 753              		.loc 1 182 5 is_stmt 1 view .LVU268
- 754              		.loc 1 182 15 is_stmt 0 view .LVU269
- 755 0062 A3F5D433 		sub	r3, r3, #108544
- 756 0066 1968     		ldr	r1, [r3]
- 757 0068 41F40041 		orr	r1, r1, #32768
- 758 006c 1960     		str	r1, [r3]
- 183:Core/Src/i2c.c ****     I2C2->CR2 |= (LCD_ADDRESS << 1U);
- 759              		.loc 1 183 5 is_stmt 1 view .LVU270
- 760              		.loc 1 183 15 is_stmt 0 view .LVU271
- 761 006e 5968     		ldr	r1, [r3, #4]
- 762 0070 41F04E01 		orr	r1, r1, #78
- 763 0074 5960     		str	r1, [r3, #4]
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 51
-
-
- 184:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_RD_WRN; // write operation
- 764              		.loc 1 184 5 is_stmt 1 view .LVU272
- 765              		.loc 1 184 15 is_stmt 0 view .LVU273
- 766 0076 5968     		ldr	r1, [r3, #4]
- 767 0078 41F48061 		orr	r1, r1, #1024
- 768 007c 5960     		str	r1, [r3, #4]
- 185:Core/Src/i2c.c ****     I2C2->CR2 &= ~I2C_CR2_NBYTES;
- 769              		.loc 1 185 5 is_stmt 1 view .LVU274
- 770              		.loc 1 185 15 is_stmt 0 view .LVU275
- 771 007e 5968     		ldr	r1, [r3, #4]
- 772 0080 21F47F01 		bic	r1, r1, #16711680
- 773 0084 5960     		str	r1, [r3, #4]
- 186:Core/Src/i2c.c ****     I2C2->CR2 |= (size << I2C_CR2_NBYTES_Pos);
- 774              		.loc 1 186 5 is_stmt 1 view .LVU276
- 775              		.loc 1 186 15 is_stmt 0 view .LVU277
- 776 0086 5968     		ldr	r1, [r3, #4]
- 777 0088 41EA0242 		orr	r2, r1, r2, lsl #16
- 778              	.LVL16:
- 779              		.loc 1 186 15 view .LVU278
- 780 008c 5A60     		str	r2, [r3, #4]
- 187:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_AUTOEND;
- 781              		.loc 1 187 5 is_stmt 1 view .LVU279
- 782              		.loc 1 187 15 is_stmt 0 view .LVU280
- 783 008e 5A68     		ldr	r2, [r3, #4]
- 784 0090 42F00072 		orr	r2, r2, #33554432
- 785 0094 5A60     		str	r2, [r3, #4]
- 188:Core/Src/i2c.c ****     I2C2->CR2 |= I2C_CR2_START;
- 786              		.loc 1 188 5 is_stmt 1 view .LVU281
- 787              		.loc 1 188 15 is_stmt 0 view .LVU282
- 788 0096 5A68     		ldr	r2, [r3, #4]
- 789 0098 42F40052 		orr	r2, r2, #8192
- 790 009c 5A60     		str	r2, [r3, #4]
- 189:Core/Src/i2c.c **** 
- 190:Core/Src/i2c.c ****     while (!rx_finished)
- 791              		.loc 1 190 5 is_stmt 1 view .LVU283
- 792              	.L18:
- 191:Core/Src/i2c.c ****         ;
- 793              		.loc 1 191 9 discriminator 1 view .LVU284
- 190:Core/Src/i2c.c ****         ;
- 794              		.loc 1 190 11 discriminator 1 view .LVU285
- 190:Core/Src/i2c.c ****         ;
- 795              		.loc 1 190 12 is_stmt 0 discriminator 1 view .LVU286
- 796 009e 064B     		ldr	r3, .L20+8
- 797 00a0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 190:Core/Src/i2c.c ****         ;
- 798              		.loc 1 190 11 discriminator 1 view .LVU287
- 799 00a2 002B     		cmp	r3, #0
- 800 00a4 FBD0     		beq	.L18
- 192:Core/Src/i2c.c ****     rx_finished = 0;
- 801              		.loc 1 192 5 is_stmt 1 view .LVU288
- 802              		.loc 1 192 17 is_stmt 0 view .LVU289
- 803 00a6 044B     		ldr	r3, .L20+8
- 804 00a8 0022     		movs	r2, #0
- 805 00aa 1A70     		strb	r2, [r3]
- 193:Core/Src/i2c.c **** }
- 806              		.loc 1 193 1 view .LVU290
- 807 00ac 10BC     		pop	{r4}
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 52
-
-
- 808              		.cfi_restore 4
- 809              		.cfi_def_cfa_offset 0
- 810 00ae 7047     		bx	lr
- 811              	.L21:
- 812              		.align	2
- 813              	.L20:
- 814 00b0 00580040 		.word	1073764352
- 815 00b4 00000240 		.word	1073872896
- 816 00b8 00000000 		.word	.LANCHOR1
- 817              		.cfi_endproc
- 818              	.LFE1045:
- 820              		.section	.text.DMA1_Channel2_IRQHandler,"ax",%progbits
- 821              		.align	1
- 822              		.global	DMA1_Channel2_IRQHandler
- 823              		.syntax unified
- 824              		.thumb
- 825              		.thumb_func
- 826              		.fpu softvfp
- 828              	DMA1_Channel2_IRQHandler:
- 829              	.LFB1046:
- 194:Core/Src/i2c.c **** 
- 195:Core/Src/i2c.c **** void DMA1_Channel2_IRQHandler(void)
- 196:Core/Src/i2c.c **** {
- 830              		.loc 1 196 1 is_stmt 1 view -0
- 831              		.cfi_startproc
- 832              		@ args = 0, pretend = 0, frame = 0
- 833              		@ frame_needed = 0, uses_anonymous_args = 0
- 834              		@ link register save eliminated.
- 197:Core/Src/i2c.c ****     if (DMA1->ISR & DMA_ISR_TCIF2)
- 835              		.loc 1 197 5 view .LVU292
- 836              		.loc 1 197 13 is_stmt 0 view .LVU293
- 837 0000 064B     		ldr	r3, .L24
- 838 0002 1B68     		ldr	r3, [r3]
- 839              		.loc 1 197 8 view .LVU294
- 840 0004 13F0200F 		tst	r3, #32
- 841 0008 07D0     		beq	.L22
- 198:Core/Src/i2c.c ****     {
- 199:Core/Src/i2c.c ****         DMA1->IFCR |= DMA_IFCR_CTCIF2;
- 842              		.loc 1 199 9 is_stmt 1 view .LVU295
- 843              		.loc 1 199 20 is_stmt 0 view .LVU296
- 844 000a 044A     		ldr	r2, .L24
- 845 000c 5368     		ldr	r3, [r2, #4]
- 846 000e 43F02003 		orr	r3, r3, #32
- 847 0012 5360     		str	r3, [r2, #4]
- 200:Core/Src/i2c.c ****         tx_finished = 1;
- 848              		.loc 1 200 9 is_stmt 1 view .LVU297
- 849              		.loc 1 200 21 is_stmt 0 view .LVU298
- 850 0014 024B     		ldr	r3, .L24+4
- 851 0016 0122     		movs	r2, #1
- 852 0018 1A70     		strb	r2, [r3]
- 853              	.L22:
- 201:Core/Src/i2c.c ****     }
- 202:Core/Src/i2c.c **** }
- 854              		.loc 1 202 1 view .LVU299
- 855 001a 7047     		bx	lr
- 856              	.L25:
- 857              		.align	2
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 53
-
-
- 858              	.L24:
- 859 001c 00000240 		.word	1073872896
- 860 0020 00000000 		.word	.LANCHOR0
- 861              		.cfi_endproc
- 862              	.LFE1046:
- 864              		.section	.text.DMA1_Channel3_IRQHandler,"ax",%progbits
- 865              		.align	1
- 866              		.global	DMA1_Channel3_IRQHandler
- 867              		.syntax unified
- 868              		.thumb
- 869              		.thumb_func
- 870              		.fpu softvfp
- 872              	DMA1_Channel3_IRQHandler:
- 873              	.LFB1047:
- 203:Core/Src/i2c.c **** 
- 204:Core/Src/i2c.c **** void DMA1_Channel3_IRQHandler(void)
- 205:Core/Src/i2c.c **** {
- 874              		.loc 1 205 1 is_stmt 1 view -0
- 875              		.cfi_startproc
- 876              		@ args = 0, pretend = 0, frame = 0
- 877              		@ frame_needed = 0, uses_anonymous_args = 0
- 878              		@ link register save eliminated.
- 206:Core/Src/i2c.c ****     if (DMA1->ISR & DMA_ISR_TCIF3)
- 879              		.loc 1 206 5 view .LVU301
- 880              		.loc 1 206 13 is_stmt 0 view .LVU302
- 881 0000 064B     		ldr	r3, .L28
- 882 0002 1B68     		ldr	r3, [r3]
- 883              		.loc 1 206 8 view .LVU303
- 884 0004 13F4007F 		tst	r3, #512
- 885 0008 07D0     		beq	.L26
- 207:Core/Src/i2c.c ****     {
- 208:Core/Src/i2c.c ****         DMA1->IFCR |= DMA_IFCR_CTCIF3;
- 886              		.loc 1 208 9 is_stmt 1 view .LVU304
- 887              		.loc 1 208 20 is_stmt 0 view .LVU305
- 888 000a 044A     		ldr	r2, .L28
- 889 000c 5368     		ldr	r3, [r2, #4]
- 890 000e 43F40073 		orr	r3, r3, #512
- 891 0012 5360     		str	r3, [r2, #4]
- 209:Core/Src/i2c.c ****         rx_finished = 1;
- 892              		.loc 1 209 9 is_stmt 1 view .LVU306
- 893              		.loc 1 209 21 is_stmt 0 view .LVU307
- 894 0014 024B     		ldr	r3, .L28+4
- 895 0016 0122     		movs	r2, #1
- 896 0018 1A70     		strb	r2, [r3]
- 897              	.L26:
- 210:Core/Src/i2c.c ****     }
- 211:Core/Src/i2c.c **** }
- 898              		.loc 1 211 1 view .LVU308
- 899 001a 7047     		bx	lr
- 900              	.L29:
- 901              		.align	2
- 902              	.L28:
- 903 001c 00000240 		.word	1073872896
- 904 0020 00000000 		.word	.LANCHOR1
- 905              		.cfi_endproc
- 906              	.LFE1047:
- 908              		.global	rx_finished
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 54
-
-
- 909              		.global	tx_finished
- 910              		.section	.bss.rx_finished,"aw",%nobits
- 911              		.set	.LANCHOR1,. + 0
- 914              	rx_finished:
- 915 0000 00       		.space	1
- 916              		.section	.bss.tx_finished,"aw",%nobits
- 917              		.set	.LANCHOR0,. + 0
- 920              	tx_finished:
- 921 0000 00       		.space	1
- 922              		.text
- 923              	.Letext0:
- 924              		.file 3 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wle5xx.h"
- 925              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_de
- 926              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint
- 927              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
- 928              		.file 7 "<built-in>"
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s 			page 55
+ 347              	.LVL7:
+ 348              		.loc 1 86 2 is_stmt 0 view .LVU84
+ 349 0006 FFF7FEFF 		bl	serialWrite
+ 350              	.LVL8:
+  87:Core/Src/usart.c **** 	return ch;
+ 351              		.loc 1 87 2 is_stmt 1 view .LVU85
+  88:Core/Src/usart.c **** }...
+ 352              		.loc 1 88 1 is_stmt 0 view .LVU86
+ 353 000a 2046     		mov	r0, r4
+ 354 000c 10BD     		pop	{r4, pc}
+ 355              		.loc 1 88 1 view .LVU87
+ 356              		.cfi_endproc
+ 357              	.LFE1047:
+ 359              		.global	rxBuf
+ 360              		.section	.bss.rxBuf,"aw",%nobits
+ 361              		.set	.LANCHOR0,. + 0
+ 364              	rxBuf:
+ 365 0000 00       		.space	1
+ 366              		.text
+ 367              	.Letext0:
+ 368              		.file 3 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wle5xx.h"
+ 369              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_de
+ 370              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint
+ 371              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ 372              		.file 7 "Core/Inc/usart.h"
+ 373              		.file 8 "Core/Inc/lcd.h"
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s 			page 43
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 i2c.c
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:16     .text.i2c2Init:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:24     .text.i2c2Init:0000000000000000 i2c2Init
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:425    .text.i2c2Init:00000000000001f0 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:435    .text.i2c2CommandDMA:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:442    .text.i2c2CommandDMA:0000000000000000 i2c2CommandDMA
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:528    .text.i2c2CommandDMA:0000000000000068 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:534    .text.i2c2WriteMemDMA:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:541    .text.i2c2WriteMemDMA:0000000000000000 i2c2WriteMemDMA
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:654    .text.i2c2WriteMemDMA:0000000000000088 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:660    .text.i2c2ReadMemoryDMA:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:667    .text.i2c2ReadMemoryDMA:0000000000000000 i2c2ReadMemoryDMA
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:814    .text.i2c2ReadMemoryDMA:00000000000000b0 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:821    .text.DMA1_Channel2_IRQHandler:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:828    .text.DMA1_Channel2_IRQHandler:0000000000000000 DMA1_Channel2_IRQHandler
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:859    .text.DMA1_Channel2_IRQHandler:000000000000001c $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:865    .text.DMA1_Channel3_IRQHandler:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:872    .text.DMA1_Channel3_IRQHandler:0000000000000000 DMA1_Channel3_IRQHandler
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:903    .text.DMA1_Channel3_IRQHandler:000000000000001c $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:914    .bss.rx_finished:0000000000000000 rx_finished
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:920    .bss.tx_finished:0000000000000000 tx_finished
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:915    .bss.rx_finished:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc5pTqNk.s:921    .bss.tx_finished:0000000000000000 $d
+                            *ABS*:0000000000000000 usart.c
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:16     .text.usart1ReceiveCb:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:23     .text.usart1ReceiveCb:0000000000000000 usart1ReceiveCb
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:50     .text.usart1ReceiveCb:0000000000000014 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:56     .text.usart1Init:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:63     .text.usart1Init:0000000000000000 usart1Init
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:184    .text.usart1Init:0000000000000068 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:192    .text.serialWrite:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:199    .text.serialWrite:0000000000000000 serialWrite
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:225    .text.serialWrite:0000000000000010 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:230    .text.serialBeginRead8:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:237    .text.serialBeginRead8:0000000000000000 serialBeginRead8
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:260    .text.serialBeginRead8:0000000000000014 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:265    .text.USART1_IRQHandler:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:272    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:320    .text.USART1_IRQHandler:0000000000000034 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:325    .text.__io_putchar:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:332    .text.__io_putchar:0000000000000000 __io_putchar
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:364    .bss.rxBuf:0000000000000000 rxBuf
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//cc6mK8Vk.s:365    .bss.rxBuf:0000000000000000 $d
 
 UNDEFINED SYMBOLS
-memcpy
+lcdSendChar

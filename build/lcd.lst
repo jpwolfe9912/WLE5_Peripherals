@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
   30:Core/Src/lcd.c **** 	_displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
   31:Core/Src/lcd.c **** 
   32:Core/Src/lcd.c **** 	if (ROWS > 1)
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 2
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 2
 
 
   33:Core/Src/lcd.c **** 	{
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
   87:Core/Src/lcd.c **** 		lcdNoBacklight();
   88:Core/Src/lcd.c **** 		delay(250);
   89:Core/Src/lcd.c **** 	}
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 3
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 3
 
 
   90:Core/Src/lcd.c **** 	lcdBacklight(); // finish with backlight on
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  144:Core/Src/lcd.c **** 	command(LCD_DISPLAYCONTROL | _displaycontrol);
  145:Core/Src/lcd.c **** }
  146:Core/Src/lcd.c **** void lcdBlink()
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 4
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 4
 
 
  147:Core/Src/lcd.c **** {
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  201:Core/Src/lcd.c **** }
  202:Core/Src/lcd.c **** 
  203:Core/Src/lcd.c **** void lcdSendString(char *str)
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 5
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 5
 
 
  204:Core/Src/lcd.c **** {
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
   38              	.LVL1:
   39              		.loc 1 246 2 is_stmt 0 view .LVU3
   40 0006 FFF7FEFF 		bl	i2c2CommandDMA
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 6
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 6
 
 
   41              	.LVL2:
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
   87              		.cfi_endproc
   88              	.LFE1067:
   90              		.section	.text.write4bits,"ax",%progbits
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 7
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 7
 
 
   91              		.align	1
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  141              		.cfi_offset 5, -8
  142              		.cfi_offset 14, -4
  143 0002 0D46     		mov	r5, r1
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 8
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 8
 
 
  232:Core/Src/lcd.c **** 	uint8_t lownib = (value << 4) & 0xf0;
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  188              		.loc 1 96 2 view .LVU31
  189              	.LVL18:
  190              	.LBB41:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 9
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 9
 
 
  191              	.LBI41:
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  238 0006 FFF7FEFF 		bl	send
  239              	.LVL22:
  218:Core/Src/lcd.c **** }
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 10
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 10
 
 
  240              		.loc 1 218 2 is_stmt 0 view .LVU41
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  287 0016 01D9     		bls	.L14
  111:Core/Src/lcd.c **** 	}
  288              		.loc 1 111 7 view .LVU51
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 11
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 11
 
 
  289 0018 4FF0030E 		mov	lr, #3
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  334              		.thumb
  335              		.thumb_func
  336              		.fpu softvfp
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 12
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 12
 
 
  338              	lcdNoDisplay:
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  384              		.thumb_func
  385              		.fpu softvfp
  387              	lcdDisplay:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 13
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 13
 
 
  388              	.LFB1047:
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  434              		.fpu softvfp
  436              	lcdNoCursor:
  437              	.LFB1048:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 14
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 14
 
 
  130:Core/Src/lcd.c **** 	_displaycontrol &= ~LCD_CURSORON;
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  485              	lcdCursor:
  486              	.LFB1049:
  135:Core/Src/lcd.c **** 	_displaycontrol |= LCD_CURSORON;
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 15
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 15
 
 
  487              		.loc 1 135 1 is_stmt 1 view -0
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  535              	.LFB1050:
  142:Core/Src/lcd.c **** 	_displaycontrol &= ~LCD_BLINKON;
  536              		.loc 1 142 1 is_stmt 1 view -0
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 16
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 16
 
 
  537              		.cfi_startproc
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  147:Core/Src/lcd.c **** 	_displaycontrol |= LCD_BLINKON;
  585              		.loc 1 147 1 is_stmt 1 view -0
  586              		.cfi_startproc
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 17
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 17
 
 
  587              		@ args = 0, pretend = 0, frame = 0
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  634              		.loc 1 154 1 is_stmt 1 view -0
  635              		.cfi_startproc
  636              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 18
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 18
 
 
  637              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  218:Core/Src/lcd.c **** }
  685              		.loc 1 218 2 view .LVU125
  686 0002 0021     		movs	r1, #0
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 19
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 19
 
 
  687 0004 1C20     		movs	r0, #28
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  734              	.LVL54:
  218:Core/Src/lcd.c **** }
  735              		.loc 1 218 2 view .LVU135
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 20
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 20
 
 
  736              	.LBE64:
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  218:Core/Src/lcd.c **** }
  784              		.loc 1 218 2 view .LVU144
  785              	.LBE66:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 21
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 21
 
 
  786              	.LBE65:
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  833              		.loc 1 218 2 view .LVU153
  834              	.LBE68:
  835              	.LBE67:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 22
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 22
 
 
  181:Core/Src/lcd.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  883              	.LBE70:
  884              	.LBE69:
  188:Core/Src/lcd.c **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 23
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 23
 
 
  885              		.loc 1 188 1 view .LVU163
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  938              	.LFB1059:
  198:Core/Src/lcd.c **** 	_backlightval = LCD_BACKLIGHT;
  939              		.loc 1 198 1 is_stmt 1 view -0
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 24
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 24
 
 
  940              		.cfi_startproc
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  989 0006 2C70     		strb	r4, [r5]
   32:Core/Src/lcd.c **** 	{
  990              		.loc 1 32 2 is_stmt 1 view .LVU177
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 25
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 25
 
 
   34:Core/Src/lcd.c **** 	}
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1033 004a FFF7FEFF 		bl	write4bits
  1034              	.LVL75:
   66:Core/Src/lcd.c **** 
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 26
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 26
 
 
  1035              		.loc 1 66 2 view .LVU190
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1076 0070 0620     		movs	r0, #6
  1077 0072 FFF7FEFF 		bl	send
  1078              	.LVL82:
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 27
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 27
 
 
  218:Core/Src/lcd.c **** }
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
   91:Core/Src/lcd.c **** 
  1119              		.loc 1 91 1 is_stmt 0 view .LVU218
  1120 009a 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 28
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 28
 
 
  1121              	.LVL91:
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1168 000a FFF7FEFF 		bl	send
  1169              	.LVL95:
  224:Core/Src/lcd.c **** }
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 29
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 29
 
 
  1170              		.loc 1 224 2 view .LVU228
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1215 0004 FFF7FEFF 		bl	send
  1216              	.LVL98:
  224:Core/Src/lcd.c **** }
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 30
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 30
 
 
  1217              		.loc 1 224 2 view .LVU240
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1286              		.text
  1287              	.Letext0:
  1288              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/_de
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 31
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 31
 
 
  1289              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_stdint
@@ -1806,91 +1806,91 @@ ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 1
  1291              		.file 5 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
  1292              		.file 6 "Core/Inc/drv_system.h"
  1293              		.file 7 "Core/Inc/i2c.h"
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 32
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 lcd.c
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:16     .text.expanderWrite:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:23     .text.expanderWrite:0000000000000000 expanderWrite
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:48     .text.pulseEnable:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:54     .text.pulseEnable:0000000000000000 pulseEnable
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:91     .text.write4bits:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:97     .text.write4bits:0000000000000000 write4bits
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:123    .text.send:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:129    .text.send:0000000000000000 send
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:171    .text.lcdClear:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:178    .text.lcdClear:0000000000000000 lcdClear
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:212    .text.lcdHome:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:219    .text.lcdHome:0000000000000000 lcdHome
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:253    .text.lcdSetCursor:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:260    .text.lcdSetCursor:0000000000000000 lcdSetCursor
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:326    .text.lcdSetCursor:000000000000003c $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:331    .text.lcdNoDisplay:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:338    .text.lcdNoDisplay:0000000000000000 lcdNoDisplay
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:375    .text.lcdNoDisplay:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:380    .text.lcdDisplay:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:387    .text.lcdDisplay:0000000000000000 lcdDisplay
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:424    .text.lcdDisplay:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:429    .text.lcdNoCursor:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:436    .text.lcdNoCursor:0000000000000000 lcdNoCursor
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:473    .text.lcdNoCursor:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:478    .text.lcdCursor:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:485    .text.lcdCursor:0000000000000000 lcdCursor
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:522    .text.lcdCursor:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:527    .text.lcdNoBlink:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:534    .text.lcdNoBlink:0000000000000000 lcdNoBlink
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:571    .text.lcdNoBlink:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:576    .text.lcdBlink:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:583    .text.lcdBlink:0000000000000000 lcdBlink
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:620    .text.lcdBlink:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:625    .text.lcdScrollDisplayLeft:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:632    .text.lcdScrollDisplayLeft:0000000000000000 lcdScrollDisplayLeft
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:662    .text.lcdScrollDisplayRight:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:669    .text.lcdScrollDisplayRight:0000000000000000 lcdScrollDisplayRight
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:699    .text.lcdLeftToRight:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:706    .text.lcdLeftToRight:0000000000000000 lcdLeftToRight
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:743    .text.lcdLeftToRight:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:748    .text.lcdRightToLeft:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:755    .text.lcdRightToLeft:0000000000000000 lcdRightToLeft
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:792    .text.lcdRightToLeft:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:797    .text.lcdAutoscroll:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:804    .text.lcdAutoscroll:0000000000000000 lcdAutoscroll
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:841    .text.lcdAutoscroll:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:846    .text.lcdNoAutoscroll:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:853    .text.lcdNoAutoscroll:0000000000000000 lcdNoAutoscroll
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:890    .text.lcdNoAutoscroll:0000000000000018 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:895    .text.lcdNoBacklight:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:902    .text.lcdNoBacklight:0000000000000000 lcdNoBacklight
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:925    .text.lcdNoBacklight:0000000000000010 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:930    .text.lcdBacklight:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:937    .text.lcdBacklight:0000000000000000 lcdBacklight
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:961    .text.lcdBacklight:0000000000000010 $d
-ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s 			page 33
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:16     .text.expanderWrite:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:23     .text.expanderWrite:0000000000000000 expanderWrite
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:48     .text.pulseEnable:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:54     .text.pulseEnable:0000000000000000 pulseEnable
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:91     .text.write4bits:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:97     .text.write4bits:0000000000000000 write4bits
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:123    .text.send:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:129    .text.send:0000000000000000 send
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:171    .text.lcdClear:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:178    .text.lcdClear:0000000000000000 lcdClear
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:212    .text.lcdHome:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:219    .text.lcdHome:0000000000000000 lcdHome
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:253    .text.lcdSetCursor:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:260    .text.lcdSetCursor:0000000000000000 lcdSetCursor
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:326    .text.lcdSetCursor:000000000000003c $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:331    .text.lcdNoDisplay:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:338    .text.lcdNoDisplay:0000000000000000 lcdNoDisplay
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:375    .text.lcdNoDisplay:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:380    .text.lcdDisplay:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:387    .text.lcdDisplay:0000000000000000 lcdDisplay
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:424    .text.lcdDisplay:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:429    .text.lcdNoCursor:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:436    .text.lcdNoCursor:0000000000000000 lcdNoCursor
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:473    .text.lcdNoCursor:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:478    .text.lcdCursor:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:485    .text.lcdCursor:0000000000000000 lcdCursor
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:522    .text.lcdCursor:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:527    .text.lcdNoBlink:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:534    .text.lcdNoBlink:0000000000000000 lcdNoBlink
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:571    .text.lcdNoBlink:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:576    .text.lcdBlink:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:583    .text.lcdBlink:0000000000000000 lcdBlink
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:620    .text.lcdBlink:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:625    .text.lcdScrollDisplayLeft:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:632    .text.lcdScrollDisplayLeft:0000000000000000 lcdScrollDisplayLeft
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:662    .text.lcdScrollDisplayRight:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:669    .text.lcdScrollDisplayRight:0000000000000000 lcdScrollDisplayRight
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:699    .text.lcdLeftToRight:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:706    .text.lcdLeftToRight:0000000000000000 lcdLeftToRight
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:743    .text.lcdLeftToRight:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:748    .text.lcdRightToLeft:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:755    .text.lcdRightToLeft:0000000000000000 lcdRightToLeft
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:792    .text.lcdRightToLeft:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:797    .text.lcdAutoscroll:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:804    .text.lcdAutoscroll:0000000000000000 lcdAutoscroll
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:841    .text.lcdAutoscroll:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:846    .text.lcdNoAutoscroll:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:853    .text.lcdNoAutoscroll:0000000000000000 lcdNoAutoscroll
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:890    .text.lcdNoAutoscroll:0000000000000018 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:895    .text.lcdNoBacklight:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:902    .text.lcdNoBacklight:0000000000000000 lcdNoBacklight
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:925    .text.lcdNoBacklight:0000000000000010 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:930    .text.lcdBacklight:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:937    .text.lcdBacklight:0000000000000000 lcdBacklight
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:961    .text.lcdBacklight:0000000000000010 $d
+ARM GAS  /var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s 			page 33
 
 
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:966    .text.lcdInit:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:973    .text.lcdInit:0000000000000000 lcdInit
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1126   .text.lcdInit:000000000000009c $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1133   .text.lcdSendString:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1140   .text.lcdSendString:0000000000000000 lcdSendString
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1188   .text.lcdSendChar:0000000000000000 $t
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1195   .text.lcdSendChar:0000000000000000 lcdSendChar
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1251   .bss._backlightval:0000000000000000 _backlightval
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1256   .bss._charsize:0000000000000000 _charsize
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1284   .data._rows:0000000000000000 _rows
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1279   .data._cols:0000000000000000 _cols
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1274   .bss._displaymode:0000000000000000 _displaymode
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1262   .bss._displaycontrol:0000000000000000 _displaycontrol
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1268   .bss._displayfunction:0000000000000000 _displayfunction
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1245   .bss._addr:0000000000000000 _addr
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1235   .rodata:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1246   .bss._addr:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1252   .bss._backlightval:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1257   .bss._charsize:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1263   .bss._displaycontrol:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1269   .bss._displayfunction:0000000000000000 $d
-/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccleLZY9.s:1275   .bss._displaymode:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:966    .text.lcdInit:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:973    .text.lcdInit:0000000000000000 lcdInit
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1126   .text.lcdInit:000000000000009c $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1133   .text.lcdSendString:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1140   .text.lcdSendString:0000000000000000 lcdSendString
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1188   .text.lcdSendChar:0000000000000000 $t
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1195   .text.lcdSendChar:0000000000000000 lcdSendChar
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1251   .bss._backlightval:0000000000000000 _backlightval
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1256   .bss._charsize:0000000000000000 _charsize
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1284   .data._rows:0000000000000000 _rows
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1279   .data._cols:0000000000000000 _cols
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1274   .bss._displaymode:0000000000000000 _displaymode
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1262   .bss._displaycontrol:0000000000000000 _displaycontrol
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1268   .bss._displayfunction:0000000000000000 _displayfunction
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1245   .bss._addr:0000000000000000 _addr
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1235   .rodata:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1246   .bss._addr:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1252   .bss._backlightval:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1257   .bss._charsize:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1263   .bss._displaycontrol:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1269   .bss._displayfunction:0000000000000000 $d
+/var/folders/9y/n02fl3g16gnf7ppy14xghdy80000gn/T//ccSB6VDC.s:1275   .bss._displaymode:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 i2c2CommandDMA

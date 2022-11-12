@@ -95,6 +95,7 @@ int main(void)
     MX_GPIO_Init();
     // MX_ADC_Init();
     /* USER CODE BEGIN 2 */
+    usart1Init();
     i2c2Init();
     lcdInit();
 
@@ -111,6 +112,7 @@ int main(void)
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
+    serialBeginRead8();
     while (1)
     {
         /* USER CODE END WHILE */

@@ -1,4 +1,4 @@
-build/lcd.o: Core/Src/lcd.c Core/Inc/lcd.h Core/Inc/main.h \
+build/usart.o: Core/Src/usart.c Core/Inc/usart.h Core/Inc/main.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_adc.h \
  Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wlxx.h \
  Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wle5xx.h \
@@ -18,7 +18,7 @@ build/lcd.o: Core/Src/lcd.c Core/Inc/lcd.h Core/Inc/main.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_pwr.h \
  Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_gpio.h Core/Inc/i2c.h \
  Core/Inc/drv_system.h Core/Inc/lcd.h Core/Inc/usart.h
-Core/Inc/lcd.h:
+Core/Inc/usart.h:
 Core/Inc/main.h:
 Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_adc.h:
 Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wlxx.h:

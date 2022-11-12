@@ -44,7 +44,9 @@ Core/Src/i2c.c \
 Core/Src/lcd.c \
 Core/Src/main.c \
 Core/Src/stm32wlxx_it.c \
+Core/Src/syscalls.c \
 Core/Src/system_stm32wlxx.c \
+Core/Src/usart.c \
 Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_ll_adc.c \
 Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_ll_dma.c \
 Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_ll_exti.c \
