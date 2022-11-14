@@ -54,8 +54,8 @@ void MX_ADC_Init(void)
     DMA1_Channel1->CCR &= ~DMA_CCR_CIRC;  // normal mode
     DMA1_Channel1->CCR &= ~DMA_CCR_PINC;  // no per inc
     DMA1_Channel1->CCR |= DMA_CCR_MINC;   // mem inc
-    DMA1_Channel1->CCR &= ~DMA_CCR_PSIZE; // per size byte
-    DMA1_Channel1->CCR &= ~DMA_CCR_MSIZE; // mem size byte
+    DMA1_Channel1->CCR |= DMA_CCR_PSIZE_0; // per size 16 bits
+    DMA1_Channel1->CCR |= DMA_CCR_MSIZE_0; // mem size 16 bits
     DMA1_Channel1->CPAR = (uint32_t)(&(ADC->DR));
     DMA1_Channel1->CMAR = (uint32_t)(&rawAdc);
     DMA1_Channel1->CNDTR = 1U;
@@ -136,7 +136,7 @@ static void adcEnableIntReg(void)
     ADC->CR &= ~ADC_CR_ADEN;
     ADC->CR &= ~ADC_CR_ADSTART;
     ADC->CR &= ~ADC_CR_ADSTP;
-    
+
     ADC->CR |= ADC_CR_ADVREGEN;
     delayMicroseconds(20);      // wait for regulator to stabilize
 }
