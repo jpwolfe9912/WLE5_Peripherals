@@ -50,7 +50,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void serialToLcd(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,33 +91,33 @@ int main(void)
     /* USER CODE END SysInit */
 
     /* Initialize all configured peripherals */
-//    MX_DMA_Init();
+    //    MX_DMA_Init();
     MX_GPIO_Init();
-    // MX_ADC_Init();
+    MX_ADC_Init();
     /* USER CODE BEGIN 2 */
     usart1Init();
-    i2c2Init();
-    lcdInit();
+    
+//    i2c2Init();
+//    lcdInit();
 
-    lcdBacklight();
-    lcdSetCursor(3, 0);
-    lcdSendString("Hello, World!");
-    lcdSetCursor(0, 1);
-    lcdSendString("Jeremy Wolfe, here!");
-    lcdSetCursor(0, 2);
-    lcdSendString("Arduino LCM IIC 2004");
-    lcdSetCursor(1, 3);
-    lcdSendString("Power By Me, Bitch!");
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-    serialBeginRead8();
+//    serialBeginRead8();
     while (1)
     {
         /* USER CODE END WHILE */
-
+        
         /* USER CODE BEGIN 3 */
+        // serialToLcd();
+        adcStartConv();
+        while(!convCplt)
+        {
+            convCplt = false;
+            printf("Data: %u\n", rawAdc);
+        }
+        delay(1000);
     }
     /* USER CODE END 3 */
 }
@@ -163,7 +163,23 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void serialToLcd(void)
+{
+    if (rxEvent)
+    {
+        rxEvent = false;
+        if (rxBuf == '\b')
+        {
+            lcdSendChar(0x20);
+            lcdDecCursor();
+        }
+        else
+        {
+            lcdSendChar(rxBuf);
+            lcdIncCursor();
+        }
+    }
+}
 /* USER CODE END 4 */
 
 /**

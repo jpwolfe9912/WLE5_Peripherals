@@ -53,7 +53,7 @@ void i2c2Init(void)
     GPIOA->MODER |= GPIO_MODER_MODE15_1;     // AF mode
     GPIOA->OSPEEDR |= GPIO_OSPEEDR_OSPEED15; // very high speed
     GPIOA->OTYPER |= GPIO_OTYPER_OT15;       // open drain
-    GPIOA->PUPDR |= GPIO_PUPDR_PUPD15_0;     // no pull
+    GPIOA->PUPDR |= GPIO_PUPDR_PUPD15_0;     // pull up
     GPIOA->AFR[1] &= GPIO_AFRH_AFSEL15;
     GPIOA->AFR[1] |= (4U << GPIO_AFRH_AFSEL15_Pos); // AF4
 
@@ -61,7 +61,7 @@ void i2c2Init(void)
     GPIOB->MODER |= GPIO_MODER_MODE15_1;     // AF mode
     GPIOB->OSPEEDR |= GPIO_OSPEEDR_OSPEED15; // very high speed
     GPIOB->OTYPER |= GPIO_OTYPER_OT15;       // open drain
-    GPIOB->PUPDR |= GPIO_PUPDR_PUPD15_0;     // no pull
+    GPIOB->PUPDR |= GPIO_PUPDR_PUPD15_0;     // pull up
     GPIOB->AFR[1] &= GPIO_AFRH_AFSEL15;
     GPIOB->AFR[1] |= (4U << GPIO_AFRH_AFSEL15_Pos); // AF4
 

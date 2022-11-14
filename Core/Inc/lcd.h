@@ -60,6 +60,8 @@
 #define ROWS 4U
 #define COLS 20U
 
+extern uint8_t rowCurr;
+extern uint8_t colCurr;
 
 void lcdInit();
 void lcdClear();
@@ -81,13 +83,7 @@ void lcdNoBacklight(void);
 void lcdBacklight(void);
 void lcdSendString(char *str);
 void lcdSendChar(char c);
-
-/*
-void lcdInit(void);
-void lcdSendCmd(uint8_t cmd);
-void lcdClear(void);
-void lcdPutCur(uint8_t row, uint8_t col);
-void lcdSendString(char *str);
-*/
+void lcdIncCursor(void);
+void lcdDecCursor(void);
 
 #endif /* INC_LCD_H_ */

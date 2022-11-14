@@ -13,7 +13,7 @@
             "configFiles": [
                 "openocd.cfg"
             ],
-            "svdFile": "{workspaceRoot}/STM32WLE5_CM4.svd"
+            "svdFile": "/Users/jpwolfe/Documents/VisualStudio/STM32/WLE5_Peripherals/STM32WLE5_CM4.svd"
         },
         {
             "showDevDebugOutput": "parsed",

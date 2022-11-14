@@ -4,6 +4,7 @@
 #include "main.h"
 
 extern uint8_t rxBuf;
+extern bool rxEvent;
 
 void usart1Init(void);
 void serialWrite(uint8_t ch);

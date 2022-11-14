@@ -1,145 +1,172 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    adc.c
-  * @brief   This file provides code for the configuration
-  *          of the ADC instances.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    adc.c
+ * @brief   This file provides code for the configuration
+ *          of the ADC instances.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2022 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "adc.h"
 
 /* USER CODE BEGIN 0 */
+uint16_t rawAdc;
+bool convCplt = false;
 
+static void adcEnableIntReg(void);
+static uint8_t adcCalibrate(void);
 /* USER CODE END 0 */
 
 /* ADC init function */
 void MX_ADC_Init(void)
 {
 
-  /* USER CODE BEGIN ADC_Init 0 */
+    /* USER CODE BEGIN ADC_Init 0 */
+    RCC->AHB1ENR |= RCC_AHB1ENR_DMAMUX1EN;
+    RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
 
-  /* USER CODE END ADC_Init 0 */
+    /* DMA1_Channel1_IRQn interrupt configuration */
+    NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
+    NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 
-  LL_ADC_InitTypeDef ADC_InitStruct = {0};
-  LL_ADC_REG_InitTypeDef ADC_REG_InitStruct = {0};
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
+    RCC->APB2ENR |= RCC_APB2ENR_ADCEN;
 
-  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIOB->MODER &= ~GPIO_MODER_MODE4;
+    GPIOB->MODER |= GPIO_MODER_MODE4;
+    GPIOB->PUPDR &= ~GPIO_PUPDR_PUPD4;
 
-  /* Peripheral clock enable */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC);
+    DMAMUX1_Channel0->CCR &= ~DMAMUX_CxCR_DMAREQ_ID;
+    DMAMUX1_Channel0->CCR |= (ADC_DMA_REQUEST << DMAMUX_CxCR_DMAREQ_ID_Pos);
+    DMA1_Channel1->CCR &= ~DMA_CCR_DIR;   // per to mem
+    DMA1_Channel1->CCR &= ~DMA_CCR_PL;    // low priority
+    DMA1_Channel1->CCR &= ~DMA_CCR_CIRC;  // normal mode
+    DMA1_Channel1->CCR &= ~DMA_CCR_PINC;  // no per inc
+    DMA1_Channel1->CCR |= DMA_CCR_MINC;   // mem inc
+    DMA1_Channel1->CCR &= ~DMA_CCR_PSIZE; // per size byte
+    DMA1_Channel1->CCR &= ~DMA_CCR_MSIZE; // mem size byte
+    DMA1_Channel1->CPAR = (uint32_t)(&(ADC->DR));
+    DMA1_Channel1->CMAR = (uint32_t)(&rawAdc);
+    DMA1_Channel1->CNDTR = 1U;
+    DMA1_Channel1->CCR |= DMA_CCR_TCIE;
+    DMA1_Channel1->CCR |= DMA_CCR_EN;
 
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
-  /**ADC GPIO Configuration
-  PB4   ------> ADC_IN3
-  */
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_4;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    /* Configure ADC */
+    /* Configure NVIC to enable ADC interruptions */
+    NVIC_SetPriority(ADC_IRQn, 0); /* ADC IRQ greater priority than DMA IRQ */
+    NVIC_EnableIRQ(ADC_IRQn);
 
-  /* ADC DMA Init */
+    ADC->CR &= ~ADC_CR_ADEN;           // turn off ADC
+    ADC->CFGR2 |= ADC_CFGR2_CKMODE_0;  // PCLK/2
+    ADC->CFGR1 &= ~ADC_CFGR1_RES;      // 12 bit res
+    ADC->CFGR1 &= ~ADC_CFGR1_ALIGN;    // right alignment
+    ADC->CFGR1 &= ~ADC_CFGR1_AUTOFF;   // no lp mode
+    ADC->CFGR1 |= ADC_CFGR1_CHSELRMOD; // channels configurable
 
-  /* ADC Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_1, LL_DMAMUX_REQ_ADC);
+    while (!(ADC->ISR & ADC_ISR_CCRDY))
+        ;                      // wait for flag
+    ADC->ISR |= ADC_ISR_CCRDY; // write to clear
 
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_1, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
+    ADC->CFGR1 &= ~ADC_CFGR1_EXTEN;  // software trigger
+    ADC->CFGR1 &= ~ADC_CFGR1_DISCEN; // disc mode off
+    ADC->CFGR1 &= ~ADC_CFGR1_CONT;   // cont mode off
+    ADC->CFGR1 &= ~ADC_CFGR1_DMACFG; // one shot mode
+    ADC->CFGR1 &= ~ADC_CFGR1_DMAEN;  // disable dma mode
+    ADC->CFGR1 &= ~ADC_CFGR1_OVRMOD; // preserve overrun data
 
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PRIORITY_LOW);
+    adcEnableIntReg();
 
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MODE_NORMAL);
+    ADC->CFGR2 &= ~ADC_CFGR2_OVSE;               // disable oversampling
+    ADC->SMPR &= ~ADC_SMPR_SMP1;                 // 1.5 clock cycles
+    ADC->SMPR &= ~ADC_SMPR_SMP2;                 // 1.5 clock cycles
+    ADC->IER &= ~ADC_IER_EOCIE;                  // disable EOC IT
+    ADC->IER &= ~ADC_IER_EOSIE;                  // disable EOS IT
+    ADC->CFGR2 &= ~ADC_CFGR2_LFTRIG;             // high freq trigger
+    ADC->CHSELR |= (0x3 << ADC_CHSELR_SQ1_Pos);  // channel 3 as 1st conversion
+    ADC->CHSELR |= (0xFF << ADC_CHSELR_SQ2_Pos); // 0xFF as next selection to indicate stop
+    while (!(ADC->ISR & ADC_ISR_CCRDY))
+        ; // wait for ADC to be ready
+    ADC->ISR |= ADC_ISR_CCRDY;
+    ADC->SMPR &= ~ADC_SMPR_SMPSEL3; // choose selection 1
+    ADC->IER |= ADC_IER_OVRIE;      // enable OVR IT
 
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PERIPH_NOINCREMENT);
+    while (!(ADC->ISR & ADC_ISR_ADRDY))
+        ;                          // wait for ADC to be ready
+    adcEnableIntReg();
+    ADC->CFGR1 &= ~ADC_CFGR1_DMAEN; // disable DMA
 
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MEMORY_INCREMENT);
+    adcCalibrate();
+    ADC->CFGR1 |= ADC_CFGR1_DMAEN; // enable DMA
+    delayMicroseconds(64);         // wait between calibration and enable
+    ADC->ISR |= ADC_ISR_ADRDY;
+    ADC->CR |= ADC_CR_ADEN; // enable ADC
+    while (!(ADC->ISR & ADC_ISR_ADRDY))
+        ; // wait for ADC to be ready
+    /* USER CODE BEGIN ADC_Init 2 */
 
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PDATAALIGN_HALFWORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MDATAALIGN_HALFWORD);
-
-  /* USER CODE BEGIN ADC_Init 1 */
-
-  /* USER CODE END ADC_Init 1 */
-
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-  */
-
-   #define ADC_CHANNEL_CONF_RDY_TIMEOUT_MS ( 1U)
-   #if (USE_TIMEOUT == 1)
-   uint32_t Timeout ; /* Variable used for Timeout management */
-   #endif /* USE_TIMEOUT */
-
-  ADC_InitStruct.Clock = LL_ADC_CLOCK_SYNC_PCLK_DIV2;
-  ADC_InitStruct.Resolution = LL_ADC_RESOLUTION_12B;
-  ADC_InitStruct.DataAlignment = LL_ADC_DATA_ALIGN_RIGHT;
-  ADC_InitStruct.LowPowerMode = LL_ADC_LP_MODE_NONE;
-  LL_ADC_Init(ADC, &ADC_InitStruct);
-  LL_ADC_REG_SetSequencerConfigurable(ADC, LL_ADC_REG_SEQ_CONFIGURABLE);
-
-   /* Poll for ADC channel configuration ready */
-   #if (USE_TIMEOUT == 1)
-   Timeout = ADC_CHANNEL_CONF_RDY_TIMEOUT_MS;
-   #endif /* USE_TIMEOUT */
-   while (LL_ADC_IsActiveFlag_CCRDY(ADC) == 0)
-     {
-   #if (USE_TIMEOUT == 1)
-   /* Check Systick counter flag to decrement the time-out value */
-   if (LL_SYSTICK_IsActiveCounterFlag())
-     {
-   if(Timeout-- == 0)
-         {
-   Error_Handler();
-         }
-     }
-   #endif /* USE_TIMEOUT */
-     }
-   /* Clear flag ADC channel configuration ready */
-   LL_ADC_ClearFlag_CCRDY(ADC);
-  ADC_REG_InitStruct.TriggerSource = LL_ADC_REG_TRIG_SOFTWARE;
-  ADC_REG_InitStruct.SequencerLength = LL_ADC_REG_SEQ_SCAN_DISABLE;
-  ADC_REG_InitStruct.SequencerDiscont = LL_ADC_REG_SEQ_DISCONT_DISABLE;
-  ADC_REG_InitStruct.ContinuousMode = LL_ADC_REG_CONV_SINGLE;
-  ADC_REG_InitStruct.DMATransfer = LL_ADC_REG_DMA_TRANSFER_LIMITED;
-  ADC_REG_InitStruct.Overrun = LL_ADC_REG_OVR_DATA_PRESERVED;
-  LL_ADC_REG_Init(ADC, &ADC_REG_InitStruct);
-
-   /* Enable ADC internal voltage regulator */
-   LL_ADC_EnableInternalRegulator(ADC);
-   /* Delay for ADC internal voltage regulator stabilization. */
-   /* Compute number of CPU cycles to wait for, from delay in us. */
-   /* Note: Variable divided by 2 to compensate partially */
-   /* CPU processing cycles (depends on compilation optimization). */
-   /* Note: If system core clock frequency is below 200kHz, wait time */
-   /* is only a few CPU processing cycles. */
-   uint32_t wait_loop_index;
-   wait_loop_index = ((LL_ADC_DELAY_INTERNAL_REGUL_STAB_US * (SystemCoreClock / (100000 * 2))) / 10);
-   while(wait_loop_index != 0)
-     {
-   wait_loop_index--;
-     }
-  LL_ADC_SetOverSamplingScope(ADC, LL_ADC_OVS_DISABLE);
-  LL_ADC_SetSamplingTimeCommonChannels(ADC, LL_ADC_SAMPLINGTIME_COMMON_1, LL_ADC_SAMPLINGTIME_1CYCLE_5);
-  LL_ADC_SetSamplingTimeCommonChannels(ADC, LL_ADC_SAMPLINGTIME_COMMON_2, LL_ADC_SAMPLINGTIME_1CYCLE_5);
-  LL_ADC_DisableIT_EOC(ADC);
-  LL_ADC_DisableIT_EOS(ADC);
-  LL_ADC_SetTriggerFrequencyMode(ADC, LL_ADC_TRIGGER_FREQ_HIGH);
-  /* USER CODE BEGIN ADC_Init 2 */
-
-  /* USER CODE END ADC_Init 2 */
-
+    /* USER CODE END ADC_Init 2 */
 }
 
 /* USER CODE BEGIN 1 */
+void adcStartConv(void)
+{
+    if ((ADC->CR & ADC_CR_ADEN) &&
+        !(ADC->CR & ADC_CR_ADDIS) &&
+        !(ADC->CR & ADC_CR_ADSTART))
+    {
+        ADC->CR |= ADC_CR_ADSTART;
+    }
+}
 
+static void adcEnableIntReg(void)
+{
+    ADC->CR &= ~ADC_CR_ADCAL;
+    ADC->CR &= ~ADC_CR_ADDIS;
+    ADC->CR &= ~ADC_CR_ADEN;
+    ADC->CR &= ~ADC_CR_ADSTART;
+    ADC->CR &= ~ADC_CR_ADSTP;
+    
+    ADC->CR |= ADC_CR_ADVREGEN;
+    delayMicroseconds(20);      // wait for regulator to stabilize
+}
+
+static uint8_t adcCalibrate(void)
+{
+    ADC->CR &= ~ADC_CR_ADCAL;
+    ADC->CR &= ~ADC_CR_ADDIS;
+    ADC->CR &= ~ADC_CR_ADEN;
+    ADC->CR &= ~ADC_CR_ADSTART;
+    ADC->CR &= ~ADC_CR_ADSTP;
+
+    ADC->CR |= ADC_CR_ADCAL;
+    while (ADC->CR & ADC_CR_ADCAL)
+        ; // wait for cal to stop
+    return (uint8_t)(ADC->CALFACT);
+}
+
+void DMA1_Channel1_IRQHandler(void)
+{
+    if (DMA1->ISR & DMA_ISR_TCIF1)
+    {
+        DMA1->IFCR |= DMA_IFCR_CGIF1;
+        convCplt = true;
+    }
+}
+
+void ADC_IRQHandler(void)
+{
+    if (ADC->ISR & ADC_ISR_OVR)
+        ADC->ISR |= ADC_ISR_OVR;
+}
 /* USER CODE END 1 */
